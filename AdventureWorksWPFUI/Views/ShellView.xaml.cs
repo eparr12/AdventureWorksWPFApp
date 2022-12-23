@@ -39,5 +39,28 @@ namespace AdventureWorksWPFUI.Views
         {
             Close();
         }
+
+        private void maximizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            switch(this.WindowState) 
+            { 
+                case WindowState.Normal:
+                    this.WindowState= WindowState.Maximized;
+                    break;
+                case WindowState.Maximized:
+                    this.WindowState= WindowState.Normal;
+                    break;
+            }
+        }
+
+        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
+
+        private void Menu_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
     }
 }

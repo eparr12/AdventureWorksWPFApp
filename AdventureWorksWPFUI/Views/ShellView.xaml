@@ -7,7 +7,7 @@
    mc:Ignorable="d"
         Title="ShellView" Height="550" Width="800"
         WindowStyle ="None"
-        WindowState="Maximized"
+        WindowState="Normal"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
         AllowsTransparency="True"
@@ -17,11 +17,11 @@
     <Border CornerRadius="12">
         <Border.Background>
             <ImageBrush ImageSource="C:\Users\eparrish\OneDrive - Catalyst Ventures, LLC\Desktop\AdventureWorksImages\istockphoto-1162940275-170667a.jpg"/>
-
+        
         </Border.Background>
         <Border CornerRadius="10"
             BorderThickness="2"
-                Opacity=".95">
+                Opacity=".9">
 
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -38,9 +38,9 @@
                 </LinearGradientBrush>
             </Border.Background>
 
-            <Grid>
+            <Grid >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="50"/>
                     <RowDefinition/>
                     <RowDefinition Height="0"/>
                 </Grid.RowDefinitions>
@@ -51,18 +51,63 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="25"/>
                         <ColumnDefinition Width="25"/>
+                        <ColumnDefinition Width="25"/>
                         <ColumnDefinition Width="0"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="Dashboard"
-                               Foreground="DarkGray"
-                               FontSize="10"
-                               FontFamily="Montserrat"
-                               Grid.Column="1"
-                               VerticalAlignment="Center"
-                               Margin="10,0,0,0"/>
+                <StackPanel Grid.Column="0" Grid.ColumnSpan="2"
+                           >
+                    <Menu MinHeight="50"
+                          Background="#1B1448"
+                          Foreground="White"
+                          >
+                        <MenuItem Header="LogOut"
+                                  Padding="8,17"
+                                  FontFamily="Montserrat"
+                                  FontWeight="SemiBold"
+                                  x:Name="Logout">
+                        </MenuItem>
+                        <MenuItem Header="Non-Sales Employee"
+                                  Padding="8,17"
+                                  FontFamily="Montserrat"
+                                  FontWeight="SemiBold"
+                                  x:Name="NonSalesEmployee">
+                            <MenuItem Header=" Add Non-Sales Employee"
+                                  Padding="8,17"
+                                  FontFamily="Montserrat"
+                                  FontWeight="SemiBold"
+                                  x:Name="AddNonSalesEmployee"
+                                      Background="#1B1448">
+                                </MenuItem>
 
-                    <Button x:Name="minimizeButton"
+                            <MenuItem Header=" Update Non-Sales Employee Info"
+                                  Padding="8,17"
+                                  FontFamily="Montserrat"
+                                  FontWeight="SemiBold"
+                                  x:Name="UpdateNonSalesEmployee"
+                                      Background="#1B1448">
+                            </MenuItem>
+
+                            <MenuItem Header=" View Non-Sales Employee Info"
+                                  Padding="8,17"
+                                  FontFamily="Montserrat"
+                                  FontWeight="SemiBold"
+                                  x:Name="ViewNonSalesEmployee"
+                                      Background="#1B1448">
+                            </MenuItem>
+
+                            <MenuItem Header=" Delete Non-Sales Employee"
+                                  Padding="8,17"
+                                  FontFamily="Montserrat"
+                                  FontWeight="SemiBold"
+                                  x:Name="DeleteNonSalesEmployee"
+                                      Background="#1B1448">
+                            </MenuItem>
+                        </MenuItem>
+                    </Menu>
+                </StackPanel>
+                
+                <Button x:Name="minimizeButton"
                             BorderThickness="0"
                             Content="-"
                             Foreground="White"
@@ -70,8 +115,10 @@
                             FontFamily="Montserrat"
                             Cursor="Hand"
                             Grid.Column="2"
-                            Margin="0,0,5,0"
-                            Click="minimizeButton_Click">
+                            Margin="0,0,0,0"
+                            Click="minimizeButton_Click"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left">
 
                         <Button.Style>
                             <Style TargetType="Button">
@@ -96,6 +143,37 @@
                         </Button.Template>
                     </Button>
 
+                <Button x:Name="maximizeButton"
+                        Cursor="Hand"
+                        Grid.Column="3"
+                        Margin="0,0,6,0"
+                        Content="_"
+                        Foreground="White"
+                        Click="maximizeButton_Click"
+                        >
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#FF3D38D0"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#FF2C27B1"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="18" Height="18"
+                                        CornerRadius="4"
+                                        Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+
+                </Button>
                 <Button x:Name="closeButton"
                             BorderThickness="0"
                             Content="X"
@@ -103,9 +181,10 @@
                             FontSize="12"
                             FontFamily="Montserrat"
                             Cursor="Hand"
-                            Grid.Column="3"
-                            Margin="0,0,5,0"
-                            Click="closeButton_Click" Height="30" VerticalAlignment="Top">
+                            Grid.Column="4"
+                            Margin="0,0,0,0"
+                            Click="closeButton_Click" Height="30" VerticalAlignment="Center"
+                            HorizontalAlignment="Left">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="#DA34AE"/>
@@ -130,7 +209,7 @@
                 </Button>
 
                 <ContentControl Grid.Row="1" Grid.Column="1"
-                                    x:Name="ActiveItem" Grid.ColumnSpan="3"/>
+                                    x:Name="ActiveItem" Grid.ColumnSpan="4"/>
 
             </Grid>
         </Border>

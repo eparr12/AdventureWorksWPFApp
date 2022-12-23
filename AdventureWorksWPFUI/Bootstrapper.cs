@@ -60,13 +60,8 @@ namespace AdventureWorksWPFUI
             _container.BuildUp(instance);
         }
 
-  
-        IDataAccess db = new DataAccess();
-        ILoginModel login = new LoginModel();
-
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
-            LoginViewModel lvm = new LoginViewModel(db, login);
             DisplayRootViewForAsync<ShellViewModel>();
         }
     }

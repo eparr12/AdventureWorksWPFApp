@@ -13,10 +13,10 @@ using System.Windows;
 
 namespace AdventureWorksWPFUI.ViewModels
 {
-    public class LoginViewModel : Screen
+    public class LoginViewModel : Screen, ILoginViewModel
     {
 
-        public static string role;
+        public static string role = "";
 
         private string _loginID;
         private string _password;

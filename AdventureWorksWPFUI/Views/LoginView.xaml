@@ -15,7 +15,7 @@
             </Border.Background>
             <Border CornerRadius="10"
             BorderThickness="2"
-                Opacity=".95">
+                Opacity=".85">
 
                 <Border.BorderBrush>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -46,13 +46,6 @@
                             <ColumnDefinition Width="5"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Text="LOG IN"
-                               Foreground="DarkGray"
-                               FontSize="10"
-                               FontFamily="Montserrat"
-                               Grid.Column="0"
-                               VerticalAlignment="Center"
-                               Margin="10,0,0,0"/>
                     </Grid>
 
                     <StackPanel Width="250"
@@ -61,7 +54,8 @@
                             Margin="0,35,0,0">
 
                         <Image Source="C:\Users\eparrish\OneDrive - Catalyst Ventures, LLC\Desktop\AdventureWorksImages\stock-vector-bicycle-blue-gradient-vector-iconOld.jfif"
-                           Width="100" Height="100"/>
+                           Width="100" Height="100"
+                               />
 
                         <TextBlock Text="AdventureWorks"
                                Foreground="White"
