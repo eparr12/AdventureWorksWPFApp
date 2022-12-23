@@ -16,12 +16,12 @@
 
     <Border CornerRadius="12">
         <Border.Background>
-            <ImageBrush ImageSource="C:\Users\eparrish\OneDrive - Catalyst Ventures, LLC\Desktop\AdventureWorksImages\andhika-soreng-US06QF_sxu8-unsplash.jpg"/>
+            <ImageBrush ImageSource="C:\Users\eparrish\OneDrive - Catalyst Ventures, LLC\Desktop\AdventureWorksImages\istockphoto-1162940275-170667a.jpg"/>
 
         </Border.Background>
         <Border CornerRadius="10"
             BorderThickness="2"
-                Opacity="0.95">
+                Opacity=".95">
 
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -42,21 +42,23 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
                     <RowDefinition/>
+                    <RowDefinition Height="0"/>
                 </Grid.RowDefinitions>
-
-                <Grid>
+                
+                
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0"/>
                         <ColumnDefinition/>
                         <ColumnDefinition Width="25"/>
                         <ColumnDefinition Width="25"/>
-                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition Width="0"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="LOG IN"
+                    <TextBlock Text="Dashboard"
                                Foreground="DarkGray"
                                FontSize="10"
                                FontFamily="Montserrat"
-                               Grid.Column="0"
+                               Grid.Column="1"
                                VerticalAlignment="Center"
                                Margin="10,0,0,0"/>
 
@@ -67,7 +69,8 @@
                             FontSize="16"
                             FontFamily="Montserrat"
                             Cursor="Hand"
-                            Grid.Column="1"
+                            Grid.Column="2"
+                            Margin="0,0,5,0"
                             Click="minimizeButton_Click">
 
                         <Button.Style>
@@ -93,39 +96,42 @@
                         </Button.Template>
                     </Button>
 
-                    <Button x:Name="closeButton"
+                <Button x:Name="closeButton"
                             BorderThickness="0"
                             Content="X"
                             Foreground="White"
                             FontSize="12"
                             FontFamily="Montserrat"
                             Cursor="Hand"
-                            Grid.Column="2"
-                            Click="closeButton_Click">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="#DA34AE"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#C62DAE"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
+                            Grid.Column="3"
+                            Margin="0,0,5,0"
+                            Click="closeButton_Click" Height="30" VerticalAlignment="Top">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#DA34AE"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#C62DAE"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
 
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border Width="18" Height="18"
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="18" Height="18"
                                         CornerRadius="9"
                                         Background="{TemplateBinding Background}">
-                                    <ContentPresenter VerticalAlignment="Center"
+                                <ContentPresenter VerticalAlignment="Center"
                                                       HorizontalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
 
-                </Grid>
+                <ContentControl Grid.Row="1" Grid.Column="1"
+                                    x:Name="ActiveItem" Grid.ColumnSpan="3"/>
+
             </Grid>
         </Border>
     </Border>

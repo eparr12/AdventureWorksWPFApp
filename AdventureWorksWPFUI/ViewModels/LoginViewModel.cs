@@ -1,7 +1,6 @@
 ﻿using AdventureWorksLibrary.Models;
 using AdventureWorksLibrary.SqlDataAccess;
 using AdventureWorksLibrary.Validators;
-using AdventureWorksWPFUI.Views;
 using Caliburn.Micro;
 using FluentValidation.Results;
 using System;
@@ -97,4 +96,3 @@ namespace AdventureWorksWPFUI.ViewModels
         }
     }
 }
-

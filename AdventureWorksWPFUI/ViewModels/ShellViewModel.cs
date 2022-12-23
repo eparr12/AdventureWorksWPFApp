@@ -15,12 +15,16 @@ using System.Windows;
 
 namespace AdventureWorksWPFUI.ViewModels
 {
-    public class ShellViewModel : Screen
+    public class ShellViewModel : Conductor<object>
     {
+        IDataAccess _dataAccess;
+        ILoginModel _loginModel;
 
-        public ShellViewModel() 
+        public ShellViewModel(IDataAccess dataAccess,ILoginModel loginModel) 
         {
-            
+            _dataAccess = dataAccess; 
+            _loginModel = loginModel;
+            ActivateItemAsync(new LoginViewModel(_dataAccess,_loginModel));
         }
     }
 }

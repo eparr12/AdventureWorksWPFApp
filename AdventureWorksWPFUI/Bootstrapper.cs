@@ -66,8 +66,7 @@ namespace AdventureWorksWPFUI
 
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
-            IWindowManager manager = new WindowManager();
-            manager.ShowWindowAsync(new LoginViewModel(db,login));
+            LoginViewModel lvm = new LoginViewModel(db, login);
             DisplayRootViewForAsync<ShellViewModel>();
         }
     }
