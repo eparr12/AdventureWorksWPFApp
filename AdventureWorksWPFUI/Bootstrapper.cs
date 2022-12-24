@@ -1,5 +1,6 @@
 ﻿using AdventureWorksLibrary.Models;
 using AdventureWorksLibrary.SqlDataAccess;
+using AdventureWorksLibrary.Validators;
 using AdventureWorksWPFUI.ViewModels;
 using Caliburn.Micro;
 using System;
@@ -10,11 +11,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Xml.Linq;
 
 namespace AdventureWorksWPFUI
 {
     public class Bootstrapper : BootstrapperBase
     {
+
         private SimpleContainer _container = new SimpleContainer();
         public Bootstrapper()
         {
@@ -35,12 +38,17 @@ namespace AdventureWorksWPFUI
 
             _container.PerRequest<ILoginModel, LoginModel>();
             _container.PerRequest<IDataAccess, DataAccess>();
+            _container.PerRequest<LoginValidators>();
+            _container.PerRequest<ValidationResult>();
+
             GetType().Assembly.GetTypes()
                 .Where(type => type.IsClass)
                 .Where(type => type.Name.EndsWith("ViewModel"))
                 .ToList()
                 .ForEach(viewModelType => _container.RegisterPerRequest(
                     viewModelType, viewModelType.ToString(), viewModelType));
+
+            _container.PerRequest<ILoginViewModel, LoginViewModel>();
         }
 
         protected override object GetInstance(Type service, string key)

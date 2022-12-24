@@ -16,7 +16,7 @@
 
     <Border CornerRadius="12">
         <Border.Background>
-            <ImageBrush ImageSource="C:\Users\eparrish\OneDrive - Catalyst Ventures, LLC\Desktop\AdventureWorksImages\istockphoto-1162940275-170667a.jpg"/>
+            <ImageBrush ImageSource="C:\Users\eparrish\OneDrive - Catalyst Ventures, LLC\Desktop\AdventureWorksImages\andhika-soreng-US06QF_sxu8-unsplash.jpg"/>
         
         </Border.Background>
         <Border CornerRadius="10"

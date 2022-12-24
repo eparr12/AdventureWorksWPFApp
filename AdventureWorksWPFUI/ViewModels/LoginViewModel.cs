@@ -5,6 +5,7 @@ using Caliburn.Micro;
 using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
+using System.Composition;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -22,11 +23,15 @@ namespace AdventureWorksWPFUI.ViewModels
         private string _password;
         IDataAccess _dataAccess;
         ILoginModel _loginModel;
+        LoginValidators _loginValidators;
+        ValidationResult _validationResult;
 
-        public LoginViewModel(IDataAccess dataAccess, ILoginModel loginModel)
+        public LoginViewModel(IDataAccess dataAccess, ILoginModel loginModel, LoginValidators loginValidators, ValidationResult validationResult)
         {
             _dataAccess = dataAccess;
             _loginModel = loginModel;
+            _loginValidators = loginValidators;
+            _validationResult = validationResult;
         }
 
         public string LoginID
@@ -62,13 +67,11 @@ namespace AdventureWorksWPFUI.ViewModels
                 _loginModel.LoginID = LoginID;
                 _loginModel.Password = Password;
 
-                LoginValidators validator = new LoginValidators();
+                _validationResult = _loginValidators.Validate(_loginModel);
 
-                ValidationResult result = validator.Validate(_loginModel);
-
-                if (result.IsValid == false)
+                if (_validationResult.IsValid == false)
                 {
-                    foreach (ValidationFailure failure in result.Errors)
+                    foreach (ValidationFailure failure in _validationResult.Errors)
                     {
                         MessageBox.Show(failure.ErrorMessage);
                         return;

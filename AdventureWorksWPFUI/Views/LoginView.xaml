@@ -8,12 +8,12 @@
              Background="Transparent"
              d:DesignHeight="550" d:DesignWidth="800">
     <Grid>
-        <Border CornerRadius="12">
-            <Border.Background>
+        <!--<Border CornerRadius="12">-->
+            <!--<Border.Background>
                 <ImageBrush ImageSource="C:\Users\eparrish\OneDrive - Catalyst Ventures, LLC\Desktop\AdventureWorksImages\andhika-soreng-US06QF_sxu8-unsplash.jpg"/>
 
-            </Border.Background>
-            <Border CornerRadius="10"
+            </Border.Background>-->
+            <!--<Border CornerRadius="10"
             BorderThickness="2"
                 Opacity=".85">
 
@@ -30,7 +30,7 @@
                         <GradientStop Color="#060531" Offset="0"/>
                         <GradientStop Color="#1B1448" Offset="0.75"/>
                     </LinearGradientBrush>
-                </Border.Background>
+                </Border.Background>-->
 
                 <Grid>
                     <Grid.RowDefinitions>
@@ -170,7 +170,7 @@
 
                 </Grid>
 
-            </Border>
-        </Border>
+            <!--</Border>
+        </Border>-->
     </Grid>
 </UserControl>

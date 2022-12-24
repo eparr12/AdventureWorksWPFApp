@@ -7,6 +7,7 @@ using FluentValidation.Results;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.Composition;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -19,18 +20,18 @@ namespace AdventureWorksWPFUI.ViewModels
 {
     public class ShellViewModel : Conductor<object>
     {
-        IDataAccess _dataAccess;
-        ILoginModel _loginModel;
-
-        public ShellViewModel(IDataAccess dataAccess,ILoginModel loginModel) 
+        private readonly Func<ILoginViewModel> loginViewModelFactory;
+        public ShellViewModel(Func<ILoginViewModel> loginViewModelFactory)
         {
-            _dataAccess = dataAccess;
-            _loginModel = loginModel;
-            ActivateItemAsync(new LoginViewModel(_dataAccess,_loginModel));
+            this.loginViewModelFactory= loginViewModelFactory;
+            var item = loginViewModelFactory();
+            ActivateItemAsync(item);
         }
 
         public void LogOut()
         {
+            var item = loginViewModelFactory();
+
             if (LoginViewModel.role == "Administrator")
             {
                 var confirmResult = MessageBox.Show($"Are You Sure You Want To LogOut?",
@@ -38,7 +39,7 @@ namespace AdventureWorksWPFUI.ViewModels
                 if (confirmResult == MessageBoxResult.Yes)
                 {
                     LoginViewModel.role = "";
-                    ActivateItemAsync(new LoginViewModel(_dataAccess, _loginModel));
+                    ActivateItemAsync(item);
                 }
                 else
                 {
@@ -54,7 +55,7 @@ namespace AdventureWorksWPFUI.ViewModels
                 if (confirmResult == MessageBoxResult.Yes)
                 {
                     LoginViewModel.role = "";
-                    ActivateItemAsync(new LoginViewModel(_dataAccess, _loginModel));
+                    ActivateItemAsync(item);
                 }
                 else
                 {
@@ -68,5 +69,18 @@ namespace AdventureWorksWPFUI.ViewModels
             }
         }
 
+    }
+
+    internal record struct NewStruct(object Item1, object Item2)
+    {
+        public static implicit operator (object, object)(NewStruct value)
+        {
+            return (value.Item1, value.Item2);
+        }
+
+        public static implicit operator NewStruct((object, object) value)
+        {
+            return new NewStruct(value.Item1, value.Item2);
+        }
     }
 }
