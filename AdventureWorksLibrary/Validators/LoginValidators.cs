@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AdventureWorksLibrary.Validators
 {
-    public class LoginValidators : AbstractValidator<ILoginModel>
+    public class LoginValidators : AbstractValidator<LoginModel>
     {
         public LoginValidators() 
         {

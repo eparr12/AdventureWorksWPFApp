@@ -20,17 +20,13 @@ namespace AdventureWorksWPFUI.ViewModels
 {
     public class ShellViewModel : Conductor<object>
     {
-        private readonly Func<ILoginViewModel> loginViewModelFactory;
-        public ShellViewModel(Func<ILoginViewModel> loginViewModelFactory)
+        public ShellViewModel()
         {
-            this.loginViewModelFactory= loginViewModelFactory;
-            var item = loginViewModelFactory();
-            ActivateItemAsync(item);
+            ActivateItemAsync(new LoginViewModel());
         }
 
         public void LogOut()
         {
-            var item = loginViewModelFactory();
 
             if (LoginViewModel.role == "Administrator")
             {
@@ -39,7 +35,7 @@ namespace AdventureWorksWPFUI.ViewModels
                 if (confirmResult == MessageBoxResult.Yes)
                 {
                     LoginViewModel.role = "";
-                    ActivateItemAsync(item);
+                    ActivateItemAsync(new LoginViewModel());
                 }
                 else
                 {
@@ -55,7 +51,7 @@ namespace AdventureWorksWPFUI.ViewModels
                 if (confirmResult == MessageBoxResult.Yes)
                 {
                     LoginViewModel.role = "";
-                    ActivateItemAsync(item);
+                    ActivateItemAsync(new LoginViewModel());
                 }
                 else
                 {

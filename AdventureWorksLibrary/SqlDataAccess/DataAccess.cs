@@ -12,10 +12,10 @@ using AdventureWorksLibrary.Models.DropDowns;
 
 namespace AdventureWorksLibrary.SqlDataAccess
 {
-    public class DataAccess : IDataAccess
+    public class DataAccess
     {
 
-        public ILoginModel Login(ILoginModel Login)
+        public LoginModel Login(LoginModel Login)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(SqlHelper.CnnVal("AdventureWorks2014")))
             {

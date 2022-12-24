@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AdventureWorksLibrary.Models
 {
-    public class LoginModel : ILoginModel
+    public class LoginModel
     {
         public string LoginID { get; set; }
         public string Password { get; set; }
