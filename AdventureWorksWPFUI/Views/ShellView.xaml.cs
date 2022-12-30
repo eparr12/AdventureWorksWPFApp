@@ -22,6 +22,7 @@ namespace AdventureWorksWPFUI.Views
         public ShellView()
         {
             InitializeComponent();
+
         }
 
         private void Window_MouseDown(object sender, MouseEventArgs e)

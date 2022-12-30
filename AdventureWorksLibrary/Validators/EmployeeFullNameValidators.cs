@@ -1,4 +1,5 @@
 ﻿using AdventureWorksLibrary.Models;
+using AdventureWorksLibrary.Models.DropDowns;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -8,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace AdventureWorksLibrary.Validators
 {
-    public class DeleteNonSalesEmployeeValidators : AbstractValidator<DeleteNonSalesEmployeeModel>
+    public class EmployeeFullNameValidators : AbstractValidator<EmployeeFullNameModel>
     {
-        public DeleteNonSalesEmployeeValidators()
+        public EmployeeFullNameValidators()
         {
-            RuleFor(N => N.Name).UniversalDropdownValidation();
+            RuleFor(N => N.FullName).UniversalDropdownValidation();
         }
     }
 }

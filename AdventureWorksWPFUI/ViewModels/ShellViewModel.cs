@@ -5,6 +5,7 @@ using AdventureWorksWPFUI.Views;
 using Caliburn.Micro;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Composition;
@@ -14,15 +15,21 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Xml.Linq;
 
 namespace AdventureWorksWPFUI.ViewModels
 {
     public class ShellViewModel : Conductor<object>
     {
+        private bool _nonSalesEmployeeMenu = true;
+        string Role = LoginViewModel.role;
+
         public ShellViewModel()
         {
             ActivateItemAsync(new LoginViewModel());
+            //ActivateItemAsync(new GetNonSalesEmployeeInfoViewModel());
+            //ActivateItemAsync(new DeleteNonSalesEmployeeViewModel());
         }
 
         public void LogOut()
@@ -65,6 +72,35 @@ namespace AdventureWorksWPFUI.ViewModels
             }
         }
 
+        public void NonSalesEmployeeInfoMenu()
+        {
+            ActivateItemAsync(new GetNonSalesEmployeeInfoViewModel());
+        }
+
+        public void DeleteNonSalesEmployeeMenu()
+        {
+            ActivateItemAsync(new DeleteNonSalesEmployeeViewModel());
+        }
+
+        public bool HandlerExistsFor(Type messageType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Subscribe(object subscriber, Func<Func<Task>, Task> marshal)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Unsubscribe(object subscriber)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task PublishAsync(object message, Func<Func<Task>, Task> marshal, CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     internal record struct NewStruct(object Item1, object Item2)

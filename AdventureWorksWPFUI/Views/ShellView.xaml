@@ -7,13 +7,13 @@
    mc:Ignorable="d"
         Title="ShellView" Height="550" Width="800"
         WindowStyle ="None"
-        WindowState="Normal"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
         AllowsTransparency="True"
         MouseDown ="Window_MouseDown"
+        ResizeMode="CanResizeWithGrip"
         Icon="C:\Users\eparrish\OneDrive - Catalyst Ventures, LLC\Desktop\AdventureWorksImages\favicon.ico">
-
+    
     <Border CornerRadius="12">
         <Border.Background>
             <ImageBrush ImageSource="C:\Users\eparrish\OneDrive - Catalyst Ventures, LLC\Desktop\AdventureWorksImages\andhika-soreng-US06QF_sxu8-unsplash.jpg"/>
@@ -37,23 +37,23 @@
                     <GradientStop Color="#1B1448" Offset="0.75"/>
                 </LinearGradientBrush>
             </Border.Background>
-
+            
             <Grid >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>
                     <RowDefinition/>
                     <RowDefinition Height="0"/>
                 </Grid.RowDefinitions>
-                
-                
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0"/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="25"/>
-                        <ColumnDefinition Width="25"/>
-                        <ColumnDefinition Width="25"/>
-                        <ColumnDefinition Width="0"/>
-                    </Grid.ColumnDefinitions>
+
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition Width="0"/>
+                </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0" Grid.ColumnSpan="2"
                            >
@@ -71,14 +71,15 @@
                                   Padding="8,17"
                                   FontFamily="Montserrat"
                                   FontWeight="SemiBold"
-                                  x:Name="NonSalesEmployee">
+                                  x:Name="NonSalesEmployeeMenu"
+                                  IsEnabled="{Binding NonSalesEmployeeMenu}">
                             <MenuItem Header=" Add Non-Sales Employee"
                                   Padding="8,17"
                                   FontFamily="Montserrat"
                                   FontWeight="SemiBold"
                                   x:Name="AddNonSalesEmployee"
                                       Background="#1B1448">
-                                </MenuItem>
+                            </MenuItem>
 
                             <MenuItem Header=" Update Non-Sales Employee Info"
                                   Padding="8,17"
@@ -88,11 +89,10 @@
                                       Background="#1B1448">
                             </MenuItem>
 
-                            <MenuItem Header=" View Non-Sales Employee Info"
+                            <MenuItem x:Name="NonSalesEmployeeInfoMenu" Header=" View Non-Sales Employee Info"
                                   Padding="8,17"
                                   FontFamily="Montserrat"
                                   FontWeight="SemiBold"
-                                  x:Name="ViewNonSalesEmployee"
                                       Background="#1B1448">
                             </MenuItem>
 
@@ -100,13 +100,13 @@
                                   Padding="8,17"
                                   FontFamily="Montserrat"
                                   FontWeight="SemiBold"
-                                  x:Name="DeleteNonSalesEmployee"
+                                  x:Name="DeleteNonSalesEmployeeMenu"
                                       Background="#1B1448">
                             </MenuItem>
                         </MenuItem>
                     </Menu>
                 </StackPanel>
-                
+
                 <Button x:Name="minimizeButton"
                             BorderThickness="0"
                             Content="-"
@@ -120,28 +120,28 @@
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left">
 
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="#28AEED"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#278BEF"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#28AEED"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#278BEF"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
 
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border Width="18" Height="18"
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="18" Height="18"
                                         CornerRadius="9"
                                         Background="{TemplateBinding Background}">
-                                    <ContentPresenter VerticalAlignment="Center"
+                                <ContentPresenter VerticalAlignment="Center"
                                                       HorizontalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
 
                 <Button x:Name="maximizeButton"
                         Cursor="Hand"
@@ -210,8 +210,8 @@
 
                 <ContentControl Grid.Row="1" Grid.Column="1"
                                     x:Name="ActiveItem" Grid.ColumnSpan="4"/>
-
             </Grid>
+
         </Border>
     </Border>
 </Window>
