@@ -33,13 +33,11 @@
                  Margin="0,0,0,50" VerticalAlignment="Bottom" MinWidth="150"
                  x:Name="SearchFilter"/>
         <!-- Row 1-->
-        <ListView x:Name="EmployeeFullName" FontFamily="Montserrat" Grid.Row="1"
+        <ListView x:Name="EmployeeFullNames" FontFamily="Montserrat" Grid.Row="1"
                       Foreground="White" FontSize="22" Background="Transparent"
                       MaxHeight="275" IsSynchronizedWithCurrentItem="True"
                       MaxWidth="250" VerticalAlignment="Center" Grid.ColumnSpan="2"
-                      ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single"
-                      SelectedItem="{Binding Path=SelectedPerson, Mode=TwoWay}"
-                      ItemsSource="{Binding EmployeeFullName, Mode=TwoWay}">
+                      ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single">
             <ListView.Resources>
                 <Style TargetType="GridViewColumnHeader">
                     <Setter Property="Template" Value="{x:Null}"/>

@@ -19,6 +19,16 @@ namespace AdventureWorksWPFUI.ViewModels
 {
     public class GetNonSalesEmployeeInfoViewModel : Conductor<Screen>.Collection.OneActive
     {
+
+        private string _selectedInformation = string.Empty;
+        private BindableCollection<NonSalesEmployeeInformationModel> _employeeInformations = new BindableCollection<NonSalesEmployeeInformationModel>();
+
+        List<NonSalesEmployeeInformationModel> Information = new List<NonSalesEmployeeInformationModel>();
+
+        DataAccess db = new DataAccess();
+
+        public ICollectionView Collection { get; set; }
+
         protected override void OnViewLoaded(object GetNonSalesInfoViewModel)
         {
             base.OnViewLoaded(GetNonSalesInfoViewModel);
@@ -26,39 +36,34 @@ namespace AdventureWorksWPFUI.ViewModels
 
         }
 
-        private string _selectedPerson = string.Empty;
-        private BindableCollection<NonSalesEmployeeInformationModel> _employeeInformation = new BindableCollection<NonSalesEmployeeInformationModel>();
-        List<NonSalesEmployeeInformationModel> Information = new List<NonSalesEmployeeInformationModel>();
-        public ICollectionView Collection { get; set; }
-
         public GetNonSalesEmployeeInfoViewModel()
         { 
 
         }
 
-        public string SelectedPerson
+        public string SelectedInformation
         {
             get
             {
-                return _selectedPerson;
+                return _selectedInformation;
             }
             set
             {
-                _selectedPerson = value;
-                NotifyOfPropertyChange(() => SelectedPerson);
+                _selectedInformation = value;
+                NotifyOfPropertyChange(() => SelectedInformation);
                 Collection.Refresh();
             }
         }
 
-        public BindableCollection<NonSalesEmployeeInformationModel> EmployeeInformation
+        public BindableCollection<NonSalesEmployeeInformationModel> EmployeeInformations
         {
             get 
             {
-                return _employeeInformation;
+                return _employeeInformations;
             }
             set
             {
-                _employeeInformation = value;
+                _employeeInformations = value;
             }
         }
 
@@ -66,16 +71,14 @@ namespace AdventureWorksWPFUI.ViewModels
         {
             try
             {
-                DataAccess db = new DataAccess();
-
-                Information = db.GetEmployeeInformation();
+                Information = db.GetNonSalesEmployeeInformation();
 
                 foreach (NonSalesEmployeeInformationModel e in Information)
                 {
-                    EmployeeInformation.Add(e);
+                    EmployeeInformations.Add(e);
                 }
 
-                Collection = CollectionViewSource.GetDefaultView(_employeeInformation);
+                Collection = CollectionViewSource.GetDefaultView(_employeeInformations);
 
                 Collection.Filter = FilterEmployees;
                 Collection.GroupDescriptions.Add(new PropertyGroupDescription(nameof(NonSalesEmployeeInformationModel.JobGroup)));
@@ -97,7 +100,7 @@ namespace AdventureWorksWPFUI.ViewModels
         {
             if(obj is NonSalesEmployeeInformationModel filter) 
             {
-                return filter.PersonName.Contains(SelectedPerson,StringComparison.InvariantCultureIgnoreCase);
+                return filter.PersonName.Contains(SelectedInformation,StringComparison.InvariantCultureIgnoreCase);
             }
             return false;
         }

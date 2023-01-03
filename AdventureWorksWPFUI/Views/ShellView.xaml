@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdventureWorksWPFUI.Views"
    mc:Ignorable="d"
-        Title="ShellView" Height="550" Width="800"
+        Title="ShellView" Height="850" Width="1200"
         WindowStyle ="None"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
@@ -77,7 +77,7 @@
                                   Padding="8,17"
                                   FontFamily="Montserrat"
                                   FontWeight="SemiBold"
-                                  x:Name="AddNonSalesEmployee"
+                                  x:Name="AddNonSalesEmployeeMenu"
                                       Background="#1B1448">
                             </MenuItem>
 

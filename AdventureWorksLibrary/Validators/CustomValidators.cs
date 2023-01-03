@@ -42,7 +42,7 @@ namespace AdventureWorksLibrary.Validators
                 .Matches(letters).WithMessage("{PropertyName} Must Not Contain Numbers.");
         }
 
-        static readonly Regex numbers = new Regex("^[0-9]*$");
+        static readonly Regex numbers = new Regex("^[0-9]");
         public static IRuleBuilderOptions<T, string> UniversalNumValidation<T>(this IRuleBuilder<T, string> rule)
         {
             return rule
@@ -50,7 +50,7 @@ namespace AdventureWorksLibrary.Validators
                 .NotStartWithWhiteSpace()
                 .NotEndsWithWhiteSpace()
                 .Matches("^[^'<>]*$").WithMessage("{PropertyName} Must Not Contain The Following Characters ' < Or >.")
-                .Matches(numbers).WithMessage("{PropertyName} Must Be In Money Format 00.00.");                
+                .Matches(numbers).WithMessage("{PropertyName} Must Contain Only Numbers.");                
         }
 
         static readonly Regex money = new Regex("^[0-9].*$");
@@ -61,7 +61,7 @@ namespace AdventureWorksLibrary.Validators
                 .NotStartWithWhiteSpace()
                 .NotEndsWithWhiteSpace()
                 .Matches("^[^'<>-]*$").WithMessage("{PropertyName} Must Not Contain The Following Characters ' < > Or -.")
-                .Matches(money).WithMessage("{PropertyName} Must Contain Only Numbers.");
+                .Matches(money).WithMessage("{PropertyName} Must Be In Money Format 00.00.");
         }
 
         public static IRuleBuilderOptions<T, int> VacatiionSickHoursValidation<T>(this IRuleBuilder<T, int> rule)

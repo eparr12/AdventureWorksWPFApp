@@ -17,11 +17,14 @@ namespace AdventureWorksWPFUI.ViewModels
 {
     public class LoginViewModel : Screen
     {
+        private string _loginID;
+        private string _password;
 
         public static string role = "";
 
-        private string _loginID;
-        private string _password;
+        DataAccess db = new DataAccess();
+        LoginModel login = new LoginModel();
+        LoginValidators validator = new LoginValidators();
 
         public LoginViewModel()
         {
@@ -57,15 +60,10 @@ namespace AdventureWorksWPFUI.ViewModels
         {
             try
             {
-                DataAccess db = new DataAccess();
+                login.LoginID = LoginID;
+                login.Password = Password;
 
-                LoginModel Login = new LoginModel();
-                Login.LoginID = LoginID;
-                Login.Password = Password;
-
-                LoginValidators validator = new LoginValidators();
-
-                ValidationResult result = validator.Validate(Login);
+                ValidationResult result = validator.Validate(login);
 
                 if (result.IsValid == false)
                 {
@@ -75,13 +73,13 @@ namespace AdventureWorksWPFUI.ViewModels
                         return;
                     }
                 }
-                db.Login(Login);
+                db.Login(login);
 
-                role = Login.Role;
+                role = login.Role;
 
-                if (Login.Role == "Wrong LoginID Or Password. Please Try Again!")
+                if (login.Role == "Wrong LoginID Or Password. Please Try Again!")
                 {
-                    MessageBox.Show(Login.Role);
+                    MessageBox.Show(login.Role);
                     return;
                 }
                 else

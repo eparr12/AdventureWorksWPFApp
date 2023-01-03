@@ -20,6 +20,7 @@ using System.Xml.Linq;
 
 namespace AdventureWorksWPFUI.ViewModels
 {
+    // TODO add title in top menu bar to show which page the user is on
     public class ShellViewModel : Conductor<object>
     {
         private bool _nonSalesEmployeeMenu = true;
@@ -30,6 +31,7 @@ namespace AdventureWorksWPFUI.ViewModels
             ActivateItemAsync(new LoginViewModel());
             //ActivateItemAsync(new GetNonSalesEmployeeInfoViewModel());
             //ActivateItemAsync(new DeleteNonSalesEmployeeViewModel());
+            //ActivateItemAsync(new AddNonSalesEmployeeViewModel());
         }
 
         public void LogOut()
@@ -81,6 +83,12 @@ namespace AdventureWorksWPFUI.ViewModels
         {
             ActivateItemAsync(new DeleteNonSalesEmployeeViewModel());
         }
+
+        public void AddNonSalesEmployeeMenu()
+        {
+            ActivateItemAsync(new AddNonSalesEmployeeViewModel());
+        }
+
 
         public bool HandlerExistsFor(Type messageType)
         {

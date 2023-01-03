@@ -23,26 +23,57 @@ namespace AdventureWorksWPFUI.ViewModels
 {
     public class DeleteNonSalesEmployeeViewModel : Conductor<Screen>.Collection.OneActive
     {
+        private string _searchFilter = string.Empty;
+        private BindableCollection<EmployeeFullNameModel> _employeeFullNames = new BindableCollection<EmployeeFullNameModel>();
+        private EmployeeFullNameModel _selectedEmployeeFullName;
+
+        List<EmployeeFullNameModel> Employees = new List<EmployeeFullNameModel>();
+
+        DataAccess db = new DataAccess();
+        EmployeeFullNameModel Employee = new EmployeeFullNameModel();
+        EmployeeFullNameValidators validator = new EmployeeFullNameValidators();
+
         protected override void OnViewLoaded(object DeleteNonSalesInfoViewModel)
         {
             base.OnViewLoaded(DeleteNonSalesInfoViewModel);
             ListData();
 
         }
-
-        private string _searchFilter = string.Empty;
-        private BindableCollection<EmployeeFullNameModel> _employeeFullName = new BindableCollection<EmployeeFullNameModel>();
-        private EmployeeFullNameModel _selectedPerson;
-
-        List<EmployeeFullNameModel> Employees = new List<EmployeeFullNameModel>();
         
-
         public ICollectionView Collection { get; set; }
 
         public DeleteNonSalesEmployeeViewModel()
         {
 
         }
+
+        public BindableCollection<EmployeeFullNameModel> EmployeeFullNames
+        {
+            get
+            {
+                return _employeeFullNames;
+            }
+            set
+            {
+                _employeeFullNames = value;
+                NotifyOfPropertyChange(() => EmployeeFullNames);
+                Collection.Refresh();
+            }
+        }
+
+        public EmployeeFullNameModel SelectedEmployeeFullName
+        {
+            get
+            {
+                return _selectedEmployeeFullName;
+            }
+            set
+            {
+                _selectedEmployeeFullName = value;
+                NotifyOfPropertyChange(() => SelectedEmployeeFullName);
+            }
+        }
+
 
         public string SearchFilter
         {
@@ -58,34 +89,27 @@ namespace AdventureWorksWPFUI.ViewModels
             }
         }
 
-        public BindableCollection<EmployeeFullNameModel> EmployeeFullName
+        private bool FilterEmployees(object obj)
         {
-            get
+            if (obj is EmployeeFullNameModel filter)
             {
-                return _employeeFullName;
+                return filter.FullName.Contains(SearchFilter, StringComparison.InvariantCultureIgnoreCase);
             }
-            set
-            {
-                _employeeFullName = value;
-                NotifyOfPropertyChange(() => EmployeeFullName);
-                Collection.Refresh();
-            }
+            return false;
         }
 
         internal void ListData()
         {
             try
             {
-                DataAccess db = new DataAccess();
-
                 Employees = db.GetNonSalesEmployeeFullName();
 
                 foreach (EmployeeFullNameModel e in Employees)
                 {
-                    EmployeeFullName.Add(e);
+                    EmployeeFullNames.Add(e);
                 }
 
-                Collection = CollectionViewSource.GetDefaultView(_employeeFullName);
+                Collection = CollectionViewSource.GetDefaultView(_employeeFullNames);
 
                 Collection.Filter = FilterEmployees;
                 Collection.SortDescriptions.Add(new SortDescription(nameof(EmployeeFullNameModel.FullName), ListSortDirection.Ascending));
@@ -96,43 +120,18 @@ namespace AdventureWorksWPFUI.ViewModels
             }
         }
 
-        private bool FilterEmployees(object obj)
-        {
-            if (obj is EmployeeFullNameModel filter)
-            {
-                return filter.FullName.Contains(SearchFilter, StringComparison.InvariantCultureIgnoreCase);
-            }
-            return false;
-        }
-
-        public EmployeeFullNameModel SelectedPerson
-        {
-            get
-            {
-                return _selectedPerson;
-            }
-            set
-            {
-                _selectedPerson = value;
-                NotifyOfPropertyChange(() => SelectedPerson);
-            }
-        }
-
         public void Delete()
         {
-            if (_selectedPerson != null)
+            /// TODO find a way to select multiple employees and do a mass delete operation
+            /// 
+            if (_selectedEmployeeFullName != null)
             {
                 var result = MessageBox.Show("Are You Sure You Want To Delete??", "Confirm Delete!!", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
                     try
                     {
-                        DataAccess db = new DataAccess();
-
-                        EmployeeFullNameModel Employee = new EmployeeFullNameModel();
-                        Employee.FullName = SelectedPerson.FullName;
-
-                        EmployeeFullNameValidators validator = new EmployeeFullNameValidators();
+                        Employee.FullName = SelectedEmployeeFullName.FullName;
 
                         ValidationResult results = validator.Validate(Employee);
 
@@ -146,15 +145,15 @@ namespace AdventureWorksWPFUI.ViewModels
                         }
 
                         db.DeleteNonSalesEmployee(Employee);
-                        EmployeeFullName.Remove(SelectedPerson);
+                        EmployeeFullNames.Remove(SelectedEmployeeFullName);
                         MessageBox.Show("Success!");
                     }
 
-                    catch (SqlException exception)
-                    {
-                        MessageBox.Show("There was an error when performing this operation.\nPlease verify that all entered information is correct.\nCheck the database table DB_Errors for more information.");
-                    }
+                catch (SqlException exception)
+                {
+                    MessageBox.Show("There was an error when performing this operation.\nPlease verify that all entered information is correct.\nCheck the database table DB_Errors for more information.");
                 }
+            }
 
                 else
                 {

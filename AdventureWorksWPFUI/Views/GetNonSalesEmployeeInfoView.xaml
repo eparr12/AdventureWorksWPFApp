@@ -25,7 +25,7 @@
                    Foreground="White" FontFamily="Montserrat" FontSize="18"
                    Padding="20,20,0,0" HorizontalAlignment="Center"/>
 
-        <TextBox x:Name="SelectedPerson" Grid.Row="0" Grid.Column="1" Foreground="White"
+        <TextBox x:Name="SelectedInformation" Grid.Row="0" Grid.Column="1" Foreground="White"
                    Background="Transparent" FontSize="18" FontFamily="Montserrat" TextAlignment="Left" VerticalContentAlignment="Center"
                  HorizontalAlignment="Left" MinWidth="200"/>
 
@@ -33,7 +33,7 @@
             <WrapPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4"
                    Orientation="Horizontal" HorizontalAlignment="Center"
                       ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" >
-                <ListView x:Name="EmployeeInformation" FontFamily="Montserrat" 
+                <ListView x:Name="EmployeeInformations" FontFamily="Montserrat" 
                       Foreground="White" FontSize="12" Background="Transparent"
                       Margin="0,10,0,0" MaxHeight="375" IsSynchronizedWithCurrentItem="True">
                     <ListView.View>
@@ -103,7 +103,7 @@
                     </ListView.View>
                 </ListView>
 
-                <ListView ItemsSource="{Binding EmployeeInformation}" FontFamily="Montserrat" 
+                <ListView ItemsSource="{Binding EmployeeInformations}" FontFamily="Montserrat" 
                       Foreground="White" FontSize="12" Background="Transparent"
                       Margin="0,10,0,0" MaxHeight="375">
                     <ListView.View>
@@ -209,7 +209,7 @@
                     </ListView.View>
                 </ListView>
 
-                <ListView ItemsSource="{Binding EmployeeInformation}" FontFamily="Montserrat" 
+                <ListView ItemsSource="{Binding EmployeeInformations}" FontFamily="Montserrat" 
                       Foreground="White" FontSize="12" Background="Transparent"
                       Margin="0,10,0,0" MaxHeight="375">
                     <ListView.View>
@@ -303,7 +303,7 @@
                     </ListView.View>
                 </ListView>
 
-                <ListView ItemsSource="{Binding EmployeeInformation}" FontFamily="Montserrat" 
+                <ListView ItemsSource="{Binding EmployeeInformations}" FontFamily="Montserrat" 
                       Foreground="White" FontSize="12" Background="Transparent"
                       Margin="0,10,0,0" MaxHeight="375">
                     <ListView.View>

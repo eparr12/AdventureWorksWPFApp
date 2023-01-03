@@ -1,0 +1,20 @@
+{
+    [
+
+    "title":["Mr.","Mrs.","Ms."],
+
+    "suffix":["","I","II","III","IV","Jr.","Sr.","PhD"],
+
+    "phoneNumberType":["","Cell","Home","Work"],
+
+    "addressType":["","Archive","Billing","Home","Main Office","Primary","Shipping"],
+
+    "maritalStatus":["","Single","Married"],
+
+    "gender":["","Male","Female"],
+
+    "payFrequency":["","Weekly","Bi-Weekly"]
+    
+    ]
+
+}

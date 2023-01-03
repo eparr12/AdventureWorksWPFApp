@@ -33,47 +33,47 @@ namespace AdventureWorksLibrary.SqlDataAccess
 
         }
 
-        //public AddNonSalesEmployeeModel AddNonSalesEmployee(AddNonSalesEmployeeModel Employee)
-        //{
-        //    using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(SqlHelper.CnnVal("AdventureWorks2014")))
-        //    {
-        //        var p = new DynamicParameters();
-        //        p.Add("@Title", Employee.Title);
-        //        p.Add("@FirstName", Employee.FirstName);
-        //        p.Add("@MiddleName", Employee.MiddleName);
-        //        p.Add("@LastName", Employee.LastName);
-        //        p.Add("@Suffix", Employee.Suffix);
-        //        p.Add("@Password", Employee.Password);
-        //        p.Add("@PhoneNumber", Employee.PhoneNumber);
-        //        p.Add("@PhoneNumberTypeID", Employee.PhoneNumberTypeID);
-        //        p.Add("@AddressLine1", Employee.AddressLine1);
-        //        p.Add("@City", Employee.City);
-        //        p.Add("@StateProvinceID", Employee.StateProvinceID);
-        //        p.Add("@PostalCode", Employee.PostalCode);
-        //        p.Add("@AddressTypeID", Employee.AddressTypeID);
-        //        p.Add("@EmailAddress", Employee.EmailAddress);
-        //        p.Add("@NationalIDNumber", Employee.NationalIDNumber);
-        //        p.Add("@LoginID", Employee.LoginID);
-        //        p.Add("@JobTitle", Employee.JobTitle);
-        //        p.Add("@BirthDate", Employee.BirthDate);
-        //        p.Add("@MaritalStatus", Employee.MaritalStatus);
-        //        p.Add("@Gender", Employee.Gender);
-        //        p.Add("@HireDate", Employee.HireDate);
-        //        p.Add("@SalariedFlag", Employee.SalariedFlag);
-        //        p.Add("@VacationHours", Employee.VacationHours);
-        //        p.Add("@SickLeaveHours", Employee.SickLeaveHours);
-        //        p.Add("@Rate", Employee.Rate);
-        //        p.Add("@PayFrequency", Employee.PayFrequency);
-        //        p.Add("@DepartmentID", Employee.DepartmentID);
-        //        p.Add("@ShiftID", Employee.ShiftID);
-        //        p.Add("@StartDate", Employee.StartDate);
-        //        p.Add("@Role", Employee.Role);
+        public AddNonSalesEmployeeModel AddNonSalesEmployee(AddNonSalesEmployeeModel Employee)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(SqlHelper.CnnVal("AdventureWorks2014")))
+            {
+                var p = new DynamicParameters();
+                p.Add("@Title", Employee.Title);
+                p.Add("@FirstName", Employee.FirstName);
+                p.Add("@MiddleName", Employee.MiddleName);
+                p.Add("@LastName", Employee.LastName);
+                p.Add("@Suffix", Employee.Suffix);
+                p.Add("@Password", Employee.Password);
+                p.Add("@PhoneNumber", Employee.PhoneNumber);
+                p.Add("@PhoneNumberTypeID", Employee.PhoneNumberTypeID);
+                p.Add("@AddressLine1", Employee.AddressLine1);
+                p.Add("@City", Employee.City);
+                p.Add("@StateProvinceID", Employee.StateProvinceID);
+                p.Add("@PostalCode", Employee.PostalCode);
+                p.Add("@AddressTypeID", Employee.AddressTypeID);
+                p.Add("@EmailAddress", Employee.EmailAddress);
+                p.Add("@NationalIDNumber", Employee.NationalIDNumber);
+                p.Add("@LoginID", Employee.LoginID);
+                p.Add("@JobTitle", Employee.JobTitle);
+                p.Add("@BirthDate", Employee.BirthDate);
+                p.Add("@MaritalStatus", Employee.MaritalStatus);
+                p.Add("@Gender", Employee.Gender);
+                p.Add("@HireDate", Employee.HireDate);
+                p.Add("@SalariedFlag", Employee.SalariedFlag);
+                p.Add("@VacationHours", Employee.VacationHours);
+                p.Add("@SickLeaveHours", Employee.SickLeaveHours);
+                p.Add("@Rate", Employee.Rate);
+                p.Add("@PayFrequency", Employee.PayFrequency);
+                p.Add("@DepartmentID", Employee.DepartmentID);
+                p.Add("@ShiftID", Employee.ShiftID);
+                p.Add("@StartDate", Employee.StartDate);
+                p.Add("@Role", Employee.Role);
 
-        //        connection.Execute("SP_AddNonSalesEmployee", p, commandType: CommandType.StoredProcedure);
+                connection.Execute("SP_AddNonSalesEmployee", p, commandType: CommandType.StoredProcedure);
 
-        //        return Employee;
-        //    }
-        //}
+                return Employee;
+            }
+        }
 
         public EmployeeFullNameModel DeleteNonSalesEmployee(EmployeeFullNameModel Employee)
         {
@@ -88,7 +88,7 @@ namespace AdventureWorksLibrary.SqlDataAccess
             }
         }
 
-        public List<NonSalesEmployeeInformationModel> GetEmployeeInformation(/*string personName*/)
+        public List<NonSalesEmployeeInformationModel> GetNonSalesEmployeeInformation()
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(SqlHelper.CnnVal("AdventureWorks2014")))
             {
@@ -154,23 +154,23 @@ namespace AdventureWorksLibrary.SqlDataAccess
         //    }
         //}
 
-        //public List<StateProvinceIDModel> GetStateProvinceID()
-        //{
-        //    using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(SqlHelper.CnnVal("AdventureWorks2014")))
-        //    {
-        //        var output = connection.Query<StateProvinceIDModel>($"select * from v_DropdownStateProvinceID").ToList();
-        //        return output;
-        //    }
-        //}
+        public List<StateProvinceIDModel> GetStateProvinceID()
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(SqlHelper.CnnVal("AdventureWorks2014")))
+            {
+                var output = connection.Query<StateProvinceIDModel>($"select * from v_DropdownStateProvinceID").ToList();
+                return output;
+            }
+        }
 
-        //public List<DepartmentIDModel> GetDepartmentID()
-        //{
-        //    using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(SqlHelper.CnnVal("AdventureWorks2014")))
-        //    {
-        //        var output = connection.Query<DepartmentIDModel>($"select * from v_DropdownDepartmentID").ToList();
-        //        return output; 
-        //    }
-        //}
+        public List<DepartmentIDModel> GetDepartmentID()
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(SqlHelper.CnnVal("AdventureWorks2014")))
+            {
+                var output = connection.Query<DepartmentIDModel>($"select * from v_DropdownDepartmentID").ToList();
+                return output;
+            }
+        }
 
         public List<EmployeeFullNameModel> GetNonSalesEmployeeFullName()
         {
