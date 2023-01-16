@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AdventureWorksLibrary\AdventureWorksLibrary.csproj" />
+    <ProjectReference Include="..\AdventureWorksWPFClassLibrary\AdventureWorksWPFClassLibrary.csproj" />
   </ItemGroup>
 
 </Project>

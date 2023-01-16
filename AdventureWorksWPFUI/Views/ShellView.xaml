@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdventureWorksWPFUI.Views"
    mc:Ignorable="d"
-        Title="ShellView" Height="850" Width="1200"
+        Title="ShellView" Height="900" Width="1200"
         WindowStyle ="None"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
@@ -72,7 +72,7 @@
                                   FontFamily="Montserrat"
                                   FontWeight="SemiBold"
                                   x:Name="NonSalesEmployeeMenu"
-                                  IsEnabled="{Binding NonSalesEmployeeMenu}">
+                                  IsEnabled="{Binding MenuActivation}">
                             <MenuItem Header=" Add Non-Sales Employee"
                                   Padding="8,17"
                                   FontFamily="Montserrat"
@@ -85,7 +85,7 @@
                                   Padding="8,17"
                                   FontFamily="Montserrat"
                                   FontWeight="SemiBold"
-                                  x:Name="UpdateNonSalesEmployee"
+                                  x:Name="UpdateNonSalesEmployeeMenu"
                                       Background="#1B1448">
                             </MenuItem>
 

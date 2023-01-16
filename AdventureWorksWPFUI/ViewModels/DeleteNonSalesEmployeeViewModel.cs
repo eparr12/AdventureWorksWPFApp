@@ -1,22 +1,14 @@
-﻿using AdventureWorksLibrary.Models;
-using AdventureWorksLibrary.Models.DropDowns;
-using AdventureWorksLibrary.SqlDataAccess;
-using AdventureWorksLibrary.Validators;
+﻿using AdventureWorksWPFClassLibrary.Models.DropDowns;
+using AdventureWorksWPFClassLibrary.SqlDataAccess;
+using AdventureWorksWPFClassLibrary.Validators;
 using Caliburn.Micro;
 using FluentValidation.Results;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
-using System.Xml.Linq;
 using ValidationResult = FluentValidation.Results.ValidationResult;
 
 namespace AdventureWorksWPFUI.ViewModels
@@ -28,7 +20,6 @@ namespace AdventureWorksWPFUI.ViewModels
         private EmployeeFullNameModel _selectedEmployeeFullName;
 
         List<EmployeeFullNameModel> Employees = new List<EmployeeFullNameModel>();
-
         DataAccess db = new DataAccess();
         EmployeeFullNameModel Employee = new EmployeeFullNameModel();
         EmployeeFullNameValidators validator = new EmployeeFullNameValidators();
@@ -40,7 +31,12 @@ namespace AdventureWorksWPFUI.ViewModels
 
         }
         
-        public ICollectionView Collection { get; set; }
+        public ICollectionView Collection 
+        { 
+            get; 
+
+            set; 
+        }
 
         public DeleteNonSalesEmployeeViewModel()
         {

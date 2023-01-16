@@ -1,19 +1,24 @@
-﻿using AdventureWorksWPFClassLibrary.Models;
-using AdventureWorksWPFClassLibrary.Models.DropDowns;
-using AdventureWorksWPFClassLibrary.SqlDataAccess;
-using AdventureWorksWPFClassLibrary.Validators;
-using AdventureWorksWPFUI.Models.DropdownListsModels;
-using Caliburn.Micro;
-using FluentValidation.Results;
+﻿using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.SqlClient;
+using System.Windows.Data;
 using System.Windows;
+using AdventureWorksWPFUI.Models.DropdownListsModels;
+using FluentValidation.Results;
+using ValidationResult = FluentValidation.Results.ValidationResult;
+using AdventureWorksWPFClassLibrary.Models.DropDowns;
+using AdventureWorksWPFClassLibrary.SqlDataAccess;
+using AdventureWorksWPFClassLibrary.Models;
+using AdventureWorksWPFClassLibrary.Validators;
 
 namespace AdventureWorksWPFUI.ViewModels
 {
-    public class AddNonSalesEmployeeViewModel : Conductor<Screen>.Collection.OneActive
+    public class UpdateNonSalesEmployeeViewModel : Conductor<Screen>.Collection.OneActive
     {
+        private BindableCollection<EmployeeFullNameModel> _employeeFullNames = new BindableCollection<EmployeeFullNameModel>();
+        private EmployeeFullNameModel _selectedEmployeeFullName;
         private BindableCollection<StateProvinceIDModel> _stateProvinceIDs = new BindableCollection<StateProvinceIDModel>();
         private StateProvinceIDModel _selectedStateProvinceID;
         private BindableCollection<DepartmentIDModel> _departmentIDs = new BindableCollection<DepartmentIDModel>();
@@ -32,8 +37,8 @@ namespace AdventureWorksWPFUI.ViewModels
         private string _selectedGender;
         private List<string> _payFrequencys = new List<string>();
         private string _selectedPayFrequency;
-        private List<string> _userRoles = new List<string>();
-        private string _selectedUserRole;
+        private List<string> _personTypes = new List<string>();
+        private string _selectedPersonType;
         private string _firstName;
         private DateTime _hireDate = DateTime.Now;
         private string _postalCode;
@@ -44,27 +49,143 @@ namespace AdventureWorksWPFUI.ViewModels
         private int _sickLeaveHours;
         private string _nationalID;
         private decimal _payRate;
-        private string _password;
         private string _phoneNumber;
         private string _jobTitle;
         private DateTime _birthDate = DateTime.Now;
         private string _address;
-        private DateTime _startDate = DateTime.Now ;
+        private DateTime _startDate = DateTime.Now;
         private bool _yesSalaried;
         private bool _noSalaried;
         private bool _firstShift;
         private bool _secondShift;
         private bool _thirdShift;
+        private bool _yesCurrent;
+        private bool _noCurrent;
 
         DropdownListsModel dropdown = new DropdownListsModel();
-        AddNonSalesEmployeeModel Employee = new AddNonSalesEmployeeModel();
+        List<EmployeeFullNameModel> Employees = new List<EmployeeFullNameModel>();
         DataAccess db = new DataAccess();
-        AddNonSalesEmployeeValidators validator = new AddNonSalesEmployeeValidators();
+        List<UpdateNonSalesEmployeeModel> EmployeeSelection = new List<UpdateNonSalesEmployeeModel>();
+        UpdateNonSalesEmployeeModel Employee = new UpdateNonSalesEmployeeModel();
+        UpdateNonSalesEmployeeValidators validator = new UpdateNonSalesEmployeeValidators();
 
-        protected override void OnViewLoaded(object AddNonSalesInfoViewModel)
+        protected override void OnViewLoaded(object UpdateNonSalesInfoViewModel)
         {
-            base.OnViewLoaded(AddNonSalesInfoViewModel);
+            base.OnViewLoaded(UpdateNonSalesInfoViewModel);
             ListData();
+        }
+
+        public ICollectionView Collection
+        {
+            get;
+
+            set;
+        }
+
+        public BindableCollection<EmployeeFullNameModel> EmployeeFullNames
+        {
+            get
+            {
+                return _employeeFullNames;
+            }
+            set
+            {
+                _employeeFullNames = value;
+                NotifyOfPropertyChange(() => EmployeeFullNames);
+                Collection.Refresh();
+            }
+        }
+
+        public EmployeeFullNameModel SelectedEmployeeFullName
+        {
+            get
+            {
+                return _selectedEmployeeFullName;
+            }
+            set
+            {
+                _selectedEmployeeFullName = value;
+
+                NotifyOfPropertyChange(() => SelectedEmployeeFullName);
+
+                if (SelectedEmployeeFullName != null)
+                {
+                    EmployeeSelection = db.GetUpdatedEmployeeInformation(SelectedEmployeeFullName.FullName);
+
+                    foreach (UpdateNonSalesEmployeeModel Employee in EmployeeSelection)
+                    {
+
+                        SelectedPersonType = Employee.PersonType2;
+                        SelectedTitle = Employee.Title;
+                        FirstName = Employee.FirstName;
+                        MiddleName = Employee.MiddleName;
+                        LastName = Employee.LastName;
+                        SelectedSuffix = Employee.Suffix;
+                        PhoneNumber = Employee.PhoneNumber;
+                        SelectedPhoneNumberType = Employee.PhoneNumberType;
+                        Address = Employee.AddressLine1;
+                        City = Employee.City;
+                        //SelectedStateProvinceID.Name = Employee.StateOrProvince;
+                        PostalCode = Employee.PostalCode;
+                        SelectedAddressTypeID = Employee.AddressTypeID;
+                        EmailAddress = Employee.EmailAddress;
+                        NationalID = Employee.SocialSecurityNumber;
+                        LoginID = Employee.LoginID;
+                        JobTitle = Employee.JobTitle;
+                        BirthDate = Employee.BirthDate;
+                        SelectedMarital = Employee.MaritalStatus;
+                        SelectedGender = Employee.Gender;
+                        HireDate = Employee.HireDate;
+                        VacationHours = Employee.VacationHours;
+                        SickLeaveHours = Employee.SickLeaveHours;
+                        PayRate = decimal.Parse(Employee.HourlyPayRate);
+                        SelectedPayFrequency = Employee.PayFrequency;
+                        //SelectedDepartmentID.Name = Employee.JobDepartment;
+                        StartDate = Employee.StartDate;
+                        bool? salaried = Employee.SalariedFlag;
+                        bool? current = Employee.CurrentEmployee;
+                        int shift = Employee.ShiftID;
+
+                        if (salaried == true)
+                        {
+                            YesSalaried = true;
+                            salaried = null;
+                        }
+                        else if (salaried == false)
+                        {
+                            NoSalaried = true;
+                            salaried = null;
+                        }
+
+                        if (current == true)
+                        {
+                            YesCurrent = true;
+                            current = null;
+                        }
+                        else if (current == false)
+                        {
+                            NoCurrent = true;
+                            current = null;
+                        }
+
+                        if (shift == 1)
+                        {
+                            FirstShift = true;
+                            shift = 0;
+                        }
+                        else if (shift == 2)
+                        {
+                            SecondShift = true;
+                            shift = 0;
+                        }
+                        else if (shift == 3)
+                        {
+                            ThirdShift = true;
+                            shift = 0;
+                        }
+                    }
+                }
+            }
         }
 
         public BindableCollection<StateProvinceIDModel> StateProvinceIDs
@@ -301,29 +422,29 @@ namespace AdventureWorksWPFUI.ViewModels
             }
         }
 
-        public List<string> UserRoles
+        public List<string> PersonTypes
         {
             get
             {
-                return _userRoles;
+                return _personTypes;
             }
             set
             {
-                _userRoles = value;
-                NotifyOfPropertyChange(() => _userRoles);
+                _personTypes = value;
+                NotifyOfPropertyChange(() => PersonTypes);
             }
         }
 
-        public string SelectedUserRole
+        public string SelectedPersonType
         {
             get
             {
-                return _selectedUserRole;
+                return _selectedPersonType;
             }
             set
             {
-                _selectedUserRole = value;
-                NotifyOfPropertyChange(() => SelectedUserRole);
+                _selectedPersonType = value;
+                NotifyOfPropertyChange(() => SelectedPersonType);
             }
         }
 
@@ -456,19 +577,6 @@ namespace AdventureWorksWPFUI.ViewModels
             {
                 _payRate = value;
                 NotifyOfPropertyChange(() => PayRate);
-            }
-        }
-
-        public string Password
-        {
-            get
-            {
-                return _password;
-            }
-            set
-            {
-                _password = value;
-                NotifyOfPropertyChange(() => Password);
             }
         }
 
@@ -638,10 +746,49 @@ namespace AdventureWorksWPFUI.ViewModels
             }
         }
 
+        public bool YesCurrent
+        {
+            get
+            {
+                return _yesCurrent;
+            }
+            set
+            {
+                if (value.Equals(_yesCurrent)) return;
+                _yesCurrent = value;
+                NotifyOfPropertyChange(() => YesCurrent);
+            }
+        }
+
+        public bool NoCurrent
+        {
+            get
+            {
+                return _noCurrent;
+            }
+            set
+            {
+                if (value.Equals(_noCurrent)) return;
+                _noCurrent = value;
+                NotifyOfPropertyChange(() => NoCurrent);
+            }
+        }
+
         internal void ListData()
         {
             try
             {
+                Employees = db.GetNonSalesEmployeeFullName();
+
+                foreach (EmployeeFullNameModel e in Employees)
+                {
+                    EmployeeFullNames.Add(e);
+                }
+
+                Collection = CollectionViewSource.GetDefaultView(_employeeFullNames);
+
+                Collection.SortDescriptions.Add(new SortDescription(nameof(EmployeeFullNameModel.FullName), ListSortDirection.Ascending));
+
                 dropdown.TitleList(Titles);
                 dropdown.SuffixList(Suffixs);
                 dropdown.PhoneNumberTypeList(PhoneNumberTypes);
@@ -649,9 +796,9 @@ namespace AdventureWorksWPFUI.ViewModels
                 dropdown.MaritalStatusList(Maritals);
                 dropdown.GenderList(Genders);
                 dropdown.PayFrequencyList(PayFrequencys);
-                dropdown.UserRoleList(UserRoles);
                 dropdown.StateProvinceIDList(StateProvinceIDs);
                 dropdown.DepartmentIDList(DepartmentIDs);
+                dropdown.PersonTypeList(PersonTypes);
             }
             catch (SqlException exception)
             {
@@ -661,11 +808,23 @@ namespace AdventureWorksWPFUI.ViewModels
 
         public void Submit()
         {
-            var result = MessageBox.Show("Are You Sure You Want To Add This Person??", "Confirm Add!!", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            // TODO figure out how to get SelectedStateProvinceID to update based on db return
+
+            // TODO figure out how to get this db call to run when the selected person is changed
+
+            //TODO figure out how to update persons name in the list if it has been changed
+
+            var result = MessageBox.Show("Are You Sure You Want To Update??", "Confirm Update!!", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
                 try
                 {
+                    if (SelectedEmployeeFullName == null)
+                    {
+                        MessageBox.Show("Please Selecte A Value For Employee.");
+                        return;
+                    }
+
                     if (SelectedDepartmentID == null)
                     {
                         MessageBox.Show("Please Select A Value For Department.");
@@ -715,13 +874,29 @@ namespace AdventureWorksWPFUI.ViewModels
                         return;
                     }
 
+                    bool CurrentEmployee = true;
+                    if (YesCurrent) 
+                    { 
+                        CurrentEmployee = true;
+                    }
+
+                    else if (NoCurrent)
                     {
+                        CurrentEmployee = false;
+                    }
+                    else
+                    {
+                    MessageBox.Show("Please Selecte A Value For Active.");
+                    return;
+                    }
+
+                    {
+                        Employee.FullName = SelectedEmployeeFullName.FullName;
                         Employee.Title = SelectedTitle;
                         Employee.FirstName = FirstName;
                         Employee.MiddleName = MiddleName;
                         Employee.LastName = LastName;
                         Employee.Suffix = SelectedSuffix;
-                        Employee.Password = Password;
                         Employee.PhoneNumber = PhoneNumber;
                         Employee.PhoneNumberTypeID = SelectedPhoneNumberType;
                         Employee.AddressLine1 = Address;
@@ -742,10 +917,11 @@ namespace AdventureWorksWPFUI.ViewModels
                         Employee.SickLeaveHours = SickLeaveHours;
                         Employee.Rate = PayRate;
                         Employee.PayFrequency = SelectedPayFrequency;
+                        Employee.PersonType= SelectedPersonType;
                         Employee.DepartmentID = SelectedDepartmentID.Name;
                         Employee.ShiftID = shiftId;
                         Employee.StartDate = StartDate;
-                        Employee.Role = SelectedUserRole;
+                        Employee.CurrentEmployee = CurrentEmployee;
 
                         ValidationResult results = validator.Validate(Employee);
 
@@ -758,7 +934,7 @@ namespace AdventureWorksWPFUI.ViewModels
                             }
                         }
 
-                        db.AddNonSalesEmployee(Employee);
+                        db.UpdateNonSalesEmployee(Employee);
 
                         SelectedTitle = "";
                         SelectedSuffix = "";
@@ -767,9 +943,9 @@ namespace AdventureWorksWPFUI.ViewModels
                         SelectedMarital = "";
                         SelectedGender = "";
                         SelectedPayFrequency = "";
-                        SelectedUserRole = "";
                         SelectedStateProvinceID.Name = "Ain";
                         SelectedDepartmentID.Name = "Document Control";
+                        SelectedPersonType = "";
                         PostalCode = "";
                         FirstName = "";
                         City = "";
@@ -781,7 +957,6 @@ namespace AdventureWorksWPFUI.ViewModels
                         SickLeaveHours = 0;
                         NationalID = "";
                         PayRate = 0;
-                        Password = "";
                         PhoneNumber = "";
                         JobTitle = "";
                         BirthDate = DateTime.Now;
@@ -793,15 +968,21 @@ namespace AdventureWorksWPFUI.ViewModels
                         FirstShift = false;
                         SecondShift = false;
                         ThirdShift = false;
+                        YesCurrent= false;
+                        NoCurrent=false;
 
                         MessageBox.Show("Success!");
                     }
-                }
 
+                }
                 catch (SqlException exception)
                 {
                     MessageBox.Show("There was an error when performing this operation.\nPlease verify that all entered information is correct.\nCheck the database table DB_Errors for more information.");
                 }
+            }
+            else
+            {
+                return;
             }
         }
     }

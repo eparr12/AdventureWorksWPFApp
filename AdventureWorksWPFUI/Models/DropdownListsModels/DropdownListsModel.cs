@@ -1,12 +1,7 @@
-﻿using AdventureWorksLibrary.Models.DropDowns;
-using AdventureWorksLibrary.SqlDataAccess;
+﻿using AdventureWorksWPFClassLibrary.Models.DropDowns;
+using AdventureWorksWPFClassLibrary.SqlDataAccess;
 using Caliburn.Micro;
-using System;
 using System.Collections.Generic;
-using System.Drawing.Text;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AdventureWorksWPFUI.Models.DropdownListsModels
 {
@@ -87,8 +82,8 @@ namespace AdventureWorksWPFUI.Models.DropdownListsModels
         public void GenderList(List<string> gender) 
         {
             gender.Add("");
-            gender.Add("Male");
             gender.Add("Female");
+            gender.Add("Male");
         }
 
         public void PayFrequencyList(List<string> payFrequency) 
@@ -103,6 +98,17 @@ namespace AdventureWorksWPFUI.Models.DropdownListsModels
             userRole.Add("");
             userRole.Add("Administrator");
             userRole.Add("Basic");
+        }
+
+        public void PersonTypeList(List<string> personType)
+        {
+            personType.Add("");
+            personType.Add("SC");
+            personType.Add("IN");
+            personType.Add("SP");
+            personType.Add("EM");
+            personType.Add("VC");
+            personType.Add("GC");
         }
     }
 }

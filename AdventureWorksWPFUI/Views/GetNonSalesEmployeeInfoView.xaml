@@ -7,7 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              >
-    <Grid>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid>
 
             <Grid.RowDefinitions>
                 <RowDefinition MinHeight="30" MaxHeight="50"/>
@@ -21,15 +22,16 @@
             </Grid.ColumnDefinitions>
 
             <!-- Row 0 -->
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="Employee Name:"
+
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="Employee Name:"
                    Foreground="White" FontFamily="Montserrat" FontSize="18"
-                   Padding="20,20,0,0" HorizontalAlignment="Center"/>
+                   Padding="20,20,0,0" HorizontalAlignment="Right"/>
 
-        <TextBox x:Name="SelectedInformation" Grid.Row="0" Grid.Column="1" Foreground="White"
+            <TextBox x:Name="SelectedInformation" Grid.Row="0" Grid.Column="2" Foreground="White"
                    Background="Transparent" FontSize="18" FontFamily="Montserrat" TextAlignment="Left" VerticalContentAlignment="Center"
-                 HorizontalAlignment="Left" MinWidth="200"/>
+                 HorizontalAlignment="Right" MinWidth="200"/>
 
-        <!-- Row 1 -->
+            <!-- Row 1 -->
             <WrapPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4"
                    Orientation="Horizontal" HorizontalAlignment="Center"
                       ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" >
@@ -38,7 +40,7 @@
                       Margin="0,10,0,0" MaxHeight="375" IsSynchronizedWithCurrentItem="True">
                     <ListView.View>
                         <GridView>
-                            
+
                             <GridViewColumn>
                                 <GridViewColumnHeader Content="Employee Name" Padding="5"
                                                   Background="Transparent" Foreground="White"
@@ -99,29 +101,19 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-
-                <ListView ItemsSource="{Binding EmployeeInformations}" FontFamily="Montserrat" 
-                      Foreground="White" FontSize="12" Background="Transparent"
-                      Margin="0,10,0,0" MaxHeight="375">
-                    <ListView.View>
-                        <GridView>
-
-                        <GridViewColumn>
-                            <GridViewColumnHeader Content="Employee Name" Padding="5"
+                            <GridViewColumn>
+                                <GridViewColumnHeader Content="Employee Name" Padding="5"
                                                   Background="Transparent" Foreground="White"
                                                   FontFamily="Montserrat" FontSize="14"/>
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Padding="10,0,0,0" Text="{Binding PersonName}"
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Padding="10,0,0,0" Text="{Binding PersonName}"
                                        TextAlignment="Center" HorizontalAlignment="Center"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                            
-                        <GridViewColumn>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn>
                                 <GridViewColumnHeader Content="Email Address" Padding="5"
                                                   Background="Transparent" Foreground="White"
                                                   FontFamily="Montserrat" FontSize="14"/>
@@ -205,6 +197,18 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
+                            <GridViewColumn>
+                                <GridViewColumnHeader Content="Shift" Padding="5"
+                                                  Background="Transparent" Foreground="White"
+                                                  FontFamily="Montserrat" FontSize="14"/>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Padding="10,0,0,0" Text="{Binding ShiftNumber}" 
+                                           TextAlignment="Center" HorizontalAlignment="Center"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -215,19 +219,19 @@
                     <ListView.View>
                         <GridView>
 
-                        <GridViewColumn>
-                            <GridViewColumnHeader Content="Employee Name" Padding="5"
+                            <GridViewColumn>
+                                <GridViewColumnHeader Content="Employee Name" Padding="5"
                                                   Background="Transparent" Foreground="White"
                                                   FontFamily="Montserrat" FontSize="14"/>
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Padding="10,0,0,0" Text="{Binding PersonName}"
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Padding="10,0,0,0" Text="{Binding PersonName}"
                                        TextAlignment="Center" HorizontalAlignment="Center"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                            
-                        <GridViewColumn>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn>
                                 <GridViewColumnHeader Content="Country" Padding="5"
                                                   Background="Transparent" Foreground="White"
                                                   FontFamily="Montserrat" FontSize="14"/>
@@ -299,29 +303,19 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-
-                <ListView ItemsSource="{Binding EmployeeInformations}" FontFamily="Montserrat" 
-                      Foreground="White" FontSize="12" Background="Transparent"
-                      Margin="0,10,0,0" MaxHeight="375">
-                    <ListView.View>
-                        <GridView>
-
-                        <GridViewColumn>
-                            <GridViewColumnHeader Content="Employee Name" Padding="5"
+                            <GridViewColumn>
+                                <GridViewColumnHeader Content="Employee Name" Padding="5"
                                                   Background="Transparent" Foreground="White"
                                                   FontFamily="Montserrat" FontSize="14"/>
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Padding="10,0,0,0" Text="{Binding PersonName}"
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Padding="10,0,0,0" Text="{Binding PersonName}"
                                        TextAlignment="Center" HorizontalAlignment="Center"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                            
-                        <GridViewColumn>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn>
                                 <GridViewColumnHeader Content="Department" Padding="5"
                                                   Background="Transparent" Foreground="White"
                                                   FontFamily="Montserrat" FontSize="14"/>
@@ -346,24 +340,12 @@
                             </GridViewColumn>
 
                             <GridViewColumn>
-                                <GridViewColumnHeader Content="Shift" Padding="5"
-                                                  Background="Transparent" Foreground="White"
-                                                  FontFamily="Montserrat" FontSize="14"/>
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Padding="10,0,0,0" Text="{Binding ShiftNumber}" 
-                                           TextAlignment="Center" HorizontalAlignment="Center"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-
-                            <GridViewColumn>
                                 <GridViewColumnHeader Content="Hourly Pay" Padding="5"
                                                   Background="Transparent" Foreground="White"
                                                   FontFamily="Montserrat" FontSize="14"/>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                    <TextBlock Padding="10,0,0,0" Text="{Binding FormatHourlyPay}" 
+                                        <TextBlock Padding="10,0,0,0" Text="{Binding FormatHourlyPay}" 
                                            TextAlignment="Center" HorizontalAlignment="Center" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
@@ -409,5 +391,6 @@
                     </ListView.View>
                 </ListView>
             </WrapPanel>
-    </Grid>
+        </Grid>
+    </ScrollViewer>
 </UserControl>

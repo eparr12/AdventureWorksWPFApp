@@ -1,22 +1,8 @@
-﻿using AdventureWorksLibrary.Models;
-using AdventureWorksLibrary.SqlDataAccess;
-using AdventureWorksLibrary.Validators;
-using AdventureWorksWPFUI.Views;
-using Caliburn.Micro;
-using FluentValidation.Results;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.VisualBasic;
+﻿using Caliburn.Micro;
 using System;
-using System.Collections.Generic;
-using System.Composition;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Xml.Linq;
 
 namespace AdventureWorksWPFUI.ViewModels
 {
@@ -24,7 +10,7 @@ namespace AdventureWorksWPFUI.ViewModels
     public class ShellViewModel : Conductor<object>
     {
         private bool _nonSalesEmployeeMenu = true;
-        string Role = LoginViewModel.role;
+        public static string Role = "";
 
         public ShellViewModel()
         {
@@ -32,6 +18,12 @@ namespace AdventureWorksWPFUI.ViewModels
             //ActivateItemAsync(new GetNonSalesEmployeeInfoViewModel());
             //ActivateItemAsync(new DeleteNonSalesEmployeeViewModel());
             //ActivateItemAsync(new AddNonSalesEmployeeViewModel());
+            //ActivateItemAsync(new UpdateNonSalesEmployeeViewModel());
+        }
+
+        public static void loginViewModel_OnLoggedIn(object sender, string role)
+        {
+            Role = role;
         }
 
         public void LogOut()
@@ -87,6 +79,11 @@ namespace AdventureWorksWPFUI.ViewModels
         public void AddNonSalesEmployeeMenu()
         {
             ActivateItemAsync(new AddNonSalesEmployeeViewModel());
+        }
+
+        public void UpdateNonSalesEmployeeMenu()
+        {
+            ActivateItemAsync(new UpdateNonSalesEmployeeViewModel());
         }
 
 

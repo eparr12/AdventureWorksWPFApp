@@ -1,17 +1,7 @@
-﻿using AdventureWorksLibrary.Models;
-using AdventureWorksLibrary.SqlDataAccess;
-using AdventureWorksLibrary.Validators;
-using AdventureWorksWPFUI.ViewModels;
+﻿using AdventureWorksWPFUI.ViewModels;
 using Caliburn.Micro;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Xml.Linq;
 
 namespace AdventureWorksWPFUI
 {

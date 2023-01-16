@@ -1,18 +1,12 @@
-﻿using AdventureWorksLibrary.Models;
-using AdventureWorksLibrary.Models.DropDowns;
-using AdventureWorksLibrary.SqlDataAccess;
+﻿using AdventureWorksWPFClassLibrary.Models;
+using AdventureWorksWPFClassLibrary.SqlDataAccess;
 using Caliburn.Micro;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
 
 namespace AdventureWorksWPFUI.ViewModels
@@ -27,8 +21,6 @@ namespace AdventureWorksWPFUI.ViewModels
 
         DataAccess db = new DataAccess();
 
-        public ICollectionView Collection { get; set; }
-
         protected override void OnViewLoaded(object GetNonSalesInfoViewModel)
         {
             base.OnViewLoaded(GetNonSalesInfoViewModel);
@@ -39,6 +31,25 @@ namespace AdventureWorksWPFUI.ViewModels
         public GetNonSalesEmployeeInfoViewModel()
         { 
 
+        }
+
+        public ICollectionView Collection 
+        { 
+            get; 
+
+            set; 
+        }
+
+        public BindableCollection<NonSalesEmployeeInformationModel> EmployeeInformations
+        {
+            get 
+            {
+                return _employeeInformations;
+            }
+            set
+            {
+                _employeeInformations = value;
+            }
         }
 
         public string SelectedInformation
@@ -52,18 +63,6 @@ namespace AdventureWorksWPFUI.ViewModels
                 _selectedInformation = value;
                 NotifyOfPropertyChange(() => SelectedInformation);
                 Collection.Refresh();
-            }
-        }
-
-        public BindableCollection<NonSalesEmployeeInformationModel> EmployeeInformations
-        {
-            get 
-            {
-                return _employeeInformations;
-            }
-            set
-            {
-                _employeeInformations = value;
             }
         }
 
