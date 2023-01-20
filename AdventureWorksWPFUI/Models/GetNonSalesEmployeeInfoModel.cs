@@ -1,6 +1,6 @@
 ﻿namespace AdventureWorksWPFUI.Models
 {
-    public class GetNonSalesEmployeeInfoModel
+    public class GetNonSalesEmployeeInfoModel : IGetNonSalesEmployeeInfoModel
     {
         public string PersonName { get; set; }
         public int PersonID { get; set; }

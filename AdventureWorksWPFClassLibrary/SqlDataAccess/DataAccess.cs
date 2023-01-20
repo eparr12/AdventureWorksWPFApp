@@ -5,10 +5,10 @@ using System.Data;
 
 namespace AdventureWorksWPFClassLibrary.SqlDataAccess
 {
-    public class DataAccess
+    public class DataAccess : IDataAccess
     {
 
-        public LoginModel Login(LoginModel Login)
+        public ILoginModel Login(ILoginModel Login)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(SqlHelper.CnnVal("AdventureWorks2014")))
             {

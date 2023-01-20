@@ -5,20 +5,35 @@ using System.Windows;
 
 namespace AdventureWorksWPFUI.ViewModels
 {
-    public class ShellViewModel : Conductor<object>, IHandle<string>
+    public class ShellViewModel : Conductor<object>, IHandle<string>, IShellViewModel
     {
         private bool _permissions = false;
-        private readonly IEventAggregator _eventAggregator = new EventAggregator();
         private bool _menuActivation = false;
         private string _title;
-
         private static string role = "";
 
-        public ShellViewModel()
+        private IEventAggregator _eventAggregator;
+        private ILoginViewModel _loginViewModel;
+        private IGetNonSalesEmployeeInfoViewModel _getNonSalesEmployeeInfoViewModel;
+        private IDeleteNonSalesEmployeeViewModel _deleteNonSalesEmployeeViewModel;
+        private IAddNonSalesEmployeeViewModel _addNonSalesEmployeeViewModel;
+        private IUpdateNonSalesEmployeeViewModel _updateNonSalesEmployeeViewModel;
+
+        public ShellViewModel(IEventAggregator eventAggregator, ILoginViewModel loginViewModel, 
+                              IGetNonSalesEmployeeInfoViewModel getNonSalesEmployeeInfoViewModel, 
+                              IDeleteNonSalesEmployeeViewModel deleteNonSalesEmployeeViewModel, 
+                              IAddNonSalesEmployeeViewModel addNonSalesEmployeeViewModel,
+                              IUpdateNonSalesEmployeeViewModel updateNonSalesEmployeeViewModel)
         {
-            Title = "Login";
+            _loginViewModel = loginViewModel;
+            _eventAggregator = eventAggregator;
+            _getNonSalesEmployeeInfoViewModel = getNonSalesEmployeeInfoViewModel;
+            _deleteNonSalesEmployeeViewModel = deleteNonSalesEmployeeViewModel;
+            _addNonSalesEmployeeViewModel = addNonSalesEmployeeViewModel;
+            _updateNonSalesEmployeeViewModel = updateNonSalesEmployeeViewModel;
             _eventAggregator.SubscribeOnPublishedThread(this);
-            ActivateItemAsync(new LoginViewModel(_eventAggregator));
+            Title = "Login";
+            ActivateItemAsync(_loginViewModel);
         }
 
         public bool MenuActivation
@@ -71,7 +86,7 @@ namespace AdventureWorksWPFUI.ViewModels
                     MenuActivation = false;
                     role = "";
                     Title = "Login";
-                    ActivateItemAsync(new LoginViewModel(_eventAggregator));
+                    ActivateItemAsync(_loginViewModel);
                 }
                 else
                 {
@@ -89,7 +104,7 @@ namespace AdventureWorksWPFUI.ViewModels
                     MenuActivation = false;
                     role = "";
                     Title = "Login";
-                    ActivateItemAsync(new LoginViewModel(_eventAggregator));
+                    ActivateItemAsync(_loginViewModel);
                 }
                 else
                 {
@@ -105,25 +120,25 @@ namespace AdventureWorksWPFUI.ViewModels
 
         public void NonSalesEmployeeInfoMenu()
         {
-            ActivateItemAsync(new GetNonSalesEmployeeInfoViewModel());
+            ActivateItemAsync(_getNonSalesEmployeeInfoViewModel);
             Title = "Non-Sales Employees Information";
         }
 
         public void DeleteNonSalesEmployeeMenu()
         {
-            ActivateItemAsync(new DeleteNonSalesEmployeeViewModel());
+            ActivateItemAsync(_deleteNonSalesEmployeeViewModel);
             Title = "Delete Non-Sales Employees";
         }
 
         public void AddNonSalesEmployeeMenu()
         {
-            ActivateItemAsync(new AddNonSalesEmployeeViewModel());
+            ActivateItemAsync(_addNonSalesEmployeeViewModel);
             Title = "Add Non-Sales Employees";
         }
 
         public void UpdateNonSalesEmployeeMenu()
         {
-            ActivateItemAsync(new UpdateNonSalesEmployeeViewModel());
+            ActivateItemAsync(_updateNonSalesEmployeeViewModel);
             Title = "Update Non-Sales Employees Information";
         }
 
@@ -142,7 +157,7 @@ namespace AdventureWorksWPFUI.ViewModels
                 Permissions = false;
             }
 
-            ActivateItemAsync(new GetNonSalesEmployeeInfoViewModel());
+            ActivateItemAsync(_getNonSalesEmployeeInfoViewModel);
             Title = "Non-Sales Employees Information";
 
             return Task.CompletedTask;

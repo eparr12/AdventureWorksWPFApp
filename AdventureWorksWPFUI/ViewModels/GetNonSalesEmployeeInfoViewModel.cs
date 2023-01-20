@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace AdventureWorksWPFUI.ViewModels
 {
-    public class GetNonSalesEmployeeInfoViewModel : Conductor<Screen>.Collection.OneActive
+    public class GetNonSalesEmployeeInfoViewModel : Conductor<Screen>.Collection.OneActive, IGetNonSalesEmployeeInfoViewModel
     {
         private BindableCollection<GetNonSalesEmployeeInfoModel> _employeeInformations = new BindableCollection<GetNonSalesEmployeeInfoModel>();
 
@@ -29,7 +29,7 @@ namespace AdventureWorksWPFUI.ViewModels
 
         public BindableCollection<GetNonSalesEmployeeInfoModel> EmployeeInformations
         {
-            get 
+            get
             {
                 return _employeeInformations;
             }
@@ -48,8 +48,8 @@ namespace AdventureWorksWPFUI.ViewModels
                 var Information = db.GetNonSalesEmployeeInformation();
                 var InformationData = mapper.Map<List<GetNonSalesEmployeeInfoModel>>(Information);
 
-                foreach(GetNonSalesEmployeeInfoModel e in InformationData) 
-                { 
+                foreach (GetNonSalesEmployeeInfoModel e in InformationData)
+                {
                     EmployeeInformations.Add(e);
                 }
             }

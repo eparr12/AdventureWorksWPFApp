@@ -12,7 +12,7 @@ using System.Windows;
 
 namespace AdventureWorksWPFUI.ViewModels
 {
-    public class AddNonSalesEmployeeViewModel : Conductor<Screen>.Collection.OneActive
+    public class AddNonSalesEmployeeViewModel : Conductor<Screen>.Collection.OneActive, IAddNonSalesEmployeeViewModel
     {
         private BindableCollection<StateProvinceIDModel> _stateProvinceIDs = new();
         private StateProvinceIDModel _selectedStateProvinceID;
@@ -52,7 +52,7 @@ namespace AdventureWorksWPFUI.ViewModels
         private string _jobTitle;
         private DateTime _birthDate = DateTime.Now;
         private string _address;
-        private DateTime _startDate = DateTime.Now ;
+        private DateTime _startDate = DateTime.Now;
         private bool _yesSalaried;
         private bool _noSalaried;
         private bool _firstShift;

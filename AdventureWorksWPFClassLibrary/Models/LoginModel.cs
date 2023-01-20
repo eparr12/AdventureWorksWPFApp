@@ -1,6 +1,6 @@
 ﻿namespace AdventureWorksWPFClassLibrary.Models
 {
-    public class LoginModel
+    public class LoginModel : ILoginModel
     {
         public string LoginID { get; set; }
         public string Password { get; set; }

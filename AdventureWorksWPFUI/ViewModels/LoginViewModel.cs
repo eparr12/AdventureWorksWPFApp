@@ -2,27 +2,33 @@
 using AdventureWorksWPFClassLibrary.SqlDataAccess;
 using AdventureWorksWPFClassLibrary.Validators;
 using Caliburn.Micro;
+using FluentValidation;
 using FluentValidation.Results;
 using System.Data.SqlClient;
 using System.Windows;
 
 namespace AdventureWorksWPFUI.ViewModels
 {
-    public class LoginViewModel : Screen
+    public class LoginViewModel : Screen, ILoginViewModel
     {
         private string _loginID;
         private string _password;
-        private IEventAggregator _eventAggregator;
-
         private static string role = "";
 
-        DataAccess db = new DataAccess();
-        LoginModel login = new LoginModel();
-        LoginValidators validator = new LoginValidators();
+        private IEventAggregator _eventAggregator;
+        private IDataAccess _dataAccess;
+        private ILoginModel _loginModel;
+        private ValidationResult _validationResult;
+        private IValidator<ILoginModel> _validator;
 
-        public LoginViewModel(IEventAggregator eventAggregator)
+        public LoginViewModel(IEventAggregator eventAggregator, IDataAccess dataAccess, ILoginModel loginModel, 
+               ValidationResult validationResult, IValidator<ILoginModel> validator)
         {
             _eventAggregator = eventAggregator;
+            _dataAccess = dataAccess;
+            _loginModel = loginModel;
+            _validationResult = validationResult;
+            _validator = validator;
         }
 
         public string LoginID
@@ -55,26 +61,26 @@ namespace AdventureWorksWPFUI.ViewModels
         {
             try
             {
-                login.LoginID = LoginID;
-                login.Password = Password;
+                _loginModel.LoginID = LoginID;
+                _loginModel.Password = Password;
 
-                ValidationResult result = validator.Validate(login);
+                _validationResult = _validator.Validate(_loginModel);
 
-                if (result.IsValid == false)
+                if (_validationResult.IsValid == false)
                 {
-                    foreach (ValidationFailure failure in result.Errors)
+                    foreach (ValidationFailure failure in _validationResult.Errors)
                     {
                         MessageBox.Show(failure.ErrorMessage);
                         return;
                     }
                 }
-                db.Login(login);
+                _dataAccess.Login(_loginModel);
 
-                role = login.Role;
+                role = _loginModel.Role;
 
-                if (login.Role == "Wrong LoginID Or Password. Please Try Again!")
+                if (_loginModel.Role == "Wrong LoginID Or Password. Please Try Again!")
                 {
-                    MessageBox.Show(login.Role);
+                    MessageBox.Show(_loginModel.Role);
                     return;
                 }
                 else

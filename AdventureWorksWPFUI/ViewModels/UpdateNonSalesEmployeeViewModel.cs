@@ -15,7 +15,7 @@ using AdventureWorksWPFClassLibrary.Validators;
 
 namespace AdventureWorksWPFUI.ViewModels
 {
-    public class UpdateNonSalesEmployeeViewModel : Conductor<Screen>.Collection.OneActive
+    public class UpdateNonSalesEmployeeViewModel : Conductor<Screen>.Collection.OneActive, IUpdateNonSalesEmployeeViewModel
     {
         private BindableCollection<EmployeeFullNameModel> _employeeFullNames = new BindableCollection<EmployeeFullNameModel>();
         private EmployeeFullNameModel _selectedEmployeeFullName;
@@ -881,8 +881,8 @@ namespace AdventureWorksWPFUI.ViewModels
                     }
 
                     bool CurrentEmployee = true;
-                    if (YesCurrent) 
-                    { 
+                    if (YesCurrent)
+                    {
                         CurrentEmployee = true;
                     }
 
@@ -892,8 +892,8 @@ namespace AdventureWorksWPFUI.ViewModels
                     }
                     else
                     {
-                    MessageBox.Show("Please Selecte A Value For Active.");
-                    return;
+                        MessageBox.Show("Please Selecte A Value For Active.");
+                        return;
                     }
 
                     {

@@ -1,6 +1,6 @@
 ﻿namespace AdventureWorksWPFClassLibrary.Models
 {
-    public class UpdateNonSalesEmployeeModel
+    public class UpdateNonSalesEmployeeModel : IUpdateNonSalesEmployeeModel
     {
         public string Title { get; set; }
         public string FirstName { get; set; }

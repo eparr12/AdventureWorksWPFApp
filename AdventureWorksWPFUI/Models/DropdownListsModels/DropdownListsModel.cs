@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace AdventureWorksWPFUI.Models.DropdownListsModels
 {
-    public class DropdownListsModel
+    public class DropdownListsModel : IDropdownListsModel
     {
-        List <StateProvinceIDModel> StateProvinceID = new List<StateProvinceIDModel>();
+        List<StateProvinceIDModel> StateProvinceID = new List<StateProvinceIDModel>();
         List<DepartmentIDModel> DepartmentID = new List<DepartmentIDModel>();
 
         public void StateProvinceIDList(BindableCollection<StateProvinceIDModel> stateProvinceID)
@@ -61,10 +61,10 @@ namespace AdventureWorksWPFUI.Models.DropdownListsModels
             phoneNumberType.Add("Work");
         }
 
-        public void AddressTypeIDList(List<string> addressTypeID) 
+        public void AddressTypeIDList(List<string> addressTypeID)
         {
             addressTypeID.Add("");
-            addressTypeID .Add("Archive");
+            addressTypeID.Add("Archive");
             addressTypeID.Add("Billing");
             addressTypeID.Add("Home");
             addressTypeID.Add("Main Office");
@@ -79,14 +79,14 @@ namespace AdventureWorksWPFUI.Models.DropdownListsModels
             maritalStatus.Add("Single");
         }
 
-        public void GenderList(List<string> gender) 
+        public void GenderList(List<string> gender)
         {
             gender.Add("");
             gender.Add("Female");
             gender.Add("Male");
         }
 
-        public void PayFrequencyList(List<string> payFrequency) 
+        public void PayFrequencyList(List<string> payFrequency)
         {
             payFrequency.Add("");
             payFrequency.Add("Bi-Weekly");

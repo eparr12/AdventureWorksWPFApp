@@ -1,6 +1,6 @@
 ﻿namespace AdventureWorksWPFClassLibrary.Models
 {
-    public class NonSalesEmployeeInformationModel
+    public class NonSalesEmployeeInformationModel : INonSalesEmployeeInformationModel
     {
         public string PersonName { get; set; }
         public int PersonID { get; set; }

@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace AdventureWorksWPFClassLibrary.Validators
 {
-    public class LoginValidators : AbstractValidator<LoginModel>
+    public class LoginValidators : AbstractValidator<ILoginModel>
     {
         public LoginValidators()
         {

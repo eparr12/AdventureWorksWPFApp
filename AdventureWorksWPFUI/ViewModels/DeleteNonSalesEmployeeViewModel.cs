@@ -13,7 +13,7 @@ using ValidationResult = FluentValidation.Results.ValidationResult;
 
 namespace AdventureWorksWPFUI.ViewModels
 {
-    public class DeleteNonSalesEmployeeViewModel : Conductor<Screen>.Collection.OneActive
+    public class DeleteNonSalesEmployeeViewModel : Conductor<Screen>.Collection.OneActive, IDeleteNonSalesEmployeeViewModel
     {
         private string _searchFilter = string.Empty;
         private BindableCollection<EmployeeFullNameModel> _employeeFullNames = new BindableCollection<EmployeeFullNameModel>();
@@ -30,12 +30,12 @@ namespace AdventureWorksWPFUI.ViewModels
             ListData();
 
         }
-        
-        public ICollectionView Collection 
-        { 
-            get; 
 
-            set; 
+        public ICollectionView Collection
+        {
+            get;
+
+            set;
         }
 
         public DeleteNonSalesEmployeeViewModel()
@@ -143,11 +143,11 @@ namespace AdventureWorksWPFUI.ViewModels
                         MessageBox.Show("Success!");
                     }
 
-                catch (SqlException)
-                {
-                    MessageBox.Show("There was an error when performing this operation.\nPlease verify that all entered information is correct.\nCheck the database table DB_Errors for more information.");
+                    catch (SqlException)
+                    {
+                        MessageBox.Show("There was an error when performing this operation.\nPlease verify that all entered information is correct.\nCheck the database table DB_Errors for more information.");
+                    }
                 }
-            }
 
                 else
                 {

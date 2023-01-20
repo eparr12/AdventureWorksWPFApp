@@ -1,6 +1,6 @@
 ﻿namespace AdventureWorksWPFClassLibrary.Models.DropDowns
 {
-    public class EmployeeFullNameModel
+    public class EmployeeFullNameModel : IEmployeeFullNameModel
     {
         public string FullName { get; set; }
     }
