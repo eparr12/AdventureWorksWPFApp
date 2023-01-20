@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AdventureWorksWPFUI.Views"
-   mc:Ignorable="d"
+        xmlns:local="clr-namespace:AdventureWorksWPFUI.Views" xmlns:viewmodels="clr-namespace:AdventureWorksWPFUI.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:ShellViewModel}"
+        mc:Ignorable="d"
         Title="ShellView" Height="900" Width="1200"
         WindowStyle ="None"
         WindowStartupLocation="CenterScreen"
@@ -20,7 +20,7 @@
         
         </Border.Background>
         <Border CornerRadius="10"
-            BorderThickness="2"
+                BorderThickness="2"
                 Opacity=".9">
 
             <Border.BorderBrush>
@@ -41,6 +41,7 @@
             <Grid >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>
+                    <RowDefinition Height="100"/>
                     <RowDefinition/>
                     <RowDefinition Height="0"/>
                 </Grid.RowDefinitions>
@@ -55,52 +56,58 @@
                     <ColumnDefinition Width="0"/>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Column="0" Grid.ColumnSpan="2"
-                           >
+               <!-- Row 0 -->
+                <StackPanel Grid.Column="0" Grid.ColumnSpan="2">
+                    
                     <Menu MinHeight="50"
                           Background="#1B1448"
-                          Foreground="White"
-                          >
+                          Foreground="White">
+                        
                         <MenuItem Header="LogOut"
                                   Padding="8,17"
                                   FontFamily="Montserrat"
                                   FontWeight="SemiBold"
                                   x:Name="Logout">
                         </MenuItem>
+                        
                         <MenuItem Header="Non-Sales Employee"
                                   Padding="8,17"
                                   FontFamily="Montserrat"
                                   FontWeight="SemiBold"
                                   x:Name="NonSalesEmployeeMenu"
                                   IsEnabled="{Binding MenuActivation}">
+                            
                             <MenuItem Header=" Add Non-Sales Employee"
-                                  Padding="8,17"
-                                  FontFamily="Montserrat"
-                                  FontWeight="SemiBold"
-                                  x:Name="AddNonSalesEmployeeMenu"
+                                      Padding="8,17"
+                                      FontFamily="Montserrat"
+                                      FontWeight="SemiBold"
+                                      x:Name="AddNonSalesEmployeeMenu"
+                                      IsEnabled="{Binding Permissions}"
                                       Background="#1B1448">
                             </MenuItem>
 
                             <MenuItem Header=" Update Non-Sales Employee Info"
-                                  Padding="8,17"
-                                  FontFamily="Montserrat"
-                                  FontWeight="SemiBold"
-                                  x:Name="UpdateNonSalesEmployeeMenu"
+                                      Padding="8,17"
+                                      FontFamily="Montserrat"
+                                      FontWeight="SemiBold"
+                                      x:Name="UpdateNonSalesEmployeeMenu"
+                                      IsEnabled="{Binding Permissions}"
                                       Background="#1B1448">
                             </MenuItem>
 
                             <MenuItem x:Name="NonSalesEmployeeInfoMenu" Header=" View Non-Sales Employee Info"
-                                  Padding="8,17"
-                                  FontFamily="Montserrat"
-                                  FontWeight="SemiBold"
+                                      Padding="8,17"
+                                      FontFamily="Montserrat"
+                                      FontWeight="SemiBold"
                                       Background="#1B1448">
                             </MenuItem>
 
                             <MenuItem Header=" Delete Non-Sales Employee"
-                                  Padding="8,17"
-                                  FontFamily="Montserrat"
-                                  FontWeight="SemiBold"
-                                  x:Name="DeleteNonSalesEmployeeMenu"
+                                      Padding="8,17"
+                                      FontFamily="Montserrat"
+                                      FontWeight="SemiBold"
+                                      x:Name="DeleteNonSalesEmployeeMenu"
+                                      IsEnabled="{Binding Permissions}"
                                       Background="#1B1448">
                             </MenuItem>
                         </MenuItem>
@@ -108,17 +115,17 @@
                 </StackPanel>
 
                 <Button x:Name="minimizeButton"
-                            BorderThickness="0"
-                            Content="-"
-                            Foreground="White"
-                            FontSize="16"
-                            FontFamily="Montserrat"
-                            Cursor="Hand"
-                            Grid.Column="2"
-                            Margin="0,0,0,0"
-                            Click="minimizeButton_Click"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Left">
+                        BorderThickness="0"
+                        Content="-"
+                        Foreground="White"
+                        FontSize="16"
+                        FontFamily="Montserrat"
+                        Cursor="Hand"
+                        Grid.Column="2"
+                        Margin="0,0,0,0"
+                        Click="minimizeButton_Click"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left">
 
                     <Button.Style>
                         <Style TargetType="Button">
@@ -133,11 +140,13 @@
 
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
-                            <Border Width="18" Height="18"
-                                        CornerRadius="9"
-                                        Background="{TemplateBinding Background}">
+                            <Border Width="18" 
+                                    Height="18"
+                                    CornerRadius="9"
+                                    Background="{TemplateBinding Background}">
+                                
                                 <ContentPresenter VerticalAlignment="Center"
-                                                      HorizontalAlignment="Center"/>
+                                                  HorizontalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
                     </Button.Template>
@@ -149,8 +158,8 @@
                         Margin="0,0,6,0"
                         Content="_"
                         Foreground="White"
-                        Click="maximizeButton_Click"
-                        >
+                        Click="maximizeButton_Click">
+                    
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="#FF3D38D0"/>
@@ -164,27 +173,30 @@
 
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
-                            <Border Width="18" Height="18"
-                                        CornerRadius="4"
-                                        Background="{TemplateBinding Background}">
+                            <Border Width="18" 
+                                    Height="18"
+                                    CornerRadius="4"
+                                    Background="{TemplateBinding Background}">
+                                
                                 <ContentPresenter VerticalAlignment="Center"
-                                                      HorizontalAlignment="Center"/>
+                                                  HorizontalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
                     </Button.Template>
 
                 </Button>
                 <Button x:Name="closeButton"
-                            BorderThickness="0"
-                            Content="X"
-                            Foreground="White"
-                            FontSize="12"
-                            FontFamily="Montserrat"
-                            Cursor="Hand"
-                            Grid.Column="4"
-                            Margin="0,0,0,0"
-                            Click="closeButton_Click" Height="30" VerticalAlignment="Center"
-                            HorizontalAlignment="Left">
+                        BorderThickness="0"
+                        Content="X"
+                        Foreground="White"
+                        FontSize="12"
+                        FontFamily="Montserrat"
+                        Cursor="Hand"
+                        Grid.Column="4"
+                        Margin="0,0,0,0"
+                        Click="closeButton_Click" Height="30" VerticalAlignment="Center"
+                        HorizontalAlignment="Left">
+                    
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="#DA34AE"/>
@@ -198,20 +210,36 @@
 
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
-                            <Border Width="18" Height="18"
-                                        CornerRadius="9"
-                                        Background="{TemplateBinding Background}">
+                            <Border Width="18" 
+                                    Height="18"
+                                    CornerRadius="9"
+                                    Background="{TemplateBinding Background}">
+                                
                                 <ContentPresenter VerticalAlignment="Center"
-                                                      HorizontalAlignment="Center"/>
+                                                  HorizontalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
 
-                <ContentControl Grid.Row="1" Grid.Column="1"
-                                    x:Name="ActiveItem" Grid.ColumnSpan="4"/>
-            </Grid>
+                <!-- Row 1 -->
+                <TextBlock x:Name="Title" 
+                           FontSize="36"
+                           FontFamily="Montserrat"
+                           Grid.Row="1" 
+                           TextAlignment="Center" 
+                           HorizontalAlignment="Center"
+                           Foreground="White"  
+                           Grid.Column="1" 
+                           Grid.ColumnSpan="4"
+                           Margin="0,20,0,30"/>
 
+                <!-- Row 2 -->
+                <ContentControl Grid.Row="2" 
+                                Grid.Column="1"
+                                x:Name="ActiveItem" 
+                                Grid.ColumnSpan="4"/>
+            </Grid>
         </Border>
     </Border>
 </Window>

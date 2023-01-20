@@ -2,7 +2,6 @@
 using AdventureWorksWPFClassLibrary.SqlDataAccess;
 using AdventureWorksWPFClassLibrary.Validators;
 using Caliburn.Micro;
-using FluentValidation;
 using FluentValidation.Results;
 using System.Data.SqlClient;
 using System.Windows;
@@ -13,15 +12,17 @@ namespace AdventureWorksWPFUI.ViewModels
     {
         private string _loginID;
         private string _password;
+        private IEventAggregator _eventAggregator;
 
-        public static string role = "";
+        private static string role = "";
 
         DataAccess db = new DataAccess();
         LoginModel login = new LoginModel();
         LoginValidators validator = new LoginValidators();
 
-        public LoginViewModel()
+        public LoginViewModel(IEventAggregator eventAggregator)
         {
+            _eventAggregator = eventAggregator;
         }
 
         public string LoginID
@@ -78,11 +79,11 @@ namespace AdventureWorksWPFUI.ViewModels
                 }
                 else
                 {
+                    _eventAggregator.PublishOnUIThreadAsync(role);
                     this.TryCloseAsync();
                 }
             }
-
-            catch (SqlException exception)
+            catch (SqlException)
             {
                 MessageBox.Show("There was an error when performing this operation.\nPlease verify that all entered information is correct.\nCheck the database table DB_Errors for more information.");
             }

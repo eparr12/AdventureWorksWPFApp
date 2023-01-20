@@ -1,58 +1,95 @@
 ﻿using Caliburn.Micro;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
 namespace AdventureWorksWPFUI.ViewModels
 {
-    // TODO add title in top menu bar to show which page the user is on
-    public class ShellViewModel : Conductor<object>
+    public class ShellViewModel : Conductor<object>, IHandle<string>
     {
-        private bool _nonSalesEmployeeMenu = true;
-        public static string Role = "";
+        private bool _permissions = false;
+        private readonly IEventAggregator _eventAggregator = new EventAggregator();
+        private bool _menuActivation = false;
+        private string _title;
+
+        private static string role = "";
 
         public ShellViewModel()
         {
-            ActivateItemAsync(new LoginViewModel());
-            //ActivateItemAsync(new GetNonSalesEmployeeInfoViewModel());
-            //ActivateItemAsync(new DeleteNonSalesEmployeeViewModel());
-            //ActivateItemAsync(new AddNonSalesEmployeeViewModel());
-            //ActivateItemAsync(new UpdateNonSalesEmployeeViewModel());
+            Title = "Login";
+            _eventAggregator.SubscribeOnPublishedThread(this);
+            ActivateItemAsync(new LoginViewModel(_eventAggregator));
         }
 
-        public static void loginViewModel_OnLoggedIn(object sender, string role)
+        public bool MenuActivation
         {
-            Role = role;
+            get
+            {
+                return _menuActivation;
+            }
+            set
+            {
+                _menuActivation = value;
+                NotifyOfPropertyChange(() => MenuActivation);
+            }
+        }
+
+        public string Title
+        {
+            get
+            {
+                return _title;
+            }
+            set
+            {
+                _title = value;
+                NotifyOfPropertyChange(() => Title);
+            }
+        }
+
+        public bool Permissions
+        {
+            get
+            {
+                return _permissions;
+            }
+            set
+            {
+                _permissions = value;
+                NotifyOfPropertyChange(() => Permissions);
+            }
         }
 
         public void LogOut()
         {
-
-            if (LoginViewModel.role == "Administrator")
+            if (role == "Administrator")
             {
                 var confirmResult = MessageBox.Show($"Are You Sure You Want To LogOut?",
              "Confirm LogOut.", MessageBoxButton.YesNo);
                 if (confirmResult == MessageBoxResult.Yes)
                 {
-                    LoginViewModel.role = "";
-                    ActivateItemAsync(new LoginViewModel());
+                    MenuActivation = false;
+                    role = "";
+                    Title = "Login";
+                    ActivateItemAsync(new LoginViewModel(_eventAggregator));
                 }
                 else
                 {
                     return;
                 }
-             
+
             }
 
-            if (LoginViewModel.role == "Basic")
+            if (role == "Basic")
             {
                 var confirmResult = MessageBox.Show($"Are You Sure You Want To LogOut?",
              "Confirm LogOut.", MessageBoxButton.YesNo);
                 if (confirmResult == MessageBoxResult.Yes)
                 {
-                    LoginViewModel.role = "";
-                    ActivateItemAsync(new LoginViewModel());
+                    MenuActivation = false;
+                    role = "";
+                    Title = "Login";
+                    ActivateItemAsync(new LoginViewModel(_eventAggregator));
                 }
                 else
                 {
@@ -69,55 +106,46 @@ namespace AdventureWorksWPFUI.ViewModels
         public void NonSalesEmployeeInfoMenu()
         {
             ActivateItemAsync(new GetNonSalesEmployeeInfoViewModel());
+            Title = "Non-Sales Employees Information";
         }
 
         public void DeleteNonSalesEmployeeMenu()
         {
             ActivateItemAsync(new DeleteNonSalesEmployeeViewModel());
+            Title = "Delete Non-Sales Employees";
         }
 
         public void AddNonSalesEmployeeMenu()
         {
             ActivateItemAsync(new AddNonSalesEmployeeViewModel());
+            Title = "Add Non-Sales Employees";
         }
 
         public void UpdateNonSalesEmployeeMenu()
         {
             ActivateItemAsync(new UpdateNonSalesEmployeeViewModel());
+            Title = "Update Non-Sales Employees Information";
         }
 
-
-        public bool HandlerExistsFor(Type messageType)
+        public Task HandleAsync(string message, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
-        }
+            MenuActivation = true;
+            role = message;
 
-        public void Subscribe(object subscriber, Func<Func<Task>, Task> marshal)
-        {
-            throw new NotImplementedException();
-        }
+            if (role == "Administrator")
+            {
+                Permissions = true;
+            }
 
-        public void Unsubscribe(object subscriber)
-        {
-            throw new NotImplementedException();
-        }
+            else
+            {
+                Permissions = false;
+            }
 
-        public Task PublishAsync(object message, Func<Func<Task>, Task> marshal, CancellationToken cancellationToken = default)
-        {
-            throw new NotImplementedException();
-        }
-    }
+            ActivateItemAsync(new GetNonSalesEmployeeInfoViewModel());
+            Title = "Non-Sales Employees Information";
 
-    internal record struct NewStruct(object Item1, object Item2)
-    {
-        public static implicit operator (object, object)(NewStruct value)
-        {
-            return (value.Item1, value.Item2);
-        }
-
-        public static implicit operator NewStruct((object, object) value)
-        {
-            return new NewStruct(value.Item1, value.Item2);
+            return Task.CompletedTask;
         }
     }
 }

@@ -110,7 +110,7 @@ namespace AdventureWorksWPFUI.ViewModels
                 Collection.Filter = FilterEmployees;
                 Collection.SortDescriptions.Add(new SortDescription(nameof(EmployeeFullNameModel.FullName), ListSortDirection.Ascending));
             }
-            catch (SqlException exception)
+            catch (SqlException)
             {
                 MessageBox.Show("There was an error when performing this operation.\nPlease verify that all entered information is correct.\nCheck the database table DB_Errors for more information.");
             }
@@ -118,8 +118,6 @@ namespace AdventureWorksWPFUI.ViewModels
 
         public void Delete()
         {
-            /// TODO find a way to select multiple employees and do a mass delete operation
-            /// 
             if (_selectedEmployeeFullName != null)
             {
                 var result = MessageBox.Show("Are You Sure You Want To Delete??", "Confirm Delete!!", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -145,7 +143,7 @@ namespace AdventureWorksWPFUI.ViewModels
                         MessageBox.Show("Success!");
                     }
 
-                catch (SqlException exception)
+                catch (SqlException)
                 {
                     MessageBox.Show("There was an error when performing this operation.\nPlease verify that all entered information is correct.\nCheck the database table DB_Errors for more information.");
                 }
@@ -160,8 +158,6 @@ namespace AdventureWorksWPFUI.ViewModels
             {
                 MessageBox.Show("Must Select A Person!");
             }
-
         }
     }
-
 }

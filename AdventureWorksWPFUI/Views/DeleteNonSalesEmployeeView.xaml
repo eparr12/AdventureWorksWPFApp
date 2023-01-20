@@ -23,21 +23,48 @@
         </Grid.ColumnDefinitions>
         
         <!-- Row 0 -->
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="Search:"
-                   Foreground="White" FontFamily="Montserrat" FontSize="22"
-                   HorizontalAlignment="Right" Margin="0,0,30,50"
-                   VerticalAlignment="Bottom"/>
+        <StackPanel Grid.Row="0" 
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Orientation="Vertical"
+                    VerticalAlignment="Center"
+                    MaxWidth="300">
 
-        <TextBox Grid.Row="0" Grid.Column="1" FontFamily="Montserrat" FontSize="22"
-                 Foreground="White" Background="Transparent" HorizontalAlignment="Left"
-                 Margin="0,0,0,50" VerticalAlignment="Bottom" MinWidth="150"
-                 x:Name="SearchFilter"/>
+            <TextBlock Text="Search:"
+                       Foreground="DarkGray" 
+                       FontSize="14" 
+                       FontWeight="Medium"
+                       FontFamily="Montserrat" 
+                       TextAlignment="Center" 
+                       HorizontalAlignment="Left"/>
+
+            <TextBox x:Name="SearchFilter"
+                     FontSize="20" 
+                     FontFamily="Montserrat" 
+                     Foreground="White"
+                     CaretBrush="LightGray" 
+                     BorderBrush="DarkGray" 
+                     BorderThickness="0,0,0,1" 
+                     Height="30" 
+                     MinWidth="150"
+                     HorizontalAlignment="Stretch" 
+                     Background="Transparent" 
+                     VerticalContentAlignment="Bottom"/>
+        </StackPanel>
+        
         <!-- Row 1-->
-        <ListView x:Name="EmployeeFullNames" FontFamily="Montserrat" Grid.Row="1"
-                      Foreground="White" FontSize="22" Background="Transparent"
-                      MaxHeight="275" IsSynchronizedWithCurrentItem="True"
-                      MaxWidth="250" VerticalAlignment="Center" Grid.ColumnSpan="2"
-                      ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single">
+        <ListView x:Name="EmployeeFullNames" 
+                  FontFamily="Montserrat" 
+                  Grid.Row="1"
+                  Foreground="White" 
+                  FontSize="20" 
+                  Background="Transparent"
+                  MaxHeight="350" 
+                  IsSynchronizedWithCurrentItem="True"
+                  MaxWidth="250" VerticalAlignment="Center" 
+                  Grid.ColumnSpan="2"
+                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Single">
+            
             <ListView.Resources>
                 <Style TargetType="GridViewColumnHeader">
                     <Setter Property="Template" Value="{x:Null}"/>
@@ -49,7 +76,6 @@
                           ScrollViewer.VerticalScrollBarVisibility="Auto">
 
                     <GridViewColumn>
-
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock  Text="{Binding FullName, Mode=TwoWay}"
@@ -57,23 +83,22 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    
                 </GridView>
             </ListView.View>
         </ListView>
         
         <!--Row 2-->
         <Button x:Name="Delete"
-                            BorderThickness="0"
-                            Content="DELETE"
-                            Foreground="White"
-                            FontSize="22"
-                            FontFamily="Montserrat"
-                            Cursor="Hand"
-                            Grid.Row="2"
-                            VerticalAlignment="Top"
-                            Margin="0,50,0,0"
-                            Grid.ColumnSpan="2">
+                BorderThickness="0"
+                Content="DELETE"
+                Foreground="White"
+                FontSize="20"
+                FontFamily="Montserrat"
+                Cursor="Hand"
+                Grid.Row="2"
+                VerticalAlignment="Center"
+                Margin="0,50,0,0"
+                Grid.ColumnSpan="2">
 
             <Button.Style>
                 <Style TargetType="Button">
@@ -88,11 +113,13 @@
 
             <Button.Template>
                 <ControlTemplate TargetType="Button">
-                    <Border Width="200" Height="50"
-                                        CornerRadius="20"
-                                        Background="{TemplateBinding Background}">
+                    <Border Width="200" 
+                            Height="50"
+                            CornerRadius="20"
+                            Background="{TemplateBinding Background}">
+                        
                         <ContentPresenter VerticalAlignment="Center"
-                                                      HorizontalAlignment="Center"/>
+                                          HorizontalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>
             </Button.Template>

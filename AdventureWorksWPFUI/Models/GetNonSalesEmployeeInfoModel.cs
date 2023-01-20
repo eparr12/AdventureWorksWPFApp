@@ -1,6 +1,6 @@
-﻿namespace AdventureWorksWPFClassLibrary.Models
+﻿namespace AdventureWorksWPFUI.Models
 {
-    public class NonSalesEmployeeInformationModel
+    public class GetNonSalesEmployeeInfoModel
     {
         public string PersonName { get; set; }
         public int PersonID { get; set; }
@@ -15,40 +15,17 @@
         public string StateOrProvince { get; set; }
         public string PostalCode { get; set; }
         public string Country { get; set; }
-        public DateTime BirthDate { get; set; }
         public string MaritalStatus { get; set; }
         public string Gender { get; set; }
-        public DateTime HireDate { get; set; }
         public string JobGroup { get; set; }
         public string JobDepartment { get; set; }
         public string JobTitle { get; set; }
-        public string ShiftNumber { get; set; }
         public string ShiftName { get; set; }
-        public Decimal HourlyPayRate { get; set; }
         public string PayFrequency { get; set; }
         public int VacationHours { get; set; }
         public int SickLeaveHours { get; set; }
-        public string FormatHourlyPay
-        {
-            get
-            {
-                return HourlyPayRate.ToString("C");
-            }
-        }
-        public string FormatBirthDate
-        {
-            get
-            {
-                return BirthDate.ToString("MM/dd/yyyy");
-            }
-        }
-
-        public string FormatHireDate
-        {
-            get
-            {
-                return BirthDate.ToString("MM/dd/yyyy");
-            }
-        }
+        public string FormatHourlyPay { get; set; }
+        public string FormatBirthDate { get; set; }
+        public string FormatHireDate { get; set; }
     }
 }

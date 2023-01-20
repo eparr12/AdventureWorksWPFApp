@@ -5,7 +5,12 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventureWorksWPFUI", "AdventureWorksWPFUI\AdventureWorksWPFUI.csproj", "{BD9C1B94-24D4-46C1-9F92-8F4C9E203392}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureWorksWPFClassLibrary", "AdventureWorksWPFClassLibrary\AdventureWorksWPFClassLibrary.csproj", "{9468B990-16D2-47FB-ABB1-7F1D79B7AABD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventureWorksWPFClassLibrary", "AdventureWorksWPFClassLibrary\AdventureWorksWPFClassLibrary.csproj", "{9468B990-16D2-47FB-ABB1-7F1D79B7AABD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6E0173DA-2F3E-4047-B722-A2EAABEED016}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

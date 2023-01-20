@@ -5,399 +5,1044 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AdventureWorksWPFUI.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="1200">
-    <Grid>
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-
-        <!-- Row 0 -->
-        <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="Employee Name:"
-                   Foreground="White" FontFamily="Montserrat" FontSize="24" HorizontalAlignment="Stretch" Margin="100,15,0,50"/>
-
-        <ComboBox x:Name="EmployeeFullNames" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2"
-                  Foreground="#462AD8" Background="Transparent" FontSize="24" FontFamily="Montserrat" 
-                  IsEditable="False" HorizontalAlignment="Stretch" MinWidth="200" Margin="25,10,75,40" 
-                  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" DisplayMemberPath="FullName"/>
-        
-        <!-- Row 1-->
-
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Title"
-                   Foreground="White" FontFamily="Montserrat" FontSize="22"
-                   HorizontalAlignment="Stretch" Margin="100,10,30,30"/>
-
-        <ComboBox Grid.Row="1" Grid.Column="1" FontFamily="Montserrat" FontSize="22"
-                 Foreground="#462AD8" Background="Transparent" HorizontalAlignment="Stretch"
-                 Margin="0,10,30,30"  MinWidth="150"
-                 x:Name="Titles"/>
-
-        <TextBlock Grid.Row="1" Grid.Column="2" Text="State/Province"
-                   Foreground="White" FontFamily="Montserrat" FontSize="22"
-                   HorizontalAlignment="Stretch" Margin="20,10,30,30"/>
-
-        <ComboBox Grid.Row="1" Grid.Column="3" FontFamily="Montserrat" FontSize="22"
-                 Foreground="#462AD8" Background="Transparent" HorizontalAlignment="Stretch"
-                 Margin="0,10,20,30" MinWidth="150" IsTextSearchCaseSensitive="False" IsTextSearchEnabled="True"
-                 x:Name="StateProvinceIDs" DisplayMemberPath="Name" IsEditable="False"/>
-
-        <TextBlock Grid.Row="1" Grid.Column="4" Text="Hire Date"
-                   Foreground="White" FontFamily="Montserrat" FontSize="22"
-                   HorizontalAlignment="Stretch" Margin="60,10,30,30"/>
-
-        <DatePicker Grid.Row="1" Grid.Column="5" FontFamily="Montserrat" FontSize="22"
-                 Foreground="#462AD8" Background="Transparent" HorizontalAlignment="Stretch"
-                 Margin="0,10,20,30" MinWidth="150"
-                 x:Name="HireDate"/>
-
-        <!-- Row 2-->
-
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="First Name"
-                   Foreground="White" FontFamily="Montserrat" FontSize="22"
-                   HorizontalAlignment="Stretch" Margin="50,10,30,30"/>
-
-        <TextBox Grid.Row="2" Grid.Column="1" FontFamily="Montserrat" FontSize="22"
-                 Foreground="White" Background="Transparent" HorizontalAlignment="Stretch"
-                 Margin="0,10,30,30"  MinWidth="150"
-                 x:Name="FirstName"/>
-
-        <TextBlock Grid.Row="2" Grid.Column="2" Text="Postal Code"
-                   Foreground="White" FontFamily="Montserrat" FontSize="22"
-                   HorizontalAlignment="Stretch" Margin="30,0,30,30"/>
-
-        <TextBox Grid.Row="2" Grid.Column="3" FontFamily="Montserrat" FontSize="22"
-                 Foreground="White" Background="Transparent" HorizontalAlignment="Stretch"
-                 Margin="0,10,20,30" MinWidth="150"
-                 x:Name="PostalCode"/>
-
-        <TextBlock Grid.Row="2" Grid.Column="4" Text="Salaried"
-                   Foreground="White" FontFamily="Montserrat" FontSize="22"
-                   HorizontalAlignment="Stretch" Margin="60,0,30,30"/>
-
-        <StackPanel Grid.Row="2" Grid.Column="5" Background="Transparent" Orientation="Horizontal"
-                    HorizontalAlignment="Stretch" Margin="0,0,20,40" MinWidth="150" >
-            <RadioButton GroupName="Salaried" FontFamily="Montserrat" FontSize="22" x:Name="YesSalaried"
-                         Foreground="White" VerticalAlignment="Bottom" Margin="0,0,65,0">
-                Yes
-            </RadioButton>
-
-            <RadioButton GroupName="Salaried" FontFamily="Montserrat" FontSize="22" x:Name="NoSalaried"
-                         Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                No
-            </RadioButton>
-        </StackPanel>
-
-        <!-- Row 3-->
-
-        <TextBlock Grid.Row="3" Grid.Column="0" Text="Middle Name"
-                   Foreground="White" FontFamily="Montserrat" FontSize="22"
-                   HorizontalAlignment="Stretch" Margin="30,0,30,30"/>
-
-        <TextBox Grid.Row="3" Grid.Column="1" FontFamily="Montserrat" FontSize="22"
-                 Foreground="White" Background="Transparent" HorizontalAlignment="Stretch"
-                 Margin="0,0,30,30"  MinWidth="150"
-                 x:Name="MiddleName"/>
-
-        <TextBlock Grid.Row="3" Grid.Column="2" Text="Address Type"
-                   Foreground="White" FontFamily="Montserrat" FontSize="22"
-                   HorizontalAlignment="Stretch" Margin="30,0,30,30"/>
-
-        <ComboBox Grid.Row="3" Grid.Column="3" FontFamily="Montserrat" FontSize="22"
-                 Foreground="#462AD8" Background="Transparent" HorizontalAlignment="Stretch"
-                 Margin="0,0,20,30"  MinWidth="150"
-                 x:Name="AddressTypeIDs"
-                  SelectedIndex="0"/>
-
-        <TextBlock Grid.Row="3" Grid.Column="4" Text="Vacation Hours"
-                   Foreground="White" FontFamily="Montserrat" FontSize="22"
-                   HorizontalAlignment="Stretch" Margin="20,0,30,30"/>
-
-        <TextBox Grid.Row="3" Grid.Column="5" FontFamily="Montserrat" FontSize="22"
-                 Foreground="White" Background="Transparent" HorizontalAlignment="Stretch"
-                 Margin="0,0,20,30" MinWidth="150"
-                 x:Name="VacationHours"/>
-
-        <!-- Row 4-->
-
-        <TextBlock Grid.Row="4" Grid.Column="0" Text="Last Name"
-                   Foreground="White" FontFamily="Montserrat" FontSize="22"
-                   HorizontalAlignment="Stretch" Margin="50,0,30,30"/>
-
-        <TextBox Grid.Row="4" Grid.Column="1" FontFamily="Montserrat" FontSize="22"
-                 Foreground="White" Background="Transparent" HorizontalAlignment="Stretch"
-                 Margin="0,0,30,30"  MinWidth="150"
-                 x:Name="LastName"/>
-
-        <TextBlock Grid.Row="4" Grid.Column="2" Text="Email Address"
-                   Foreground="White" FontFamily="Montserrat" FontSize="22"
-                   HorizontalAlignment="Stretch" Margin="20,0,30,30"/>
-
-        <TextBox Grid.Row="4" Grid.Column="3" FontFamily="Montserrat" FontSize="22"
-                 Foreground="White" Background="Transparent" HorizontalAlignment="Stretch"
-                 Margin="0,0,20,30"  MinWidth="150"
-                 x:Name="EmailAddress"/>
-
-        <TextBlock Grid.Row="4" Grid.Column="4" Text="Sick Leave Hours"
-                   Foreground="White" FontFamily="Montserrat" FontSize="22"
-                   HorizontalAlignment="Stretch" Margin="5,0,30,30"/>
-
-        <TextBox Grid.Row="4" Grid.Column="5" FontFamily="Montserrat" FontSize="22"
-                 Foreground="White" Background="Transparent" HorizontalAlignment="Stretch"
-                 Margin="0,0,20,30" MinWidth="150"
-                 x:Name="SickLeaveHours"/>
-
-        <!-- Row 5-->
-
-        <TextBlock Grid.Row="5" Grid.Column="0" Text="Suffix"
-                   Foreground="White" FontFamily="Montserrat" FontSize="22"
-                   HorizontalAlignment="Stretch" Margin="80,0,30,30"/>
-
-        <ComboBox Grid.Row="5" Grid.Column="1" FontFamily="Montserrat" FontSize="22"
-                 Foreground="#462AD8" Background="Transparent" HorizontalAlignment="Stretch"
-                 Margin="0,0,30,30"  MinWidth="150"
-                 x:Name="Suffixs" SelectedIndex="0"/>
-
-        <TextBlock Grid.Row="5" Grid.Column="2" Text="National ID"
-                   Foreground="White" FontFamily="Montserrat" FontSize="22"
-                   HorizontalAlignment="Stretch" Margin="30,0,30,30"/>
-
-        <TextBox Grid.Row="5" Grid.Column="3" FontFamily="Montserrat" FontSize="22"
-                 Foreground="White" Background="Transparent" HorizontalAlignment="Stretch"
-                 Margin="0,0,20,30"  MinWidth="150"
-                 x:Name="NationalID"/>
-
-        <TextBlock Grid.Row="5" Grid.Column="4" Text="Pay Rate"
-                   Foreground="White" FontFamily="Montserrat" FontSize="22"
-                   HorizontalAlignment="Stretch" Margin="50,0,30,30"/>
-
-        <TextBox Grid.Row="5" Grid.Column="5" FontFamily="Montserrat" FontSize="22"
-                 Foreground="White" Background="Transparent" HorizontalAlignment="Stretch"
-                 Margin="0,0,20,30" MinWidth="150"
-                 x:Name="PayRate"/>
-
-
-        <!-- Row 6-->
-
-        <TextBlock Grid.Row="6" Grid.Column="0" Text="Person Type"
-                   Foreground="White" FontFamily="Montserrat" FontSize="22"
-                   HorizontalAlignment="Stretch" Margin="40,0,30,30"/>
-
-        <ComboBox Grid.Row="6" Grid.Column="1" FontFamily="Montserrat" FontSize="22"
-                 Foreground="#462AD8" Background="Transparent" HorizontalAlignment="Stretch"
-                 Margin="0,0,30,30"  MinWidth="150"
-                 x:Name="PersonTypes"/>
-
-        <TextBlock Grid.Row="6" Grid.Column="2" Text="Login ID"
-                   Foreground="White" FontFamily="Montserrat" FontSize="22"
-                   HorizontalAlignment="Stretch" Margin="30,0,30,30"/>
-
-        <TextBox Grid.Row="6" Grid.Column="3" FontFamily="Montserrat" FontSize="22"
-                 Foreground="White" Background="Transparent" HorizontalAlignment="Stretch"
-                 Margin="0,0,20,30" MinWidth="150"
-                 x:Name="LoginID"/>
-
-        <TextBlock Grid.Row="6" Grid.Column="4" Text="Pay Frequency"
-                   Foreground="White" FontFamily="Montserrat" FontSize="22"
-                   HorizontalAlignment="Stretch" Margin="20,0,30,30"/>
-
-        <ComboBox Grid.Row="6" Grid.Column="5" FontFamily="Montserrat" FontSize="22"
-                 Foreground="#462AD8" Background="Transparent" HorizontalAlignment="Stretch"
-                 Margin="0,0,20,30" MinWidth="150"
-                 x:Name="PayFrequencys" SelectedIndex="0"/>
-
-        <!-- Row 7-->
-
-        <TextBlock Grid.Row="7" Grid.Column="0" Text="Phone Number"
-                   Foreground="White" FontFamily="Montserrat" FontSize="22"
-                   HorizontalAlignment="Stretch" Margin="20,0,30,30"/>
-
-        <TextBox Grid.Row="7" Grid.Column="1" FontFamily="Montserrat" FontSize="22"
-                 Foreground="White" Background="Transparent" HorizontalAlignment="Stretch"
-                 Margin="0,0,30,30"  MinWidth="150"
-                 x:Name="PhoneNumber"/>
-
-        <TextBlock Grid.Row="7" Grid.Column="2" Text="Job Title"
-                   Foreground="White" FontFamily="Montserrat" FontSize="22"
-                   HorizontalAlignment="Stretch" Margin="40,0,30,30"/>
-
-        <TextBox Grid.Row="7" Grid.Column="3" FontFamily="Montserrat" FontSize="22"
-                 Foreground="White" Background="Transparent" HorizontalAlignment="Stretch"
-                 Margin="0,0,20,30" MinWidth="150"
-                 x:Name="JobTitle"/>
-
-        <TextBlock Grid.Row="7" Grid.Column="4" Text="Department"
-                   Foreground="White" FontFamily="Montserrat" FontSize="22"
-                   HorizontalAlignment="Stretch" Margin="30,0,30,30"/>
-
-        <ComboBox Grid.Row="7" Grid.Column="5" FontFamily="Montserrat" FontSize="22"
-                 Foreground="#462AD8" Background="Transparent" HorizontalAlignment="Stretch"
-                 Margin="0,0,20,30" MinWidth="150" IsTextSearchCaseSensitive="False" IsTextSearchEnabled="True"
-                 x:Name="DepartmentIDs" DisplayMemberPath="Name" IsEditable="False"/>
-
-        <!-- Row 8-->
-
-        <TextBlock Grid.Row="8" Grid.Column="0" Text="Phone Type"
-                   Foreground="White" FontFamily="Montserrat" FontSize="22"
-                   HorizontalAlignment="Stretch" Margin="35,0,30,30"/>
-
-        <ComboBox Grid.Row="8" Grid.Column="1" FontFamily="Montserrat" FontSize="22"
-                 Foreground="#462AD8" Background="Transparent" HorizontalAlignment="Stretch"
-                 Margin="0,0,30,30"  MinWidth="150"
-                 x:Name="PhoneNumberTypes" SelectedIndex="0"/>
-
-        <TextBlock Grid.Row="8" Grid.Column="2" Text="Birth Date"
-                   Foreground="White" FontFamily="Montserrat" FontSize="22"
-                   HorizontalAlignment="Stretch" Margin="30,0,30,30"/>
-
-        <DatePicker Grid.Row="8" Grid.Column="3" FontFamily="Montserrat" FontSize="22"
-                 Foreground="#462AD8" Background="Transparent" HorizontalAlignment="Stretch"
-                 Margin="0,0,20,30" MinWidth="150"
-                 x:Name="BirthDate"/>
-
-        <TextBlock Grid.Row="8" Grid.Column="4" Text="Shift"
-                   Foreground="White" FontFamily="Montserrat" FontSize="22"
-                   HorizontalAlignment="Stretch" Margin="60,0,30,30"/>
-
-        <StackPanel Grid.Row="8" Grid.Column="5" Background="Transparent" Orientation="Horizontal"
-                    HorizontalAlignment="Stretch" Margin="0,0,20,40" MinWidth="150" >
-            <RadioButton GroupName="Shift" FontFamily="Montserrat" FontSize="22" x:Name="FirstShift"
-                         Foreground="White" VerticalAlignment="Bottom" Margin="0,0,12,0">
-                1st
-            </RadioButton>
-
-            <RadioButton GroupName="Shift" FontFamily="Montserrat" FontSize="22" Margin="0,0,12,0"
-                         x:Name="SecondShift"
-                         Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                2nd
-            </RadioButton>
-
-            <RadioButton GroupName="Shift" FontFamily="Montserrat" FontSize="22" x:Name="ThirdShift"
-                         Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                3rd
-            </RadioButton>
-
-        </StackPanel>
-
-        <!-- Row 9-->
-
-        <TextBlock Grid.Row="9" Grid.Column="0" Text="Address"
-                   Foreground="White" FontFamily="Montserrat" FontSize="22"
-                   HorizontalAlignment="Stretch" Margin="50,0,30,30"/>
-
-        <TextBox Grid.Row="9" Grid.Column="1" FontFamily="Montserrat" FontSize="22"
-                 Foreground="White" Background="Transparent" HorizontalAlignment="Stretch"
-                 Margin="0,0,30,30"  MinWidth="150"
-                 x:Name="Address"/>
-
-        <TextBlock Grid.Row="9" Grid.Column="2" Text="Marital Status"
-                   Foreground="White" FontFamily="Montserrat" FontSize="22"
-                   HorizontalAlignment="Stretch" Margin="30,0,30,30"/>
-
-        <ComboBox Grid.Row="9" Grid.Column="3" FontFamily="Montserrat" FontSize="22"
-                 Foreground="#462AD8" Background="Transparent" HorizontalAlignment="Stretch"
-                 Margin="0,0,20,30" MinWidth="150"
-                 x:Name="Maritals" SelectedIndex="0"/>
-
-        <TextBlock Grid.Row="9" Grid.Column="4" Text="Start Date"
-                   Foreground="White" FontFamily="Montserrat" FontSize="22"
-                   HorizontalAlignment="Stretch" Margin="40,0,30,30"/>
-
-        <DatePicker Grid.Row="9" Grid.Column="5" FontFamily="Montserrat" FontSize="22"
-                 Foreground="#462AD8" Background="Transparent" HorizontalAlignment="Stretch"
-                 Margin="0,0,20,30" MinWidth="150"
-                 x:Name="StartDate"/>
-
-        <!-- Row 10-->
-
-        <TextBlock Grid.Row="10" Grid.Column="0" Text="City"
-                   Foreground="White" FontFamily="Montserrat" FontSize="22"
-                   HorizontalAlignment="Stretch" Margin="80,0,30,30"/>
-
-        <TextBox Grid.Row="10" Grid.Column="1" FontFamily="Montserrat" FontSize="22"
-                 Foreground="White" Background="Transparent" HorizontalAlignment="Stretch"
-                 Margin="0,0,30,30"  MinWidth="150"
-                 x:Name="City"/>
-
-        <TextBlock Grid.Row="10" Grid.Column="2" Text="Gender"
-                   Foreground="White" FontFamily="Montserrat" FontSize="22"
-                   HorizontalAlignment="Stretch" Margin="60,0,30,30"/>
-
-        <ComboBox Grid.Row="10" Grid.Column="3" FontFamily="Montserrat" FontSize="22"
-                 Foreground="#462AD8" Background="Transparent" HorizontalAlignment="Stretch"
-                 Margin="0,0,20,30" MinWidth="150"
-                 x:Name="Genders" SelectedIndex="0"/>
-
-        <TextBlock Grid.Row="10" Grid.Column="4" Text="Active"
-                   Foreground="White" FontFamily="Montserrat" FontSize="22"
-                   HorizontalAlignment="Stretch" Margin="50,0,30,30"/>
-
-        <StackPanel Grid.Row="10" Grid.Column="5" Background="Transparent" Orientation="Horizontal"
-                    HorizontalAlignment="Stretch" Margin="0,0,20,40" MinWidth="150" >
-            <RadioButton GroupName="Current Employee" FontFamily="Montserrat" FontSize="22" x:Name="YesCurrent"
-                         Foreground="White" VerticalAlignment="Bottom" Margin="0,5,65,0">
-                Yes
-            </RadioButton>
-
-            <RadioButton GroupName="Current Employee" FontFamily="Montserrat" FontSize="22" x:Name="NoCurrent"
-                         Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,5,0,0">
-                No
-            </RadioButton>
-        </StackPanel>
-
-        <!-- Row 11 -->
-        <Button x:Name="Submit"
-                            BorderThickness="0"
-                            Content="SUBMIT"
+             d:DesignHeight="900" d:DesignWidth="1200">
+
+    <ScrollViewer VerticalScrollBarVisibility="Visible" 
+                  HorizontalScrollBarVisibility="Auto">
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Row 0 -->
+            <StackPanel Grid.Row="0" 
+                        Grid.Column="1" 
+                        Grid.ColumnSpan="2"
+                        Orientation="Vertical"
+                        Margin="100,10,100,50"
+                        MaxWidth="300">
+                
+                <TextBlock Text="Employee Name"
+                           Foreground="DarkGray" 
+                           FontSize="14" 
+                           FontWeight="Medium"
+                           FontFamily="Montserrat" 
+                           TextAlignment="Center" 
+                           HorizontalAlignment="Left"/>
+
+                <ComboBox FontFamily="Montserrat" 
+                          FontSize="20" 
+                          BorderThickness="0,0,0,1"
+                          Foreground="White" 
+                          Background="Transparent" 
+                          HorizontalAlignment="Stretch"
+                          MinWidth="150" 
+                          Height="30" 
+                          Style="{DynamicResource ComboBoxStyle1}"
+                          IsTextSearchCaseSensitive="False" 
+                          IsTextSearchEnabled="True"
+                          x:Name="EmployeeFullNames" 
+                          DisplayMemberPath="FullName">
+
+                    <ComboBox.ItemContainerStyle>
+                        <Style TargetType="ComboBoxItem">
+                            <Setter Property="Background" Value="#FF2C1B88"/>
+                            <Setter Property="BorderBrush" Value="#FF2C1B88"/>
+                        </Style>
+                    </ComboBox.ItemContainerStyle>
+                </ComboBox>
+            </StackPanel>
+
+            <!-- Row 1-->
+            <StackPanel Grid.Row="1" 
+                        Grid.Column="0" 
+                        Orientation="Vertical"
+                        Margin="20,5,20,20">
+
+                <TextBlock Text="Title" 
+                           Foreground="DarkGray" 
+                           FontSize="14" 
+                           FontWeight="Medium"
+                           FontFamily="Montserrat" 
+                           TextAlignment="Center" 
+                           HorizontalAlignment="Left"/>
+
+                <ComboBox FontFamily="Montserrat" 
+                          FontSize="20" 
+                          BorderThickness="0,0,0,1"
+                          Foreground="White" 
+                          Background="Transparent" 
+                          HorizontalAlignment="Stretch"
+                          MinWidth="150" 
+                          Height="30"
+                          x:Name="Titles" 
+                          SelectedIndex="0">
+
+                    <ComboBox.ItemContainerStyle>
+                        <Style TargetType="ComboBoxItem">
+                            <Setter Property="Background" Value="#FF2C1B88"/>
+                            <Setter Property="BorderBrush" Value="#FF2C1B88"/>
+                        </Style>
+                    </ComboBox.ItemContainerStyle>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" 
+                        Grid.Column="1" 
+                        Orientation="Vertical" 
+                        Margin="20,5,20,20">
+
+                <TextBlock Text="City"
+                           FontWeight="Medium"
+                           Foreground="LightGray" 
+                           FontFamily="Montserrat" 
+                           FontSize="14"
+                           HorizontalAlignment="Left"/>
+
+                <TextBox x:Name="City"
+                         FontSize="20" 
+                         FontFamily="Montserrat" 
+                         Foreground="White"
+                         CaretBrush="LightGray" 
+                         BorderBrush="DarkGray" 
+                         BorderThickness="0,0,0,1" 
+                         Height="30" 
+                         MinWidth="150"
+                         HorizontalAlignment="Stretch" 
+                         Background="Transparent" 
+                         VerticalContentAlignment="Bottom"/>
+            </StackPanel>
+
+            <StackPanel  Grid.Row="1" 
+                         Grid.Column="2" 
+                         Orientation="Vertical" 
+                         Margin="20,5,20,20">
+
+                <TextBlock Text="Job Title"
+                           FontWeight="Medium"
+                           Foreground="LightGray" 
+                           FontFamily="Montserrat" 
+                           FontSize="14"
+                           HorizontalAlignment="Left"/>
+
+                <TextBox x:Name="JobTitle"
+                         FontSize="20" 
+                         FontFamily="Montserrat" 
+                         Foreground="White"
+                         CaretBrush="LightGray" 
+                         BorderBrush="DarkGray" 
+                         BorderThickness="0,0,0,1" 
+                         Height="30" 
+                         MinWidth="150"
+                         HorizontalAlignment="Stretch" 
+                         Background="Transparent" 
+                         VerticalContentAlignment="Bottom"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" 
+                        Grid.Column="3" 
+                        Orientation="Vertical" 
+                        Margin="20,5,20,20">
+
+                <TextBlock Text="Person Type"
+                           FontWeight="Medium"
+                           Foreground="LightGray" 
+                           FontFamily="Montserrat" 
+                           FontSize="14"
+                           HorizontalAlignment="Left"/>
+
+                <ComboBox FontFamily="Montserrat" 
+                          FontSize="20" 
+                          BorderThickness="0,0,0,1"
+                          Foreground="White" 
+                          Background="Transparent" 
+                          HorizontalAlignment="Stretch"
+                          MinWidth="150" 
+                          Height="30" 
+                          Style="{DynamicResource ComboBoxStyle1}"
+                          x:Name="PersonTypes" 
+                          SelectedIndex="0">
+
+                    <ComboBox.ItemContainerStyle>
+                        <Style TargetType="ComboBoxItem">
+                            <Setter Property="Background" Value="#FF2C1B88"/>
+                            <Setter Property="BorderBrush" Value="#FF2C1B88"/>
+                        </Style>
+                    </ComboBox.ItemContainerStyle>
+                </ComboBox>
+            </StackPanel>
+            
+            <!-- Row 2-->
+            <StackPanel Grid.Row="2" 
+                        Grid.Column="0" 
+                        Orientation="Vertical" 
+                        Margin="20">
+
+                <TextBlock Text="First Name" 
+                           Foreground="DarkGray" 
+                           FontSize="14" 
+                           FontWeight="Medium"
+                           FontFamily="Montserrat" 
+                           TextAlignment="Center" 
+                           HorizontalAlignment="Left"/>
+
+                <TextBox x:Name="FirstName" 
+                         FontSize="20" 
+                         FontFamily="Montserrat" 
+                         Foreground="White"
+                         CaretBrush="LightGray" 
+                         BorderBrush="DarkGray" 
+                         BorderThickness="0,0,0,1" 
+                         Height="30" 
+                         MinWidth="150"
+                         HorizontalAlignment="Stretch" 
+                         Background="Transparent" 
+                         VerticalContentAlignment="Bottom"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" 
+                        Grid.Column="1" 
+                        Orientation="Vertical"
+                        Margin="20">
+
+                <TextBlock Text="State/Province" 
+                           Foreground="DarkGray" 
+                           FontFamily="Montserrat" 
+                           FontSize="14"
+                           HorizontalAlignment="Left" 
+                           FontWeight="Medium"/>
+
+                <ComboBox FontFamily="Montserrat" 
+                          FontSize="20" 
+                          BorderThickness="0,0,0,1"
+                          Foreground="White" 
+                          Background="Transparent" 
+                          HorizontalAlignment="Stretch"
+                          MinWidth="150" 
+                          Height="30" 
+                          Style="{DynamicResource ComboBoxStyle1}"
+                          IsTextSearchCaseSensitive="False" 
+                          IsTextSearchEnabled="True"
+                          x:Name="StateProvinceIDs" 
+                          DisplayMemberPath="Name">
+
+                    <ComboBox.ItemContainerStyle>
+                        <Style TargetType="ComboBoxItem">
+                            <Setter Property="Background" Value="#FF2C1B88"/>
+                            <Setter Property="BorderBrush" Value="#FF2C1B88"/>
+                        </Style>
+                    </ComboBox.ItemContainerStyle>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel  Grid.Row="2" 
+                         Grid.Column="2" 
+                         Orientation="Vertical" 
+                         Margin="20">
+
+                <TextBlock Text="Birth Date"
+                           FontWeight="Medium"
+                           Foreground="LightGray" 
+                           FontFamily="Montserrat" 
+                           FontSize="14"
+                           HorizontalAlignment="Left"/>
+
+                <DatePicker FontFamily="Montserrat" 
+                            FontSize="20"
                             Foreground="White"
-                            FontSize="22"
-                            FontFamily="Montserrat"
-                            Cursor="Hand"
-                            Grid.Row="11"
-                            Grid.Column="2"
-                            Grid.ColumnSpan="2"
-                            VerticalAlignment="Top"
-                            Margin="0,50,0,0">
+                            Background="Transparent" 
+                            HorizontalAlignment="Stretch"
+                            MinWidth="150" 
+                            Height="30"
+                            Style="{StaticResource DatePickerStyle2}"
+                            x:Name="BirthDate"/>
+            </StackPanel>
 
-            <Button.Style>
-                <Style TargetType="Button">
-                    <Setter Property="Background" Value="#462AD8"/>
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#28AEED"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
+            <StackPanel  Grid.Row="2" 
+                         Grid.Column="3" 
+                         Orientation="Vertical" 
+                         Margin="20">
 
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Border Width="200" Height="50"
-                                        CornerRadius="20"
-                                        Background="{TemplateBinding Background}">
-                        <ContentPresenter VerticalAlignment="Center"
-                                                      HorizontalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-    </Grid>
+                <TextBlock Text="Current Employee" 
+                           FontWeight="Medium"
+                           Foreground="LightGray" 
+                           FontFamily="Montserrat" 
+                           FontSize="14"
+                           HorizontalAlignment="Left"
+                           Margin="30,0,0,0"/>
+
+                <StackPanel Background="Transparent" 
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Stretch" 
+                            Margin="30,0,20,0" 
+                            MinWidth="150">
+
+                    <RadioButton GroupName="Current" 
+                                 FontFamily="Montserrat" 
+                                 FontSize="20" 
+                                 x:Name="YesCurrent"
+                                 Foreground="White" 
+                                 VerticalAlignment="Bottom" 
+                                 Margin="0,0,40,0">
+                        Yes
+                    </RadioButton>
+
+                    <RadioButton GroupName="Current" 
+                                 FontFamily="Montserrat" 
+                                 FontSize="20" 
+                                 x:Name="NoCurrent"
+                                 Foreground="White" 
+                                 VerticalAlignment="Bottom" 
+                                 HorizontalAlignment="Right">
+                        No
+                    </RadioButton>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Row 3-->
+            <StackPanel  Grid.Row="3" 
+                         Grid.Column="0" 
+                         Orientation="Vertical" 
+                         Margin="20">
+
+                <TextBlock Text="Middle Name"
+                           FontWeight="Medium"
+                           Foreground="LightGray" 
+                           FontFamily="Montserrat" 
+                           FontSize="14"
+                           HorizontalAlignment="Left"/>
+
+                <TextBox x:Name="MiddleName" 
+                         FontSize="20" 
+                         FontFamily="Montserrat" 
+                         Foreground="White"
+                         CaretBrush="LightGray" 
+                         BorderBrush="DarkGray" 
+                         BorderThickness="0,0,0,1" 
+                         Height="30" 
+                         MinWidth="150"
+                         HorizontalAlignment="Stretch" 
+                         Background="Transparent" 
+                         VerticalContentAlignment="Bottom"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="3" 
+                        Grid.Column="1" 
+                        Orientation="Vertical" 
+                        Margin="20">
+
+                <TextBlock Text="Postal Code" 
+                           FontWeight="Medium"
+                           Foreground="DarkGray" 
+                           FontFamily="Montserrat" 
+                           FontSize="14"
+                           HorizontalAlignment="Left"/>
+
+                <TextBox x:Name="PostalCode" 
+                         FontSize="20" 
+                         FontFamily="Montserrat" 
+                         Foreground="White"
+                         CaretBrush="LightGray" 
+                         BorderBrush="DarkGray" 
+                         BorderThickness="0,0,0,1" 
+                         Height="30" 
+                         MinWidth="150"
+                         HorizontalAlignment="Stretch" 
+                         Background="Transparent" 
+                         VerticalContentAlignment="Bottom"/>
+            </StackPanel>
+
+            <StackPanel  Grid.Row="3" 
+                         Grid.Column="2" 
+                         Orientation="Vertical" 
+                         Margin="20">
+
+                <TextBlock Text="Marital Status"
+                           FontWeight="Medium"
+                           Foreground="LightGray" 
+                           FontFamily="Montserrat" 
+                           FontSize="14"
+                           HorizontalAlignment="Left"/>
+
+                <ComboBox FontFamily="Montserrat" 
+                          FontSize="20" 
+                          BorderThickness="0,0,0,1"
+                          Foreground="White" 
+                          Background="Transparent" 
+                          HorizontalAlignment="Stretch"
+                          MinWidth="150" 
+                          Height="30" 
+                          Style="{DynamicResource ComboBoxStyle1}"
+                          x:Name="Maritals" 
+                          SelectedIndex="0">
+
+                    <ComboBox.ItemContainerStyle>
+                        <Style TargetType="ComboBoxItem">
+                            <Setter Property="Background" Value="#FF2C1B88"/>
+                            <Setter Property="BorderBrush" Value="#FF2C1B88"/>
+                        </Style>
+                    </ComboBox.ItemContainerStyle>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel  Grid.Row="3" 
+                         Grid.Column="3" 
+                         Orientation="Vertical" 
+                         Margin="20">
+
+                <TextBlock Text="Pay Rate"
+                           FontWeight="Medium"
+                           Foreground="LightGray" 
+                           FontFamily="Montserrat" 
+                           FontSize="14"
+                           HorizontalAlignment="Left"/>
+
+                <TextBox x:Name="PayRate"
+                         FontSize="20" 
+                         FontFamily="Montserrat" 
+                         Foreground="White"
+                         CaretBrush="LightGray" 
+                         BorderBrush="DarkGray" 
+                         BorderThickness="0,0,0,1" 
+                         Height="30" 
+                         MinWidth="150"
+                         HorizontalAlignment="Stretch" 
+                         Background="Transparent" 
+                         VerticalContentAlignment="Bottom"/>
+            </StackPanel>
+
+            <!-- Row 4-->
+            <StackPanel  Grid.Row="4" 
+                         Grid.Column="0" 
+                         Orientation="Vertical" 
+                         Margin="20">
+
+                <TextBlock Text="Last Name"
+                           FontWeight="Medium"
+                           Foreground="LightGray" 
+                           FontFamily="Montserrat" 
+                           FontSize="14"
+                           HorizontalAlignment="Left"/>
+
+                <TextBox x:Name="LastName" 
+                         FontSize="20" 
+                         FontFamily="Montserrat" 
+                         Foreground="White"
+                         CaretBrush="LightGray" 
+                         BorderBrush="DarkGray" 
+                         BorderThickness="0,0,0,1" 
+                         Height="30" 
+                         MinWidth="150"
+                         HorizontalAlignment="Stretch" 
+                         Background="Transparent" 
+                         VerticalContentAlignment="Bottom"/>
+            </StackPanel>
+
+            <StackPanel  Grid.Row="4" 
+                         Grid.Column="1" 
+                         Orientation="Vertical" 
+                         Margin="20">
+
+                <TextBlock Text="Address Type"
+                           FontWeight="Medium"
+                           Foreground="LightGray" 
+                           FontFamily="Montserrat" 
+                           FontSize="14"
+                           HorizontalAlignment="Left"/>
+
+                <ComboBox FontFamily="Montserrat" 
+                          FontSize="20" 
+                          BorderThickness="0,0,0,1"
+                          Foreground="White" 
+                          Background="Transparent" 
+                          HorizontalAlignment="Stretch"
+                          MinWidth="150" 
+                          Height="30" 
+                          Style="{DynamicResource ComboBoxStyle1}"
+                          x:Name="AddressTypeIDs" 
+                          SelectedIndex="0">
+
+                    <ComboBox.ItemContainerStyle>
+                        <Style TargetType="ComboBoxItem">
+                            <Setter Property="Background" Value="#FF2C1B88"/>
+                            <Setter Property="BorderBrush" Value="#FF2C1B88"/>
+                        </Style>
+                    </ComboBox.ItemContainerStyle>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row="4" 
+                        Grid.Column="2" 
+                        Orientation="Vertical" 
+                        Margin="20">
+
+                <TextBlock Text="Gender"
+                           FontWeight="Medium"
+                           Foreground="LightGray" 
+                           FontFamily="Montserrat" 
+                           FontSize="14"
+                           HorizontalAlignment="Left"/>
+
+                <ComboBox FontFamily="Montserrat" 
+                          FontSize="20" 
+                          BorderThickness="0,0,0,1"
+                          Foreground="White" 
+                          Background="Transparent" 
+                          HorizontalAlignment="Stretch"
+                          MinWidth="150" 
+                          Height="30" 
+                          Style="{DynamicResource ComboBoxStyle1}"
+                          x:Name="Genders" 
+                          SelectedIndex="0">
+
+                    <ComboBox.ItemContainerStyle>
+                        <Style TargetType="ComboBoxItem">
+                            <Setter Property="Background" Value="#FF2C1B88"/>
+                            <Setter Property="BorderBrush" Value="#FF2C1B88"/>
+                        </Style>
+                    </ComboBox.ItemContainerStyle>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel  Grid.Row="4" 
+                         Grid.Column="3" 
+                         Orientation="Vertical" 
+                         Margin="20">
+
+                <TextBlock Text="Pay Frequency"
+                           FontWeight="Medium"
+                           Foreground="LightGray" 
+                           FontFamily="Montserrat" 
+                           FontSize="14"
+                           HorizontalAlignment="Left"/>
+
+                <ComboBox FontFamily="Montserrat" 
+                          FontSize="20" 
+                          BorderThickness="0,0,0,1"
+                          Foreground="White" 
+                          Background="Transparent" 
+                          HorizontalAlignment="Stretch"
+                          MinWidth="150" 
+                          Height="30" 
+                          Style="{DynamicResource ComboBoxStyle1}"
+                          x:Name="PayFrequencys"
+                          SelectedIndex="0">
+
+                    <ComboBox.ItemContainerStyle>
+                        <Style TargetType="ComboBoxItem">
+                            <Setter Property="Background" Value="#FF2C1B88"/>
+                            <Setter Property="BorderBrush" Value="#FF2C1B88"/>
+                        </Style>
+                    </ComboBox.ItemContainerStyle>
+                </ComboBox>
+            </StackPanel>
+
+            <!-- Row 5-->
+            <StackPanel  Grid.Row="5" 
+                         Grid.Column="0" 
+                         Orientation="Vertical" 
+                         Margin="20">
+
+                <TextBlock Text="Suffix"
+                           FontWeight="Medium"
+                           Foreground="LightGray" 
+                           FontFamily="Montserrat" 
+                           FontSize="14"
+                           HorizontalAlignment="Left"/>
+
+                <ComboBox FontFamily="Montserrat" 
+                          FontSize="20" 
+                          BorderThickness="0,0,0,1"
+                          Foreground="White" 
+                          Background="Transparent" 
+                          HorizontalAlignment="Stretch"
+                          MinWidth="150" 
+                          Height="30" 
+                          Style="{DynamicResource ComboBoxStyle1}"
+                          x:Name="Suffixs"
+                          SelectedIndex="0">
+
+                    <ComboBox.ItemContainerStyle>
+                        <Style TargetType="ComboBoxItem">
+                            <Setter Property="Background" Value="#FF2C1B88"/>
+                            <Setter Property="BorderBrush" Value="#FF2C1B88"/>
+                        </Style>
+                    </ComboBox.ItemContainerStyle>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel  Grid.Row="5" 
+                         Grid.Column="1" 
+                         Orientation="Vertical" 
+                         Margin="20">
+
+                <TextBlock Text="Email Address"
+                           FontWeight="Medium"
+                           Foreground="LightGray" 
+                           FontFamily="Montserrat" 
+                           FontSize="14"
+                           HorizontalAlignment="Left"/>
+
+                <TextBox x:Name="EmailAddress"
+                         FontSize="20" 
+                         FontFamily="Montserrat" 
+                         Foreground="White"
+                         CaretBrush="LightGray" 
+                         BorderBrush="DarkGray" 
+                         BorderThickness="0,0,0,1" 
+                         Height="30" 
+                         MinWidth="150"
+                         HorizontalAlignment="Stretch" 
+                         Background="Transparent" 
+                         VerticalContentAlignment="Bottom"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="5" 
+                        Grid.Column="2" 
+                        Orientation="Vertical"
+                        Margin="20">
+
+                <TextBlock Text="Hire Date"
+                           Foreground="DarkGray" 
+                           FontFamily="Montserrat" 
+                           FontSize="14"
+                           HorizontalAlignment="Left" 
+                           FontWeight="Medium"/>
+
+                <DatePicker FontFamily="Montserrat" 
+                            FontSize="20"
+                            Foreground="White"
+                            Background="Transparent" 
+                            HorizontalAlignment="Stretch"
+                            MinWidth="150" 
+                            Height="30"
+                            Style="{StaticResource DatePickerStyle2}"
+                            x:Name="HireDate"/>
+            </StackPanel>
+
+            <StackPanel  Grid.Row="5" 
+                         Grid.Column="3" 
+                         Orientation="Vertical" 
+                         Margin="20">
+
+                <TextBlock Text="Department"
+                           FontWeight="Medium"
+                           Foreground="LightGray" 
+                           FontFamily="Montserrat" 
+                           FontSize="14"
+                           HorizontalAlignment="Left"/>
+
+                <ComboBox FontFamily="Montserrat" 
+                          FontSize="20" 
+                          BorderThickness="0,0,0,1"
+                          Foreground="White" 
+                          Background="Transparent" 
+                          HorizontalAlignment="Stretch"
+                          MinWidth="150" 
+                          Height="30" 
+                          Style="{DynamicResource ComboBoxStyle1}"
+                          IsTextSearchCaseSensitive="False" 
+                          IsTextSearchEnabled="True"
+                           x:Name="DepartmentIDs" 
+                          DisplayMemberPath="Name">
+
+                    <ComboBox.ItemContainerStyle>
+                        <Style TargetType="ComboBoxItem">
+                            <Setter Property="Background" Value="#FF2C1B88"/>
+                            <Setter Property="BorderBrush" Value="#FF2C1B88"/>
+                        </Style>
+                    </ComboBox.ItemContainerStyle>
+                </ComboBox>
+            </StackPanel>
+
+            <!-- Row 6-->
+            <StackPanel  Grid.Row="6" 
+                         Grid.Column="0" 
+                         Orientation="Vertical" 
+                         Margin="20">
+
+                <TextBlock Text="Phone Number"
+                           FontWeight="Medium"
+                           Foreground="LightGray" 
+                           FontFamily="Montserrat" 
+                           FontSize="14"
+                           HorizontalAlignment="Left"/>
+
+                <TextBox x:Name="PhoneNumber"
+                         FontSize="20" 
+                         FontFamily="Montserrat" 
+                         Foreground="White"
+                         CaretBrush="LightGray" 
+                         BorderBrush="DarkGray" 
+                         BorderThickness="0,0,0,1" 
+                         Height="30" 
+                         MinWidth="150"
+                         HorizontalAlignment="Stretch" 
+                         Background="Transparent" 
+                         VerticalContentAlignment="Bottom"/>
+            </StackPanel>
+
+            <StackPanel  Grid.Row="6" 
+                         Grid.Column="1" 
+                         Orientation="Vertical" 
+                         Margin="20">
+
+                <TextBlock Text="National ID"
+                           FontWeight="Medium"
+                           Foreground="LightGray" 
+                           FontFamily="Montserrat" 
+                           FontSize="14"
+                           HorizontalAlignment="Left"/>
+
+                <TextBox x:Name="NationalID"
+                         FontSize="20" 
+                         FontFamily="Montserrat" 
+                         Foreground="White"
+                         CaretBrush="LightGray" 
+                         BorderBrush="DarkGray" 
+                         BorderThickness="0,0,0,1" 
+                         Height="30" 
+                         MinWidth="150"
+                         HorizontalAlignment="Stretch" 
+                         Background="Transparent" 
+                         VerticalContentAlignment="Bottom"/>
+            </StackPanel>
+
+            <StackPanel  Grid.Row="6" 
+                         Grid.Column="2" 
+                         Orientation="Vertical" 
+                         Margin="20">
+
+                <TextBlock Text="Salaried" 
+                           FontWeight="Medium"
+                           Foreground="LightGray" 
+                           FontFamily="Montserrat" 
+                           FontSize="14"
+                           HorizontalAlignment="Left"
+                           Margin="30,0,0,0"/>
+
+                <StackPanel Background="Transparent" 
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Stretch" 
+                            Margin="30,0,20,0" 
+                            MinWidth="150">
+
+                    <RadioButton GroupName="Salaried" 
+                                 FontFamily="Montserrat" 
+                                 FontSize="20" 
+                                 x:Name="YesSalaried"
+                                 Foreground="White" 
+                                 VerticalAlignment="Bottom" 
+                                 Margin="0,0,40,0">
+                        Yes
+                    </RadioButton>
+
+                    <RadioButton GroupName="Salaried" 
+                                 FontFamily="Montserrat" 
+                                 FontSize="20" 
+                                 x:Name="NoSalaried"
+                                 Foreground="White" 
+                                 VerticalAlignment="Bottom" 
+                                 HorizontalAlignment="Right">
+                        No
+                    </RadioButton>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel  Grid.Row="6" 
+                         Grid.Column="3" 
+                         Orientation="Vertical" 
+                         Margin="20">
+
+                <TextBlock Text="Shift"
+                           FontWeight="Medium"
+                           Foreground="LightGray" 
+                           FontFamily="Montserrat" 
+                           FontSize="14"
+                           HorizontalAlignment="Left"
+                           Margin="30,0,0,0"/>
+
+                <StackPanel Background="Transparent" 
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Stretch"
+                            MinWidth="150" Margin="30,0,0,0" >
+
+                    <RadioButton GroupName="Shift" 
+                                 FontFamily="Montserrat" 
+                                 FontSize="20" 
+                                 x:Name="FirstShift"
+                                 Foreground="White" 
+                                 VerticalAlignment="Bottom" 
+                                 Margin="0,0,12,0">
+                                 1st
+                    </RadioButton>
+
+                    <RadioButton GroupName="Shift" 
+                                 FontFamily="Montserrat" 
+                                 FontSize="20" 
+                                 Margin="0,0,12,0"
+                                 x:Name="SecondShift"
+                                 Foreground="White" 
+                                 VerticalAlignment="Bottom" 
+                                 HorizontalAlignment="Right">
+                                 2nd
+                    </RadioButton>
+
+                    <RadioButton GroupName="Shift" 
+                                 FontFamily="Montserrat" 
+                                 FontSize="20" 
+                                 x:Name="ThirdShift"
+                                 Foreground="White" 
+                                 VerticalAlignment="Bottom" 
+                                 HorizontalAlignment="Right">
+                                 3rd
+                    </RadioButton>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Row 7-->
+            <StackPanel  Grid.Row="7" 
+                         Grid.Column="0" 
+                         Orientation="Vertical"
+                         Margin="20">
+
+                <TextBlock Text="Phone Type"
+                           FontWeight="Medium"
+                           Foreground="LightGray" 
+                           FontFamily="Montserrat" 
+                           FontSize="14"
+                           HorizontalAlignment="Left"/>
+
+                <ComboBox FontFamily="Montserrat" 
+                          FontSize="20" 
+                          BorderThickness="0,0,0,1"
+                          Foreground="White" 
+                          Background="Transparent" 
+                          HorizontalAlignment="Stretch"
+                          MinWidth="150" 
+                          Height="30" 
+                          Style="{DynamicResource ComboBoxStyle1}"
+                          x:Name="PhoneNumberTypes" 
+                          SelectedIndex="0">
+
+                    <ComboBox.ItemContainerStyle>
+                        <Style TargetType="ComboBoxItem">
+                            <Setter Property="Background" Value="#FF2C1B88"/>
+                            <Setter Property="BorderBrush" Value="#FF2C1B88"/>
+                        </Style>
+                    </ComboBox.ItemContainerStyle>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel  Grid.Row="7" 
+                         Grid.Column="1" 
+                         Orientation="Vertical"
+                         Margin="20">
+
+                <TextBlock Text="Login ID"
+                           FontWeight="Medium"
+                           Foreground="LightGray" 
+                           FontFamily="Montserrat" 
+                           FontSize="14"
+                           HorizontalAlignment="Left"/>
+
+                <TextBox x:Name="LoginID"
+                         FontSize="20" 
+                         FontFamily="Montserrat" 
+                         Foreground="White"
+                         CaretBrush="LightGray" 
+                         BorderBrush="DarkGray" 
+                         BorderThickness="0,0,0,1" 
+                         Height="30" 
+                         MinWidth="150"
+                         HorizontalAlignment="Stretch" 
+                         Background="Transparent" 
+                         VerticalContentAlignment="Bottom"/>
+            </StackPanel>
+
+            <StackPanel  Grid.Row="7" 
+                         Grid.Column="2" 
+                         Orientation="Vertical"
+                         Margin="20">
+
+                <TextBlock Text="Vacation Hours"
+                           FontWeight="Medium"
+                           Foreground="LightGray" 
+                           FontFamily="Montserrat" 
+                           FontSize="14"
+                           HorizontalAlignment="Left"/>
+
+                <TextBox x:Name="VacationHours" 
+                         FontSize="20" 
+                         FontFamily="Montserrat" 
+                         Foreground="White"
+                         CaretBrush="LightGray" 
+                         BorderBrush="DarkGray" 
+                         BorderThickness="0,0,0,1" 
+                         Height="30" 
+                         MinWidth="150"
+                         HorizontalAlignment="Stretch" 
+                         Background="Transparent" 
+                         VerticalContentAlignment="Bottom"/>
+            </StackPanel>
+
+            <StackPanel  Grid.Row="7" 
+                         Grid.Column="3" 
+                         Orientation="Vertical" 
+                         Margin="20">
+
+                <TextBlock Text="Start Date"
+                           FontWeight="Medium"
+                           Foreground="LightGray" 
+                           FontFamily="Montserrat" 
+                           FontSize="14"
+                           HorizontalAlignment="Left"/>
+
+                <DatePicker FontFamily="Montserrat" 
+                            FontSize="20"
+                            Foreground="White"
+                            Background="Transparent" 
+                            HorizontalAlignment="Stretch"
+                            MinWidth="150" 
+                            Height="30"
+                            Style="{StaticResource DatePickerStyle2}"
+                            x:Name="StartDate"/>
+            </StackPanel>
+
+            <!-- Row 8-->
+            <StackPanel  Grid.Row="8" 
+                         Grid.Column="0" 
+                         Orientation="Vertical" 
+                         Margin="20">
+
+                <TextBlock Text="Address"
+                           FontWeight="Medium"
+                           Foreground="LightGray" 
+                           FontFamily="Montserrat" 
+                           FontSize="14"
+                           HorizontalAlignment="Left"/>
+
+                <TextBox x:Name="Address"
+                         FontSize="20" 
+                         FontFamily="Montserrat" 
+                         Foreground="White"
+                         CaretBrush="LightGray" 
+                         BorderBrush="DarkGray" 
+                         BorderThickness="0,0,0,1" 
+                         Height="30" 
+                         MinWidth="150"
+                         HorizontalAlignment="Stretch" 
+                         Background="Transparent" 
+                         VerticalContentAlignment="Bottom"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="8" 
+                        Grid.Column="1" 
+                        Orientation="Vertical" 
+                        Margin="20">
+
+                <TextBlock Text="Verify LoginID" 
+                           FontWeight="Medium"
+                           Foreground="DarkGray" 
+                           FontFamily="Montserrat" 
+                           FontSize="14"
+                           HorizontalAlignment="Left"/>
+
+                <TextBox x:Name="VerifyLoginID" 
+                         FontSize="20" 
+                         FontFamily="Montserrat" 
+                         Foreground="White"
+                         CaretBrush="LightGray" 
+                         BorderBrush="DarkGray" 
+                         BorderThickness="0,0,0,1" 
+                         Height="30" 
+                         MinWidth="150"
+                         HorizontalAlignment="Stretch" 
+                         Background="Transparent" 
+                         VerticalContentAlignment="Bottom"/>
+            </StackPanel>
+
+            <StackPanel  Grid.Row="8" 
+                         Grid.Column="2" 
+                         Orientation="Vertical" 
+                         Margin="20">
+
+                <TextBlock Text="Sick Leave Hours"
+                           FontWeight="Medium"
+                           Foreground="LightGray" 
+                           FontFamily="Montserrat" 
+                           FontSize="14"
+                           HorizontalAlignment="Left"/>
+
+                <TextBox x:Name="SickLeaveHours"
+                         FontSize="20" 
+                         FontFamily="Montserrat" 
+                         Foreground="White"
+                         CaretBrush="LightGray" 
+                         BorderBrush="DarkGray" 
+                         BorderThickness="0,0,0,1" 
+                         Height="30" 
+                         MinWidth="150"
+                         HorizontalAlignment="Stretch" 
+                         Background="Transparent" 
+                         VerticalContentAlignment="Bottom"/>
+            </StackPanel>
+
+            <!-- Row 9 -->
+            <Button x:Name="Submit"
+                    BorderThickness="0"
+                    Content="SUBMIT"
+                   Foreground="White"
+                    FontSize="20"
+                    FontFamily="Montserrat"
+                    Cursor="Hand"
+                    Grid.Row="9"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    VerticalAlignment="Top"
+                    Margin="0,50,0,40">
+
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#462AD8"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#28AEED"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="200" 
+                                Height="50"
+                                CornerRadius="20"
+                                Background="{TemplateBinding Background}">
+                            
+                            <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+    </ScrollViewer>
 </UserControl>

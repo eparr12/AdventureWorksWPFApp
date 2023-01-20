@@ -7,7 +7,6 @@ namespace AdventureWorksWPFUI
 {
     public class Bootstrapper : BootstrapperBase
     {
-
         public Bootstrapper()
         {
             Initialize();

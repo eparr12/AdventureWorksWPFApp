@@ -7,81 +7,85 @@
              mc:Ignorable="d" 
              Background="Transparent"
              d:DesignHeight="550" d:DesignWidth="800">
+    
     <Grid>
-        <!--<Border CornerRadius="12">-->
-            <!--<Border.Background>
-                <ImageBrush ImageSource="C:\Users\eparrish\OneDrive - Catalyst Ventures, LLC\Desktop\AdventureWorksImages\andhika-soreng-US06QF_sxu8-unsplash.jpg"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+         </Grid.RowDefinitions>
 
-            </Border.Background>-->
-            <!--<Border CornerRadius="10"
-            BorderThickness="2"
-                Opacity=".85">
+        <Grid>
 
-                <Border.BorderBrush>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                        <GradientStop Color="#462AD8" Offset="0"/>
-                        <GradientStop Color="#DA34AE" Offset="0.75"/>
-                        <GradientStop Color="#8A16C1" Offset="1"/>
-                    </LinearGradientBrush>
-                </Border.BorderBrush>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="5"/>
+            </Grid.ColumnDefinitions>
+        </Grid>
 
-                <Border.Background>
-                    <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
-                        <GradientStop Color="#060531" Offset="0"/>
-                        <GradientStop Color="#1B1448" Offset="0.75"/>
-                    </LinearGradientBrush>
-                </Border.Background>-->
+            <StackPanel Width="250"
+                        Grid.Row="2"
+                        Orientation="Vertical"
+                        Margin="0,35,0,0">
 
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
+                <Image Source="C:\Users\eparrish\OneDrive - Catalyst Ventures, LLC\Desktop\AdventureWorksImages\stock-vector-bicycle-blue-gradient-vector-iconOld.jfif"
+                       Width="100" Height="100"/>
 
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="25"/>
-                            <ColumnDefinition Width="25"/>
-                            <ColumnDefinition Width="5"/>
-                        </Grid.ColumnDefinitions>
+                <TextBlock Text="AdventureWorks"
+                           Foreground="White"
+                           FontSize="25"
+                           FontWeight="Medium"
+                           FontFamily="Montserrat"
+                           HorizontalAlignment="Center"/>
 
-                    </Grid>
+                <TextBlock Text="A journey that never ends."
+                           Foreground="LightGray"
+                           FontSize="12"
+                           FontWeight="Medium"
+                           FontFamily="Montserrat"
+                           TextAlignment="Center"
+                           Margin="0,5,0,0"/>
 
-                    <StackPanel Width="250"
-                            Grid.Row="2"
-                            Orientation="Vertical"
-                            Margin="0,35,0,0">
+                <TextBlock Text="Username"
+                           Foreground="DarkGray"
+                           FontSize="12"
+                           FontWeight="Medium"
+                           FontFamily="Montserrat"
+                           TextAlignment="Center"
+                           Margin="0,35,0,0"
+                           HorizontalAlignment="Left"/>
 
-                        <Image Source="C:\Users\eparrish\OneDrive - Catalyst Ventures, LLC\Desktop\AdventureWorksImages\stock-vector-bicycle-blue-gradient-vector-iconOld.jfif"
-                           Width="100" Height="100"
-                               />
+                <TextBox x:Name="LoginID"
+                         FontSize="13"
+                         FontWeight="Medium"
+                         FontFamily="Montserrat"
+                         Foreground="White"
+                         CaretBrush="LightGray"
+                         BorderBrush="DarkGray"
+                         BorderThickness="0,0,0,1"
+                         Height="28"
+                         VerticalAlignment="Center"
+                         Margin="0,5,0,0"
+                         Padding="25,5,0,0">
 
-                        <TextBlock Text="AdventureWorks"
-                               Foreground="White"
-                               FontSize="25"
-                               FontWeight="Medium"
-                               FontFamily="Montserrat"
-                               HorizontalAlignment="Center"/>
+                    <TextBox.Background>
+                        <ImageBrush ImageSource="C:\Users\eparrish\OneDrive - Catalyst Ventures, LLC\Desktop\AdventureWorksImages\icons8-person-16.png"
+                                    Stretch="None"
+                                    AlignmentX="Left"/>
+                    </TextBox.Background>
+                </TextBox>
 
-                        <TextBlock Text="A journey that never ends."
-                               Foreground="LightGray"
-                               FontSize="12"
-                               FontWeight="Medium"
-                               FontFamily="Montserrat"
-                               TextAlignment="Center"
-                               Margin="0,5,0,0"/>
+                <TextBlock Text="Password"
+                           Foreground="DarkGray"
+                           FontSize="12"
+                           FontWeight="Medium"
+                           FontFamily="Montserrat"
+                           TextAlignment="Center"
+                           Margin="0,15,0,0"
+                           HorizontalAlignment="Left"/>
 
-                        <TextBlock Text="Username"
-                               Foreground="DarkGray"
-                               FontSize="12"
-                               FontWeight="Medium"
-                               FontFamily="Montserrat"
-                               TextAlignment="Center"
-                               Margin="0,35,0,0"
-                               HorizontalAlignment="Left"/>
-
-                        <TextBox x:Name="LoginID"
+                <PasswordBox x:Name="Password"
                              FontSize="13"
                              FontWeight="Medium"
                              FontFamily="Montserrat"
@@ -94,83 +98,46 @@
                              Margin="0,5,0,0"
                              Padding="25,5,0,0">
 
-                            <TextBox.Background>
-                                <ImageBrush ImageSource="C:\Users\eparrish\OneDrive - Catalyst Ventures, LLC\Desktop\AdventureWorksImages\icons8-person-16.png"
+                    <PasswordBox.Background>
+                        <ImageBrush ImageSource="C:\Users\eparrish\OneDrive - Catalyst Ventures, LLC\Desktop\AdventureWorksImages\icons8-lock-16.png"
                                         Stretch="None"
                                         AlignmentX="Left"/>
-                            </TextBox.Background>
+                    </PasswordBox.Background>
+                </PasswordBox>
 
-                        </TextBox>
+                <Button x:Name="Login"
+                        BorderThickness="0"
+                        Content="LOG IN"
+                        Foreground="White"
+                        FontSize="12"
+                        FontFamily="Montserrat"
+                        Cursor="Hand"
+                        Grid.Column="2"
+                        Margin="0,50,0,0">
 
-                        <TextBlock Text="Password"
-                               Foreground="DarkGray"
-                               FontSize="12"
-                               FontWeight="Medium"
-                               FontFamily="Montserrat"
-                               TextAlignment="Center"
-                               Margin="0,15,0,0"
-                               HorizontalAlignment="Left"/>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#462AD8"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#28AEED"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
 
-                        <PasswordBox x:Name="Password"
-                             FontSize="13"
-                             FontWeight="Medium"
-                             FontFamily="Montserrat"
-                             Foreground="White"
-                             CaretBrush="LightGray"
-                             BorderBrush="DarkGray"
-                             BorderThickness="0,0,0,1"
-                             Height="28"
-                             VerticalAlignment="Center"
-                             Margin="0,5,0,0"
-                             Padding="25,5,0,0">
-
-                            <PasswordBox.Background>
-                                <ImageBrush ImageSource="C:\Users\eparrish\OneDrive - Catalyst Ventures, LLC\Desktop\AdventureWorksImages\icons8-lock-16.png"
-                                        Stretch="None"
-                                        AlignmentX="Left"/>
-                            </PasswordBox.Background>
-
-                        </PasswordBox>
-
-                        <Button x:Name="Login"
-                            BorderThickness="0"
-                            Content="LOG IN"
-                            Foreground="White"
-                            FontSize="12"
-                            FontFamily="Montserrat"
-                            Cursor="Hand"
-                            Grid.Column="2"
-                            Margin="0,50,0,0">
-
-                            <Button.Style>
-                                <Style TargetType="Button">
-                                    <Setter Property="Background" Value="#462AD8"/>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#28AEED"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Border Width="150" Height="40"
-                                        CornerRadius="20"
-                                        Background="{TemplateBinding Background}">
-                                        <ContentPresenter VerticalAlignment="Center"
-                                                      HorizontalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
-
-                    </StackPanel>
-
-
-                </Grid>
-
-            <!--</Border>
-        </Border>-->
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="150" Height="40"
+                                    CornerRadius="20"
+                                    Background="{TemplateBinding Background}">
+                                
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
     </Grid>
 </UserControl>

@@ -41,6 +41,8 @@ namespace AdventureWorksWPFUI.ViewModels
         private string _selectedPersonType;
         private string _firstName;
         private DateTime _hireDate = DateTime.Now;
+        private string _loginID;
+        private string _verifyLoginID;
         private string _postalCode;
         private string _middleName;
         private int _vacationHours;
@@ -114,7 +116,6 @@ namespace AdventureWorksWPFUI.ViewModels
 
                     foreach (UpdateNonSalesEmployeeModel Employee in EmployeeSelection)
                     {
-
                         SelectedPersonType = Employee.PersonType2;
                         SelectedTitle = Employee.Title;
                         FirstName = Employee.FirstName;
@@ -125,7 +126,6 @@ namespace AdventureWorksWPFUI.ViewModels
                         SelectedPhoneNumberType = Employee.PhoneNumberType;
                         Address = Employee.AddressLine1;
                         City = Employee.City;
-                        //SelectedStateProvinceID.Name = Employee.StateOrProvince;
                         PostalCode = Employee.PostalCode;
                         SelectedAddressTypeID = Employee.AddressTypeID;
                         EmailAddress = Employee.EmailAddress;
@@ -140,7 +140,6 @@ namespace AdventureWorksWPFUI.ViewModels
                         SickLeaveHours = Employee.SickLeaveHours;
                         PayRate = decimal.Parse(Employee.HourlyPayRate);
                         SelectedPayFrequency = Employee.PayFrequency;
-                        //SelectedDepartmentID.Name = Employee.JobDepartment;
                         StartDate = Employee.StartDate;
                         bool? salaried = Employee.SalariedFlag;
                         bool? current = Employee.CurrentEmployee;
@@ -580,8 +579,6 @@ namespace AdventureWorksWPFUI.ViewModels
             }
         }
 
-        private string _loginID;
-
         public string LoginID
         {
             get
@@ -592,6 +589,19 @@ namespace AdventureWorksWPFUI.ViewModels
             {
                 _loginID = value;
                 NotifyOfPropertyChange(() => LoginID);
+            }
+        }
+
+        public string VerifyLoginID
+        {
+            get
+            {
+                return _verifyLoginID;
+            }
+            set
+            {
+                _verifyLoginID = value;
+                NotifyOfPropertyChange(() => VerifyLoginID);
             }
         }
 
@@ -741,7 +751,7 @@ namespace AdventureWorksWPFUI.ViewModels
             set
             {
                 if (value.Equals(_thirdShift)) return;
-                _secondShift = value;
+                _thirdShift = value;
                 NotifyOfPropertyChange(() => ThirdShift);
             }
         }
@@ -800,7 +810,7 @@ namespace AdventureWorksWPFUI.ViewModels
                 dropdown.DepartmentIDList(DepartmentIDs);
                 dropdown.PersonTypeList(PersonTypes);
             }
-            catch (SqlException exception)
+            catch (SqlException)
             {
                 MessageBox.Show("There was an error when performing this operation.\nPlease verify that all entered information is correct.\nCheck the database table DB_Errors for more information.");
             }
@@ -809,10 +819,6 @@ namespace AdventureWorksWPFUI.ViewModels
         public void Submit()
         {
             // TODO figure out how to get SelectedStateProvinceID to update based on db return
-
-            // TODO figure out how to get this db call to run when the selected person is changed
-
-            //TODO figure out how to update persons name in the list if it has been changed
 
             var result = MessageBox.Show("Are You Sure You Want To Update??", "Confirm Update!!", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
@@ -917,65 +923,76 @@ namespace AdventureWorksWPFUI.ViewModels
                         Employee.SickLeaveHours = SickLeaveHours;
                         Employee.Rate = PayRate;
                         Employee.PayFrequency = SelectedPayFrequency;
-                        Employee.PersonType= SelectedPersonType;
+                        Employee.PersonType = SelectedPersonType;
                         Employee.DepartmentID = SelectedDepartmentID.Name;
                         Employee.ShiftID = shiftId;
                         Employee.StartDate = StartDate;
                         Employee.CurrentEmployee = CurrentEmployee;
 
-                        ValidationResult results = validator.Validate(Employee);
-
-                        if (results.IsValid == false)
+                        if (LoginID != VerifyLoginID)
                         {
-                            foreach (ValidationFailure failure in results.Errors)
-                            {
-                                MessageBox.Show(failure.ErrorMessage);
-                                return;
-                            }
+                            MessageBox.Show("LoginID and Verify LoginID Do Not Match.");
+                            return;
                         }
 
-                        db.UpdateNonSalesEmployee(Employee);
+                        else
+                        {
+                            ValidationResult results = validator.Validate(Employee);
 
-                        SelectedTitle = "";
-                        SelectedSuffix = "";
-                        SelectedPhoneNumberType = "";
-                        SelectedAddressTypeID = "";
-                        SelectedMarital = "";
-                        SelectedGender = "";
-                        SelectedPayFrequency = "";
-                        SelectedStateProvinceID.Name = "Ain";
-                        SelectedDepartmentID.Name = "Document Control";
-                        SelectedPersonType = "";
-                        PostalCode = "";
-                        FirstName = "";
-                        City = "";
-                        LoginID = "";
-                        MiddleName = "";
-                        VacationHours = 0;
-                        LastName = "";
-                        EmailAddress = "";
-                        SickLeaveHours = 0;
-                        NationalID = "";
-                        PayRate = 0;
-                        PhoneNumber = "";
-                        JobTitle = "";
-                        BirthDate = DateTime.Now;
-                        Address = "";
-                        HireDate = DateTime.Now;
-                        StartDate = DateTime.Now;
-                        YesSalaried = false;
-                        NoSalaried = false;
-                        FirstShift = false;
-                        SecondShift = false;
-                        ThirdShift = false;
-                        YesCurrent= false;
-                        NoCurrent=false;
+                            if (results.IsValid == false)
+                            {
+                                foreach (ValidationFailure failure in results.Errors)
+                                {
+                                    MessageBox.Show(failure.ErrorMessage);
+                                    return;
+                                }
+                            }
 
-                        MessageBox.Show("Success!");
+                            db.UpdateNonSalesEmployee(Employee);
+
+                            SelectedTitle = "";
+                            SelectedSuffix = "";
+                            SelectedPhoneNumberType = "";
+                            SelectedAddressTypeID = "";
+                            SelectedMarital = "";
+                            SelectedGender = "";
+                            SelectedPayFrequency = "";
+                            SelectedStateProvinceID.Name = "Ain";
+                            SelectedDepartmentID.Name = "Document Control";
+                            SelectedPersonType = "";
+                            PostalCode = "";
+                            FirstName = "";
+                            City = "";
+                            LoginID = "";
+                            MiddleName = "";
+                            VacationHours = 0;
+                            LastName = "";
+                            EmailAddress = "";
+                            SickLeaveHours = 0;
+                            NationalID = "";
+                            PayRate = 0;
+                            PhoneNumber = "";
+                            JobTitle = "";
+                            BirthDate = DateTime.Now;
+                            Address = "";
+                            HireDate = DateTime.Now;
+                            StartDate = DateTime.Now;
+                            YesSalaried = false;
+                            NoSalaried = false;
+                            FirstShift = false;
+                            SecondShift = false;
+                            ThirdShift = false;
+                            YesCurrent = false;
+                            NoCurrent = false;
+
+                            EmployeeFullNames.Clear();
+                            ListData();
+
+                            MessageBox.Show("Success!");
+                        }
                     }
-
                 }
-                catch (SqlException exception)
+                catch (SqlException)
                 {
                     MessageBox.Show("There was an error when performing this operation.\nPlease verify that all entered information is correct.\nCheck the database table DB_Errors for more information.");
                 }

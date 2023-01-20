@@ -14,25 +14,25 @@ namespace AdventureWorksWPFUI.ViewModels
 {
     public class AddNonSalesEmployeeViewModel : Conductor<Screen>.Collection.OneActive
     {
-        private BindableCollection<StateProvinceIDModel> _stateProvinceIDs = new BindableCollection<StateProvinceIDModel>();
+        private BindableCollection<StateProvinceIDModel> _stateProvinceIDs = new();
         private StateProvinceIDModel _selectedStateProvinceID;
-        private BindableCollection<DepartmentIDModel> _departmentIDs = new BindableCollection<DepartmentIDModel>();
+        private BindableCollection<DepartmentIDModel> _departmentIDs = new();
         private DepartmentIDModel _selectedDepartmentID;
-        private List<string> _titles = new List<string>();
+        private List<string> _titles = new();
         private string _selectedTitle;
-        private List<string> _suffixs = new List<string>();
+        private List<string> _suffixs = new();
         private string _selectedSuffix;
-        private List<string> _phoneNumberTypes = new List<string>();
+        private List<string> _phoneNumberTypes = new();
         private string _selectedPhoneNumberType;
-        private List<string> _addressTypeIDs = new List<string>();
+        private List<string> _addressTypeIDs = new();
         private string _selectedAddressTypeID;
-        private List<string> _maritals = new List<string>();
+        private List<string> _maritals = new();
         private string _selectedMarital;
-        private List<string> _genders = new List<string>();
+        private List<string> _genders = new();
         private string _selectedGender;
-        private List<string> _payFrequencys = new List<string>();
+        private List<string> _payFrequencys = new();
         private string _selectedPayFrequency;
-        private List<string> _userRoles = new List<string>();
+        private List<string> _userRoles = new();
         private string _selectedUserRole;
         private string _firstName;
         private DateTime _hireDate = DateTime.Now;
@@ -45,6 +45,9 @@ namespace AdventureWorksWPFUI.ViewModels
         private string _nationalID;
         private decimal _payRate;
         private string _password;
+        private string _verifyPassword;
+        private string _loginID;
+        private string _verifyLoginID;
         private string _phoneNumber;
         private string _jobTitle;
         private DateTime _birthDate = DateTime.Now;
@@ -55,11 +58,10 @@ namespace AdventureWorksWPFUI.ViewModels
         private bool _firstShift;
         private bool _secondShift;
         private bool _thirdShift;
-
-        DropdownListsModel dropdown = new DropdownListsModel();
-        AddNonSalesEmployeeModel Employee = new AddNonSalesEmployeeModel();
-        DataAccess db = new DataAccess();
-        AddNonSalesEmployeeValidators validator = new AddNonSalesEmployeeValidators();
+        readonly DropdownListsModel dropdown = new();
+        readonly AddNonSalesEmployeeModel Employee = new();
+        readonly DataAccess db = new();
+        readonly AddNonSalesEmployeeValidators validator = new();
 
         protected override void OnViewLoaded(object AddNonSalesInfoViewModel)
         {
@@ -472,7 +474,18 @@ namespace AdventureWorksWPFUI.ViewModels
             }
         }
 
-        private string _loginID;
+        public string VerifyPassword
+        {
+            get
+            {
+                return _verifyPassword;
+            }
+            set
+            {
+                _verifyPassword = value;
+                NotifyOfPropertyChange(() => VerifyPassword);
+            }
+        }
 
         public string LoginID
         {
@@ -484,6 +497,19 @@ namespace AdventureWorksWPFUI.ViewModels
             {
                 _loginID = value;
                 NotifyOfPropertyChange(() => LoginID);
+            }
+        }
+
+        public string VerifyLoginID
+        {
+            get
+            {
+                return _verifyLoginID;
+            }
+            set
+            {
+                _verifyLoginID = value;
+                NotifyOfPropertyChange(() => VerifyLoginID);
             }
         }
 
@@ -633,7 +659,7 @@ namespace AdventureWorksWPFUI.ViewModels
             set
             {
                 if (value.Equals(_thirdShift)) return;
-                _secondShift = value;
+                _thirdShift = value;
                 NotifyOfPropertyChange(() => ThirdShift);
             }
         }
@@ -653,7 +679,7 @@ namespace AdventureWorksWPFUI.ViewModels
                 dropdown.StateProvinceIDList(StateProvinceIDs);
                 dropdown.DepartmentIDList(DepartmentIDs);
             }
-            catch (SqlException exception)
+            catch (SqlException)
             {
                 MessageBox.Show("There was an error when performing this operation.\nPlease verify that all entered information is correct.\nCheck the database table DB_Errors for more information.");
             }
@@ -747,58 +773,74 @@ namespace AdventureWorksWPFUI.ViewModels
                         Employee.StartDate = StartDate;
                         Employee.Role = SelectedUserRole;
 
-                        ValidationResult results = validator.Validate(Employee);
-
-                        if (results.IsValid == false)
+                        if (Password != VerifyPassword)
                         {
-                            foreach (ValidationFailure failure in results.Errors)
-                            {
-                                MessageBox.Show(failure.ErrorMessage);
-                                return;
-                            }
+                            MessageBox.Show("Password and Verify Password Do Not Match.");
+                            return;
                         }
 
-                        db.AddNonSalesEmployee(Employee);
+                        if (LoginID != VerifyLoginID)
+                        {
+                            MessageBox.Show("LoginID and Verify LoginID Do Not Match.");
+                            return;
+                        }
 
-                        SelectedTitle = "";
-                        SelectedSuffix = "";
-                        SelectedPhoneNumberType = "";
-                        SelectedAddressTypeID = "";
-                        SelectedMarital = "";
-                        SelectedGender = "";
-                        SelectedPayFrequency = "";
-                        SelectedUserRole = "";
-                        SelectedStateProvinceID.Name = "Ain";
-                        SelectedDepartmentID.Name = "Document Control";
-                        PostalCode = "";
-                        FirstName = "";
-                        City = "";
-                        LoginID = "";
-                        MiddleName = "";
-                        VacationHours = 0;
-                        LastName = "";
-                        EmailAddress = "";
-                        SickLeaveHours = 0;
-                        NationalID = "";
-                        PayRate = 0;
-                        Password = "";
-                        PhoneNumber = "";
-                        JobTitle = "";
-                        BirthDate = DateTime.Now;
-                        Address = "";
-                        HireDate = DateTime.Now;
-                        StartDate = DateTime.Now;
-                        YesSalaried = false;
-                        NoSalaried = false;
-                        FirstShift = false;
-                        SecondShift = false;
-                        ThirdShift = false;
+                        else
+                        {
 
-                        MessageBox.Show("Success!");
+                            ValidationResult results = validator.Validate(Employee);
+
+                            if (results.IsValid == false)
+                            {
+                                foreach (ValidationFailure failure in results.Errors)
+                                {
+                                    MessageBox.Show(failure.ErrorMessage);
+                                    return;
+                                }
+                            }
+
+                            db.AddNonSalesEmployee(Employee);
+
+                            SelectedTitle = "";
+                            SelectedSuffix = "";
+                            SelectedPhoneNumberType = "";
+                            SelectedAddressTypeID = "";
+                            SelectedMarital = "";
+                            SelectedGender = "";
+                            SelectedPayFrequency = "";
+                            SelectedUserRole = "";
+                            SelectedStateProvinceID.Name = "Ain";
+                            SelectedDepartmentID.Name = "Document Control";
+                            PostalCode = "";
+                            FirstName = "";
+                            City = "";
+                            LoginID = "";
+                            MiddleName = "";
+                            VacationHours = 0;
+                            LastName = "";
+                            EmailAddress = "";
+                            SickLeaveHours = 0;
+                            NationalID = "";
+                            PayRate = 0;
+                            Password = "";
+                            PhoneNumber = "";
+                            JobTitle = "";
+                            BirthDate = DateTime.Now;
+                            Address = "";
+                            HireDate = DateTime.Now;
+                            StartDate = DateTime.Now;
+                            YesSalaried = false;
+                            NoSalaried = false;
+                            FirstShift = false;
+                            SecondShift = false;
+                            ThirdShift = false;
+
+                            MessageBox.Show("Success!");
+                        }
                     }
                 }
 
-                catch (SqlException exception)
+                catch (SqlException)
                 {
                     MessageBox.Show("There was an error when performing this operation.\nPlease verify that all entered information is correct.\nCheck the database table DB_Errors for more information.");
                 }
