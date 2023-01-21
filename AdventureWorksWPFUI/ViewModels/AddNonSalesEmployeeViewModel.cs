@@ -4,6 +4,7 @@ using AdventureWorksWPFClassLibrary.SqlDataAccess;
 using AdventureWorksWPFClassLibrary.Validators;
 using AdventureWorksWPFUI.Models.DropdownListsModels;
 using Caliburn.Micro;
+using FluentValidation;
 using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
@@ -58,15 +59,28 @@ namespace AdventureWorksWPFUI.ViewModels
         private bool _firstShift;
         private bool _secondShift;
         private bool _thirdShift;
-        readonly DropdownListsModel dropdown = new();
-        readonly AddNonSalesEmployeeModel Employee = new();
-        readonly DataAccess db = new();
-        readonly AddNonSalesEmployeeValidators validator = new();
+
+        private IDropdownListsModel _dropdownListModel;
+        private IDataAccess _dataAccess;
+        private IAddNonSalesEmployeeModel Employee;
+        private ValidationResult _validationResult;
+        private IValidator<IAddNonSalesEmployeeModel> _validator;
 
         protected override void OnViewLoaded(object AddNonSalesInfoViewModel)
         {
             base.OnViewLoaded(AddNonSalesInfoViewModel);
             ListData();
+        }
+
+        public AddNonSalesEmployeeViewModel(IDropdownListsModel dropdownListsModel, IDataAccess dataAccess, 
+               IAddNonSalesEmployeeModel employee, IValidator<IAddNonSalesEmployeeModel> validator, 
+               ValidationResult validationResult)
+        {
+            _dropdownListModel = dropdownListsModel;
+            _dataAccess = dataAccess;
+            Employee = employee;
+            _validator = validator;
+            _validationResult = validationResult;
         }
 
         public BindableCollection<StateProvinceIDModel> StateProvinceIDs
@@ -668,16 +682,16 @@ namespace AdventureWorksWPFUI.ViewModels
         {
             try
             {
-                dropdown.TitleList(Titles);
-                dropdown.SuffixList(Suffixs);
-                dropdown.PhoneNumberTypeList(PhoneNumberTypes);
-                dropdown.AddressTypeIDList(AddressTypeIDs);
-                dropdown.MaritalStatusList(Maritals);
-                dropdown.GenderList(Genders);
-                dropdown.PayFrequencyList(PayFrequencys);
-                dropdown.UserRoleList(UserRoles);
-                dropdown.StateProvinceIDList(StateProvinceIDs);
-                dropdown.DepartmentIDList(DepartmentIDs);
+                _dropdownListModel.TitleList(Titles);
+                _dropdownListModel.SuffixList(Suffixs);
+                _dropdownListModel.PhoneNumberTypeList(PhoneNumberTypes);
+                _dropdownListModel.AddressTypeIDList(AddressTypeIDs);
+                _dropdownListModel.MaritalStatusList(Maritals);
+                _dropdownListModel.GenderList(Genders);
+                _dropdownListModel.PayFrequencyList(PayFrequencys);
+                _dropdownListModel.UserRoleList(UserRoles);
+                _dropdownListModel.StateProvinceIDList(StateProvinceIDs);
+                _dropdownListModel.DepartmentIDList(DepartmentIDs);
             }
             catch (SqlException)
             {
@@ -788,18 +802,18 @@ namespace AdventureWorksWPFUI.ViewModels
                         else
                         {
 
-                            ValidationResult results = validator.Validate(Employee);
+                            _validationResult = _validator.Validate(Employee);
 
-                            if (results.IsValid == false)
+                            if (_validationResult.IsValid == false)
                             {
-                                foreach (ValidationFailure failure in results.Errors)
+                                foreach (ValidationFailure failure in _validationResult.Errors)
                                 {
                                     MessageBox.Show(failure.ErrorMessage);
                                     return;
                                 }
                             }
 
-                            db.AddNonSalesEmployee(Employee);
+                            _dataAccess.AddNonSalesEmployee(Employee);
 
                             SelectedTitle = "";
                             SelectedSuffix = "";

@@ -26,7 +26,7 @@ namespace AdventureWorksWPFClassLibrary.SqlDataAccess
 
         }
 
-        public AddNonSalesEmployeeModel AddNonSalesEmployee(AddNonSalesEmployeeModel Employee)
+        public IAddNonSalesEmployeeModel AddNonSalesEmployee(IAddNonSalesEmployeeModel Employee)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(SqlHelper.CnnVal("AdventureWorks2014")))
             {
@@ -68,7 +68,7 @@ namespace AdventureWorksWPFClassLibrary.SqlDataAccess
             }
         }
 
-        public EmployeeFullNameModel DeleteNonSalesEmployee(EmployeeFullNameModel Employee)
+        public IEmployeeFullNameModel DeleteNonSalesEmployee(IEmployeeFullNameModel Employee)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(SqlHelper.CnnVal("AdventureWorks2014")))
             {
@@ -104,7 +104,7 @@ namespace AdventureWorksWPFClassLibrary.SqlDataAccess
             }
         }
 
-        public UpdateNonSalesEmployeeModel UpdateNonSalesEmployee(UpdateNonSalesEmployeeModel Employee)
+        public IUpdateNonSalesEmployeeModel UpdateNonSalesEmployee(IUpdateNonSalesEmployeeModel Employee)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(SqlHelper.CnnVal("AdventureWorks2014")))
             {
@@ -170,6 +170,7 @@ namespace AdventureWorksWPFClassLibrary.SqlDataAccess
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(SqlHelper.CnnVal("AdventureWorks2014")))
             {
                 var output = connection.Query<EmployeeFullNameModel>($"select * from v_DropdownNonSalesEmployeeFullName").ToList();
+
                 return output;
             }
         }

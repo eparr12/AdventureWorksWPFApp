@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace AdventureWorksWPFClassLibrary.Validators
 {
-    public class EmployeeFullNameValidators : AbstractValidator<EmployeeFullNameModel>
+    public class EmployeeFullNameValidators : AbstractValidator<IEmployeeFullNameModel>
     {
         public EmployeeFullNameValidators()
         {

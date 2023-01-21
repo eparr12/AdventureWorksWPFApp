@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace AdventureWorksWPFClassLibrary.Validators
 {
-    public class UpdateNonSalesEmployeeValidators : AbstractValidator<UpdateNonSalesEmployeeModel>
+    public class UpdateNonSalesEmployeeValidators : AbstractValidator<IUpdateNonSalesEmployeeModel>
     {
         public UpdateNonSalesEmployeeValidators()
         {

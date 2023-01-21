@@ -1,7 +1,9 @@
-﻿using AdventureWorksWPFClassLibrary.Models.DropDowns;
+﻿using AdventureWorksWPFClassLibrary.Models;
+using AdventureWorksWPFClassLibrary.Models.DropDowns;
 using AdventureWorksWPFClassLibrary.SqlDataAccess;
 using AdventureWorksWPFClassLibrary.Validators;
 using Caliburn.Micro;
+using FluentValidation;
 using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
@@ -9,7 +11,8 @@ using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Data;
-using ValidationResult = FluentValidation.Results.ValidationResult;
+
+/// TODO figure out how to get dapper to work with IEmployeeFullNameModel to populate list
 
 namespace AdventureWorksWPFUI.ViewModels
 {
@@ -20,9 +23,11 @@ namespace AdventureWorksWPFUI.ViewModels
         private EmployeeFullNameModel _selectedEmployeeFullName;
 
         List<EmployeeFullNameModel> Employees = new List<EmployeeFullNameModel>();
-        DataAccess db = new DataAccess();
-        EmployeeFullNameModel Employee = new EmployeeFullNameModel();
-        EmployeeFullNameValidators validator = new EmployeeFullNameValidators();
+        private ValidationResult _validationResult;
+        private IValidator<IEmployeeFullNameModel> _validator;
+        private IDataAccess _dataAccess;
+        //private IEmployeeFullNameModel Employee;
+        EmployeeFullNameModel Employee = new();
 
         protected override void OnViewLoaded(object DeleteNonSalesInfoViewModel)
         {
@@ -31,16 +36,20 @@ namespace AdventureWorksWPFUI.ViewModels
 
         }
 
+        public DeleteNonSalesEmployeeViewModel(IDataAccess dataAccess, //IEmployeeFullNameModel employee,
+               ValidationResult validationResult, IValidator<IEmployeeFullNameModel> validator)
+        {
+            _dataAccess = dataAccess;
+           // Employee = employee;
+            _validator = validator;
+            _validationResult = validationResult;
+        }
+
         public ICollectionView Collection
         {
             get;
 
             set;
-        }
-
-        public DeleteNonSalesEmployeeViewModel()
-        {
-
         }
 
         public BindableCollection<EmployeeFullNameModel> EmployeeFullNames
@@ -70,7 +79,6 @@ namespace AdventureWorksWPFUI.ViewModels
             }
         }
 
-
         public string SearchFilter
         {
             get
@@ -98,7 +106,7 @@ namespace AdventureWorksWPFUI.ViewModels
         {
             try
             {
-                Employees = db.GetNonSalesEmployeeFullName();
+                Employees = _dataAccess.GetNonSalesEmployeeFullName();
 
                 foreach (EmployeeFullNameModel e in Employees)
                 {
@@ -127,18 +135,18 @@ namespace AdventureWorksWPFUI.ViewModels
                     {
                         Employee.FullName = SelectedEmployeeFullName.FullName;
 
-                        ValidationResult results = validator.Validate(Employee);
+                        _validationResult = _validator.Validate(Employee);
 
-                        if (results.IsValid == false)
+                        if (_validationResult.IsValid == false)
                         {
-                            foreach (ValidationFailure failure in results.Errors)
+                            foreach (ValidationFailure failure in _validationResult.Errors)
                             {
                                 MessageBox.Show(failure.ErrorMessage);
                                 return;
                             }
                         }
 
-                        db.DeleteNonSalesEmployee(Employee);
+                        _dataAccess.DeleteNonSalesEmployee(Employee);
                         EmployeeFullNames.Remove(SelectedEmployeeFullName);
                         MessageBox.Show("Success!");
                     }

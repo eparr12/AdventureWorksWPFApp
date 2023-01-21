@@ -1,7 +1,11 @@
 ﻿using AdventureWorksWPFClassLibrary.Models;
+using AdventureWorksWPFClassLibrary.Models.DropDowns;
 using AdventureWorksWPFClassLibrary.SqlDataAccess;
 using AdventureWorksWPFClassLibrary.Validators;
+using AdventureWorksWPFUI.Models;
+using AdventureWorksWPFUI.Models.DropdownListsModels;
 using AdventureWorksWPFUI.ViewModels;
+using AutoMapper;
 using Caliburn.Micro;
 using FluentValidation;
 using System;
@@ -28,22 +32,37 @@ namespace AdventureWorksWPFUI
 
         protected override void Configure()
         {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<NonSalesEmployeeInformationModel, GetNonSalesEmployeeInfoModel>());
+            var mapper = config.CreateMapper();
+            _container.Instance(mapper);
+
             _container.Instance(_container);
 
             _container
                 .Singleton<IEventAggregator, EventAggregator>()
                 .Singleton<IWindowManager, WindowManager>();
 
-            _container.PerRequest<IShellViewModel, ShellViewModel>()
+            _container.PerRequest<IDataAccess, DataAccess>()
+                .PerRequest<ValidationResult>()
+
+                .PerRequest<IShellViewModel, ShellViewModel>()
                 .PerRequest<ILoginViewModel, LoginViewModel>()
                 .PerRequest<IAddNonSalesEmployeeViewModel,AddNonSalesEmployeeViewModel>()
                 .PerRequest<IDeleteNonSalesEmployeeViewModel, DeleteNonSalesEmployeeViewModel>()
                 .PerRequest<IGetNonSalesEmployeeInfoViewModel, GetNonSalesEmployeeInfoViewModel>()
                 .PerRequest<IUpdateNonSalesEmployeeViewModel, UpdateNonSalesEmployeeViewModel>()
-                .PerRequest<IDataAccess, DataAccess>()
+
                 .PerRequest<ILoginModel, LoginModel>()
-                .PerRequest<ValidationResult>()
-                .PerRequest<IValidator<ILoginModel>, LoginValidators>();
+                .PerRequest<IEmployeeFullNameModel, EmployeeFullNameModel>()
+                .PerRequest<IGetNonSalesEmployeeInfoModel, GetNonSalesEmployeeInfoModel>()
+                .PerRequest<IDropdownListsModel, DropdownListsModel>()
+                .PerRequest<IAddNonSalesEmployeeModel, AddNonSalesEmployeeModel>()
+                .PerRequest<IUpdateNonSalesEmployeeModel, UpdateNonSalesEmployeeModel>()
+
+                .PerRequest<IValidator<ILoginModel>, LoginValidators>()
+                .PerRequest<IValidator<IAddNonSalesEmployeeModel>, AddNonSalesEmployeeValidators>()
+                .PerRequest<IValidator<IEmployeeFullNameModel>, EmployeeFullNameValidators>()
+                .PerRequest<IValidator<IUpdateNonSalesEmployeeModel>, UpdateNonSalesEmployeeValidators>();
         }
 
         protected override void OnStartup(object sender, StartupEventArgs e)

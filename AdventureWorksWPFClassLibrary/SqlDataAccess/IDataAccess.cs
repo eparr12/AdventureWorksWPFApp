@@ -5,14 +5,14 @@ namespace AdventureWorksWPFClassLibrary.SqlDataAccess
 {
     public interface IDataAccess
     {
-        AddNonSalesEmployeeModel AddNonSalesEmployee(AddNonSalesEmployeeModel Employee);
-        EmployeeFullNameModel DeleteNonSalesEmployee(EmployeeFullNameModel Employee);
+        IAddNonSalesEmployeeModel AddNonSalesEmployee(IAddNonSalesEmployeeModel Employee);
+        IEmployeeFullNameModel DeleteNonSalesEmployee(IEmployeeFullNameModel Employee);
         List<DepartmentIDModel> GetDepartmentID();
         List<EmployeeFullNameModel> GetNonSalesEmployeeFullName();
         List<NonSalesEmployeeInformationModel> GetNonSalesEmployeeInformation();
         List<StateProvinceIDModel> GetStateProvinceID();
         List<UpdateNonSalesEmployeeModel> GetUpdatedEmployeeInformation(string personName);
         ILoginModel Login(ILoginModel Login);
-        UpdateNonSalesEmployeeModel UpdateNonSalesEmployee(UpdateNonSalesEmployeeModel Employee);
+        IUpdateNonSalesEmployeeModel UpdateNonSalesEmployee(IUpdateNonSalesEmployeeModel Employee);
     }
 }

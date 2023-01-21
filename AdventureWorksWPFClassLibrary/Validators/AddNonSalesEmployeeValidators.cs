@@ -2,7 +2,7 @@
 using FluentValidation;
 namespace AdventureWorksWPFClassLibrary.Validators
 {
-    public class AddNonSalesEmployeeValidators : AbstractValidator<AddNonSalesEmployeeModel>
+    public class AddNonSalesEmployeeValidators : AbstractValidator<IAddNonSalesEmployeeModel>
     {
         public AddNonSalesEmployeeValidators()
         {

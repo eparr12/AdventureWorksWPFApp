@@ -7,11 +7,15 @@ using System.Windows.Data;
 using System.Windows;
 using AdventureWorksWPFUI.Models.DropdownListsModels;
 using FluentValidation.Results;
-using ValidationResult = FluentValidation.Results.ValidationResult;
 using AdventureWorksWPFClassLibrary.Models.DropDowns;
 using AdventureWorksWPFClassLibrary.SqlDataAccess;
 using AdventureWorksWPFClassLibrary.Models;
 using AdventureWorksWPFClassLibrary.Validators;
+using FluentValidation;
+
+///TODO Figure out how to do dependency injection with lists
+
+///TODO Remove Unnecessary usings at the end of project
 
 namespace AdventureWorksWPFUI.ViewModels
 {
@@ -64,17 +68,30 @@ namespace AdventureWorksWPFUI.ViewModels
         private bool _yesCurrent;
         private bool _noCurrent;
 
-        DropdownListsModel dropdown = new DropdownListsModel();
         List<EmployeeFullNameModel> Employees = new List<EmployeeFullNameModel>();
-        DataAccess db = new DataAccess();
         List<UpdateNonSalesEmployeeModel> EmployeeSelection = new List<UpdateNonSalesEmployeeModel>();
-        UpdateNonSalesEmployeeModel Employee = new UpdateNonSalesEmployeeModel();
-        UpdateNonSalesEmployeeValidators validator = new UpdateNonSalesEmployeeValidators();
+
+        private IDropdownListsModel _dropdownListModel;
+        private IDataAccess _dataAccess;
+        private ValidationResult _validationResult;
+        private IValidator<IUpdateNonSalesEmployeeModel> _validator;
+        IUpdateNonSalesEmployeeModel Employee;
 
         protected override void OnViewLoaded(object UpdateNonSalesInfoViewModel)
         {
             base.OnViewLoaded(UpdateNonSalesInfoViewModel);
             ListData();
+        }
+
+        public UpdateNonSalesEmployeeViewModel(IDropdownListsModel dropdownListModel, IDataAccess dataAccess,
+                                               IValidator<IUpdateNonSalesEmployeeModel> validator, ValidationResult validationResult,
+                                               IUpdateNonSalesEmployeeModel employee)
+        {
+            _dropdownListModel = dropdownListModel;
+            _dataAccess = dataAccess;
+            _validationResult = validationResult;
+            _validator = validator;
+            Employee = employee;
         }
 
         public ICollectionView Collection
@@ -112,7 +129,7 @@ namespace AdventureWorksWPFUI.ViewModels
 
                 if (SelectedEmployeeFullName != null)
                 {
-                    EmployeeSelection = db.GetUpdatedEmployeeInformation(SelectedEmployeeFullName.FullName);
+                    EmployeeSelection = _dataAccess.GetUpdatedEmployeeInformation(SelectedEmployeeFullName.FullName);
 
                     foreach (UpdateNonSalesEmployeeModel Employee in EmployeeSelection)
                     {
@@ -788,7 +805,7 @@ namespace AdventureWorksWPFUI.ViewModels
         {
             try
             {
-                Employees = db.GetNonSalesEmployeeFullName();
+                Employees = _dataAccess.GetNonSalesEmployeeFullName();
 
                 foreach (EmployeeFullNameModel e in Employees)
                 {
@@ -799,16 +816,16 @@ namespace AdventureWorksWPFUI.ViewModels
 
                 Collection.SortDescriptions.Add(new SortDescription(nameof(EmployeeFullNameModel.FullName), ListSortDirection.Ascending));
 
-                dropdown.TitleList(Titles);
-                dropdown.SuffixList(Suffixs);
-                dropdown.PhoneNumberTypeList(PhoneNumberTypes);
-                dropdown.AddressTypeIDList(AddressTypeIDs);
-                dropdown.MaritalStatusList(Maritals);
-                dropdown.GenderList(Genders);
-                dropdown.PayFrequencyList(PayFrequencys);
-                dropdown.StateProvinceIDList(StateProvinceIDs);
-                dropdown.DepartmentIDList(DepartmentIDs);
-                dropdown.PersonTypeList(PersonTypes);
+                _dropdownListModel.TitleList(Titles);
+                _dropdownListModel.SuffixList(Suffixs);
+                _dropdownListModel.PhoneNumberTypeList(PhoneNumberTypes);
+                _dropdownListModel.AddressTypeIDList(AddressTypeIDs);
+                _dropdownListModel.MaritalStatusList(Maritals);
+                _dropdownListModel.GenderList(Genders);
+                _dropdownListModel.PayFrequencyList(PayFrequencys);
+                _dropdownListModel.StateProvinceIDList(StateProvinceIDs);
+                _dropdownListModel.DepartmentIDList(DepartmentIDs);
+                _dropdownListModel.PersonTypeList(PersonTypes);
             }
             catch (SqlException)
             {
@@ -818,8 +835,6 @@ namespace AdventureWorksWPFUI.ViewModels
 
         public void Submit()
         {
-            // TODO figure out how to get SelectedStateProvinceID to update based on db return
-
             var result = MessageBox.Show("Are You Sure You Want To Update??", "Confirm Update!!", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
@@ -937,18 +952,18 @@ namespace AdventureWorksWPFUI.ViewModels
 
                         else
                         {
-                            ValidationResult results = validator.Validate(Employee);
+                            _validationResult = _validator.Validate(Employee);
 
-                            if (results.IsValid == false)
+                            if (_validationResult.IsValid == false)
                             {
-                                foreach (ValidationFailure failure in results.Errors)
+                                foreach (ValidationFailure failure in _validationResult.Errors)
                                 {
                                     MessageBox.Show(failure.ErrorMessage);
                                     return;
                                 }
                             }
 
-                            db.UpdateNonSalesEmployee(Employee);
+                            _dataAccess.UpdateNonSalesEmployee(Employee);
 
                             SelectedTitle = "";
                             SelectedSuffix = "";

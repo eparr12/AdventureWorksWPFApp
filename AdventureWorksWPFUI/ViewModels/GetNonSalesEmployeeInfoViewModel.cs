@@ -13,9 +13,8 @@ namespace AdventureWorksWPFUI.ViewModels
     {
         private BindableCollection<GetNonSalesEmployeeInfoModel> _employeeInformations = new BindableCollection<GetNonSalesEmployeeInfoModel>();
 
-        List<GetNonSalesEmployeeInfoModel> Information = new List<GetNonSalesEmployeeInfoModel>();
-
-        DataAccess db = new DataAccess();
+        private IMapper _mapper;
+        private IDataAccess _dataAccess;
 
         protected override void OnViewLoaded(object GetNonSalesInfoViewModel)
         {
@@ -23,8 +22,10 @@ namespace AdventureWorksWPFUI.ViewModels
             ListData();
         }
 
-        public GetNonSalesEmployeeInfoViewModel()
+        public GetNonSalesEmployeeInfoViewModel(IMapper mapper, IDataAccess dataAccess)
         {
+            _mapper = mapper;
+            _dataAccess = dataAccess;
         }
 
         public BindableCollection<GetNonSalesEmployeeInfoModel> EmployeeInformations
@@ -43,10 +44,8 @@ namespace AdventureWorksWPFUI.ViewModels
         {
             try
             {
-                var config = new MapperConfiguration(cfg => cfg.CreateMap<NonSalesEmployeeInformationModel, GetNonSalesEmployeeInfoModel>());
-                var mapper = new Mapper(config);
-                var Information = db.GetNonSalesEmployeeInformation();
-                var InformationData = mapper.Map<List<GetNonSalesEmployeeInfoModel>>(Information);
+                var Information = _dataAccess.GetNonSalesEmployeeInformation();
+                var InformationData = _mapper.Map<List<GetNonSalesEmployeeInfoModel>>(Information);
 
                 foreach (GetNonSalesEmployeeInfoModel e in InformationData)
                 {
