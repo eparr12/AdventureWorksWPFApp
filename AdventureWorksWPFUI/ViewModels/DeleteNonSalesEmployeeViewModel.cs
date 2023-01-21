@@ -12,22 +12,19 @@ using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Data;
 
-/// TODO figure out how to get dapper to work with IEmployeeFullNameModel to populate list
-
 namespace AdventureWorksWPFUI.ViewModels
 {
     public class DeleteNonSalesEmployeeViewModel : Conductor<Screen>.Collection.OneActive, IDeleteNonSalesEmployeeViewModel
     {
         private string _searchFilter = string.Empty;
-        private BindableCollection<EmployeeFullNameModel> _employeeFullNames = new BindableCollection<EmployeeFullNameModel>();
         private EmployeeFullNameModel _selectedEmployeeFullName;
 
-        List<EmployeeFullNameModel> Employees = new List<EmployeeFullNameModel>();
         private ValidationResult _validationResult;
         private IValidator<IEmployeeFullNameModel> _validator;
         private IDataAccess _dataAccess;
-        //private IEmployeeFullNameModel Employee;
-        EmployeeFullNameModel Employee = new();
+        private EmployeeFullNameModel Employee;
+        private BindableCollection<EmployeeFullNameModel> _employeeFullNames;
+        private List<EmployeeFullNameModel> Employees;
 
         protected override void OnViewLoaded(object DeleteNonSalesInfoViewModel)
         {
@@ -36,13 +33,16 @@ namespace AdventureWorksWPFUI.ViewModels
 
         }
 
-        public DeleteNonSalesEmployeeViewModel(IDataAccess dataAccess, //IEmployeeFullNameModel employee,
-               ValidationResult validationResult, IValidator<IEmployeeFullNameModel> validator)
+        public DeleteNonSalesEmployeeViewModel(IDataAccess dataAccess,  ValidationResult validationResult, 
+               IValidator<IEmployeeFullNameModel> validator, BindableCollection<EmployeeFullNameModel> employeeFullNames,
+               EmployeeFullNameModel employee, List<EmployeeFullNameModel> employees)
         {
             _dataAccess = dataAccess;
-           // Employee = employee;
             _validator = validator;
             _validationResult = validationResult;
+            _employeeFullNames = employeeFullNames;
+            Employee = employee;
+            Employees = employees;
         }
 
         public ICollectionView Collection

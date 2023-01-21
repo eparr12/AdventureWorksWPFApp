@@ -14,6 +14,8 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
+///TODO Finish adjusting validators
+
 namespace AdventureWorksWPFUI
 {
     public class Bootstrapper : BootstrapperBase
@@ -47,7 +49,7 @@ namespace AdventureWorksWPFUI
 
                 .PerRequest<IShellViewModel, ShellViewModel>()
                 .PerRequest<ILoginViewModel, LoginViewModel>()
-                .PerRequest<IAddNonSalesEmployeeViewModel,AddNonSalesEmployeeViewModel>()
+                .PerRequest<IAddNonSalesEmployeeViewModel, AddNonSalesEmployeeViewModel>()
                 .PerRequest<IDeleteNonSalesEmployeeViewModel, DeleteNonSalesEmployeeViewModel>()
                 .PerRequest<IGetNonSalesEmployeeInfoViewModel, GetNonSalesEmployeeInfoViewModel>()
                 .PerRequest<IUpdateNonSalesEmployeeViewModel, UpdateNonSalesEmployeeViewModel>()
@@ -58,6 +60,13 @@ namespace AdventureWorksWPFUI
                 .PerRequest<IDropdownListsModel, DropdownListsModel>()
                 .PerRequest<IAddNonSalesEmployeeModel, AddNonSalesEmployeeModel>()
                 .PerRequest<IUpdateNonSalesEmployeeModel, UpdateNonSalesEmployeeModel>()
+                .PerRequest<EmployeeFullNameModel>()
+                .PerRequest<BindableCollection<EmployeeFullNameModel>, BindableCollection<EmployeeFullNameModel>>()
+                .PerRequest<BindableCollection<StateProvinceIDModel>, BindableCollection<StateProvinceIDModel>>()
+                .PerRequest<BindableCollection<DepartmentIDModel>, BindableCollection<DepartmentIDModel>>()
+                .PerRequest<BindableCollection<GetNonSalesEmployeeInfoModel>, BindableCollection<GetNonSalesEmployeeInfoModel>>()
+                .PerRequest<List<UpdateNonSalesEmployeeModel>, List<UpdateNonSalesEmployeeModel>>()
+                .PerRequest<List<EmployeeFullNameModel>, List<EmployeeFullNameModel>>()
 
                 .PerRequest<IValidator<ILoginModel>, LoginValidators>()
                 .PerRequest<IValidator<IAddNonSalesEmployeeModel>, AddNonSalesEmployeeValidators>()

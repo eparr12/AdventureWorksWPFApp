@@ -13,19 +13,16 @@ using AdventureWorksWPFClassLibrary.Models;
 using AdventureWorksWPFClassLibrary.Validators;
 using FluentValidation;
 
-///TODO Figure out how to do dependency injection with lists
-
 ///TODO Remove Unnecessary usings at the end of project
+
+///TODO Remove unnecessary Interfaces
 
 namespace AdventureWorksWPFUI.ViewModels
 {
     public class UpdateNonSalesEmployeeViewModel : Conductor<Screen>.Collection.OneActive, IUpdateNonSalesEmployeeViewModel
     {
-        private BindableCollection<EmployeeFullNameModel> _employeeFullNames = new BindableCollection<EmployeeFullNameModel>();
         private EmployeeFullNameModel _selectedEmployeeFullName;
-        private BindableCollection<StateProvinceIDModel> _stateProvinceIDs = new BindableCollection<StateProvinceIDModel>();
         private StateProvinceIDModel _selectedStateProvinceID;
-        private BindableCollection<DepartmentIDModel> _departmentIDs = new BindableCollection<DepartmentIDModel>();
         private DepartmentIDModel _selectedDepartmentID;
         private List<string> _titles = new List<string>();
         private string _selectedTitle;
@@ -68,14 +65,16 @@ namespace AdventureWorksWPFUI.ViewModels
         private bool _yesCurrent;
         private bool _noCurrent;
 
-        List<EmployeeFullNameModel> Employees = new List<EmployeeFullNameModel>();
-        List<UpdateNonSalesEmployeeModel> EmployeeSelection = new List<UpdateNonSalesEmployeeModel>();
-
         private IDropdownListsModel _dropdownListModel;
         private IDataAccess _dataAccess;
         private ValidationResult _validationResult;
         private IValidator<IUpdateNonSalesEmployeeModel> _validator;
-        IUpdateNonSalesEmployeeModel Employee;
+        private IUpdateNonSalesEmployeeModel Employee;
+        private List<UpdateNonSalesEmployeeModel> EmployeeSelection;
+        private List<EmployeeFullNameModel> Employees;
+        private BindableCollection<EmployeeFullNameModel> _employeeFullNames;
+        private BindableCollection<StateProvinceIDModel> _stateProvinceIDs;
+        private BindableCollection<DepartmentIDModel> _departmentIDs;
 
         protected override void OnViewLoaded(object UpdateNonSalesInfoViewModel)
         {
@@ -85,13 +84,21 @@ namespace AdventureWorksWPFUI.ViewModels
 
         public UpdateNonSalesEmployeeViewModel(IDropdownListsModel dropdownListModel, IDataAccess dataAccess,
                                                IValidator<IUpdateNonSalesEmployeeModel> validator, ValidationResult validationResult,
-                                               IUpdateNonSalesEmployeeModel employee)
+                                               IUpdateNonSalesEmployeeModel employee, List<UpdateNonSalesEmployeeModel> employeeSelection
+,                                              BindableCollection<EmployeeFullNameModel> employeeFullNames,
+                                               BindableCollection<StateProvinceIDModel> stateProvinceIDs, List<EmployeeFullNameModel> employees
+,                                              BindableCollection<DepartmentIDModel> departmentIDs)
         {
             _dropdownListModel = dropdownListModel;
             _dataAccess = dataAccess;
             _validationResult = validationResult;
             _validator = validator;
             Employee = employee;
+            EmployeeSelection = employeeSelection;
+            _employeeFullNames = employeeFullNames;
+            _stateProvinceIDs = stateProvinceIDs;
+            Employees = employees;
+            _departmentIDs = departmentIDs;
         }
 
         public ICollectionView Collection

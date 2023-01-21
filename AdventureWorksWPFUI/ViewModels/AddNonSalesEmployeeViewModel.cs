@@ -15,9 +15,7 @@ namespace AdventureWorksWPFUI.ViewModels
 {
     public class AddNonSalesEmployeeViewModel : Conductor<Screen>.Collection.OneActive, IAddNonSalesEmployeeViewModel
     {
-        private BindableCollection<StateProvinceIDModel> _stateProvinceIDs = new();
         private StateProvinceIDModel _selectedStateProvinceID;
-        private BindableCollection<DepartmentIDModel> _departmentIDs = new();
         private DepartmentIDModel _selectedDepartmentID;
         private List<string> _titles = new();
         private string _selectedTitle;
@@ -65,6 +63,8 @@ namespace AdventureWorksWPFUI.ViewModels
         private IAddNonSalesEmployeeModel Employee;
         private ValidationResult _validationResult;
         private IValidator<IAddNonSalesEmployeeModel> _validator;
+        private BindableCollection<StateProvinceIDModel> _stateProvinceIDs;
+        private BindableCollection<DepartmentIDModel> _departmentIDs;
 
         protected override void OnViewLoaded(object AddNonSalesInfoViewModel)
         {
@@ -74,13 +74,16 @@ namespace AdventureWorksWPFUI.ViewModels
 
         public AddNonSalesEmployeeViewModel(IDropdownListsModel dropdownListsModel, IDataAccess dataAccess, 
                IAddNonSalesEmployeeModel employee, IValidator<IAddNonSalesEmployeeModel> validator, 
-               ValidationResult validationResult)
+               ValidationResult validationResult, BindableCollection<StateProvinceIDModel> stateProvinceIDs,
+               BindableCollection<DepartmentIDModel> departmentIDs)
         {
             _dropdownListModel = dropdownListsModel;
             _dataAccess = dataAccess;
             Employee = employee;
             _validator = validator;
             _validationResult = validationResult;
+            _stateProvinceIDs = stateProvinceIDs;
+            _departmentIDs = departmentIDs;
         }
 
         public BindableCollection<StateProvinceIDModel> StateProvinceIDs

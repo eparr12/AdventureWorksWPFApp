@@ -7,16 +7,23 @@ namespace AdventureWorksWPFUI.Models.DropdownListsModels
 {
     public class DropdownListsModel : IDropdownListsModel
     {
-        List<StateProvinceIDModel> StateProvinceID = new List<StateProvinceIDModel>();
-        List<DepartmentIDModel> DepartmentID = new List<DepartmentIDModel>();
+        IDataAccess _dataAccess;
+        List<StateProvinceIDModel> _stateProvinceID;
+        List<DepartmentIDModel> _departmentID;
+
+        public DropdownListsModel(List<StateProvinceIDModel> stateProvinceID,
+                                  List<DepartmentIDModel> departmentID, IDataAccess dataAccess) 
+        {
+            _stateProvinceID = stateProvinceID;
+            _departmentID = departmentID;
+            _dataAccess = dataAccess;
+        }
 
         public void StateProvinceIDList(BindableCollection<StateProvinceIDModel> stateProvinceID)
         {
-            DataAccess db = new DataAccess();
+            _stateProvinceID = _dataAccess.GetStateProvinceID();
 
-            StateProvinceID = db.GetStateProvinceID();
-
-            foreach (StateProvinceIDModel e in StateProvinceID)
+            foreach (StateProvinceIDModel e in _stateProvinceID)
             {
                 stateProvinceID.Add(e);
             }
@@ -24,11 +31,9 @@ namespace AdventureWorksWPFUI.Models.DropdownListsModels
 
         public void DepartmentIDList(BindableCollection<DepartmentIDModel> departmentID)
         {
-            DataAccess db = new DataAccess();
+            _departmentID = _dataAccess.GetDepartmentID();
 
-            DepartmentID = db.GetDepartmentID();
-
-            foreach (DepartmentIDModel e in DepartmentID)
+            foreach (DepartmentIDModel e in _departmentID)
             {
                 departmentID.Add(e);
             }

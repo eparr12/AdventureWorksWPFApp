@@ -11,10 +11,9 @@ namespace AdventureWorksWPFUI.ViewModels
 {
     public class GetNonSalesEmployeeInfoViewModel : Conductor<Screen>.Collection.OneActive, IGetNonSalesEmployeeInfoViewModel
     {
-        private BindableCollection<GetNonSalesEmployeeInfoModel> _employeeInformations = new BindableCollection<GetNonSalesEmployeeInfoModel>();
-
         private IMapper _mapper;
         private IDataAccess _dataAccess;
+        private BindableCollection<GetNonSalesEmployeeInfoModel> _employeeInformations;
 
         protected override void OnViewLoaded(object GetNonSalesInfoViewModel)
         {
@@ -22,10 +21,12 @@ namespace AdventureWorksWPFUI.ViewModels
             ListData();
         }
 
-        public GetNonSalesEmployeeInfoViewModel(IMapper mapper, IDataAccess dataAccess)
+        public GetNonSalesEmployeeInfoViewModel(IMapper mapper, IDataAccess dataAccess, 
+               BindableCollection<GetNonSalesEmployeeInfoModel> employeeInformations)
         {
             _mapper = mapper;
             _dataAccess = dataAccess;
+            _employeeInformations = employeeInformations;
         }
 
         public BindableCollection<GetNonSalesEmployeeInfoModel> EmployeeInformations

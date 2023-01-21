@@ -1,13 +1,14 @@
 ﻿using AdventureWorksWPFClassLibrary.Models;
 using AdventureWorksWPFClassLibrary.Models.DropDowns;
+using AutoMapper;
 using Dapper;
+using Microsoft.VisualBasic;
 using System.Data;
 
 namespace AdventureWorksWPFClassLibrary.SqlDataAccess
 {
     public class DataAccess : IDataAccess
     {
-
         public ILoginModel Login(ILoginModel Login)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(SqlHelper.CnnVal("AdventureWorks2014")))
@@ -87,7 +88,6 @@ namespace AdventureWorksWPFClassLibrary.SqlDataAccess
             {
 
                 var output = connection.Query<NonSalesEmployeeInformationModel>($"select * from v_GetNonSalesEmployeeInformation").ToList();
-                //var output = connection.Query<NonSalesEmployeeInformationModel>("SP_GetPersonInformation @PersonName", new { PersonName = personName }).ToList();
 
                 return output;
             }
@@ -101,6 +101,7 @@ namespace AdventureWorksWPFClassLibrary.SqlDataAccess
                 var output = connection.Query<UpdateNonSalesEmployeeModel>("SP_GetPersonInformation @PersonName", new { PersonName = personName }).ToList();
 
                 return output;
+
             }
         }
 

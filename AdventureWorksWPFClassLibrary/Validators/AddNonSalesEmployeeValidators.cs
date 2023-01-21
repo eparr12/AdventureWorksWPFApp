@@ -27,7 +27,7 @@ namespace AdventureWorksWPFClassLibrary.Validators
             RuleFor(N => N.MaritalStatus).UniversalDropdownValidation();
             RuleFor(N => N.Gender).UniversalDropdownValidation();
             RuleFor(N => N.HireDate).NotEmpty()
-                .Must(BeAValidHireDate).WithMessage($"Hire Date Must Be On Or Before {DateTime.Now.AddDays(1).ToString("MM/dd/yyyy")}");
+                .Must(BeAValidHireDate).WithMessage($"Hire Date Must Be On Or Before {DateTime.Now.ToString("MM/dd/yyyy")}");
             RuleFor(N => N.VacationHours).VacatiionSickHoursValidation();
             RuleFor(N => N.SickLeaveHours).VacatiionSickHoursValidation();
             RuleFor(N => N.Rate.ToString()).UniversalMoneyValidation();
