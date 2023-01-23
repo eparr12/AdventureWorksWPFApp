@@ -14,8 +14,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-///TODO Finish adjusting validators
-
 namespace AdventureWorksWPFUI
 {
     public class Bootstrapper : BootstrapperBase

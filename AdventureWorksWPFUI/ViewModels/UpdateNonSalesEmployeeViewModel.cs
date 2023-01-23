@@ -13,10 +13,6 @@ using AdventureWorksWPFClassLibrary.Models;
 using AdventureWorksWPFClassLibrary.Validators;
 using FluentValidation;
 
-///TODO Remove Unnecessary usings at the end of project
-
-///TODO Remove unnecessary Interfaces
-
 namespace AdventureWorksWPFUI.ViewModels
 {
     public class UpdateNonSalesEmployeeViewModel : Conductor<Screen>.Collection.OneActive, IUpdateNonSalesEmployeeViewModel
